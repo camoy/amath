@@ -3,10 +3,10 @@
 all: main.o parser.o
 	$(CC) -o main main.o parser.o
 
-main.o: main.c parser.h
+main.o: main.c parser.h scanner.c
 
-main.c: main.re
-	re2c main.re > main.c
+scanner.c: scanner.re
+	re2c scanner.re > scanner.c
 
 parser.o: parser.h parser.c
 

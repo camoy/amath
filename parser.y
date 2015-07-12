@@ -4,9 +4,10 @@
 #include <string.h>
 #include <assert.h>
 #include "strip.c"
+#include "symtypes.h"
 }
 
-%token_type {char*}
+%token_type {struct sym*}
 
 %syntax_error
 {
@@ -15,103 +16,100 @@
 
 start ::= e(A) .
 {
-	printf(A);
+	printf(A->str);
 }
 
 v(A) ::= IDENTIFIER(B) .
 {
+	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	asprintf(&str, "<mi>%s</mi>", B);
-	A = str;
+	asprintf(&str, "<mi>%s</mi>", B->str);
+	new->str = str;
+	A = new;
 }
 v(A) ::= NUMBER(B) .
 {
+	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	asprintf(&str, "<mn>%s</mn>", B);
-	A = str;
+	asprintf(&str, "<mn>%s</mn>", B->str);
+	new->str = str;
+	A = new;
 }
 v(A) ::= OPERATOR(B) .
 {
+	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	asprintf(&str, "<mo>%s</mo>", B);
-	A = str;
+	asprintf(&str, "<mo>%s</mo>", B->str);
+	new->str = str;
+	A = new;
 }
-
-l(A) ::= LEFT(B). { A = B; }
-r(A) ::= RIGHT(B). { A = B; }
+v(A) ::= TEXT(B) .
+{
+	struct sym *new = malloc(sizeof(struct sym));
+	char *str;
+	asprintf(&str, "<mtext>%s</mtext>", B->str);
+	new->str = str;
+	A = new;
+}
 
 s(A) ::= v(B). { A = B; }
-s(A) ::= l(B) e(C) r(D) .
+s(A) ::= LEFT(B) e(C) RIGHT(D) .
 {
+	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	asprintf(&str, "<mrow>%s%s%s</mrow>", B, C, D);
-	A = str;
+	asprintf(&str, "<mrow>%s%s%s</mrow>", B->str, C->str, D->str);
+	new->str = str;
+	A = new;
 }
 
-s(A) ::= ACCENT_OVER(B) s(C) .
+s(A) ::= ACCENT(B) s(C) .
 {
+	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	asprintf(&str, "<mover>%s<mo>%s</mo></mover>", C, B);
-	A = str;
-}
 
-s(A) ::= ACCENT_UNDER(B) s(C) .
-{
-	char *str;
-	asprintf(&str, "<munder>%s<mo>%s</mo></munder>", C, B);
-	A = str;
+	if (B->pos == 2) /* TOK_over */
+		asprintf(&str, "<mover>%s<mo>%s</mo></mover>", C->str, B->str);
+	else
+		asprintf(&str, "<munder>%s<mo>%s</mo></munder>", C->str, B->str);
+
+	new->str = str;
+	A = new;
 }
 
 s(A) ::= UNARY(B) s(C) .
 {
+	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	asprintf(&str, "<m%s>%s</m%s>", B, strip_brackets(C), B);
-	A = str;
+	asprintf(&str, "<m%s>%s</m%s>", B->str, strip_brackets(C->str), B->str);
+	new->str = str;
+	A = new;
 }
 
 s(A) ::= BINARY(B) s(C) s(D) .
 {
+	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	asprintf(&str, "<m%s>%s%s</m%s>", B, strip_brackets(C), strip_brackets(D), B);
-	A = str;
+	asprintf(&str, "<m%s>%s%s</m%s>", B->str, strip_brackets(C->str), strip_brackets(D->str), B->str);
+	new->str = str;
+	A = new;
 }
 
 i(A) ::= s(B). { A = B; }
-i(A) ::= s(B) SUB s(C) .
+i(A) ::= s(B) INFIX(C) s(D) .
 {
+	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	asprintf(&str, "<msub>%s%s</msub>", B, strip_brackets(C));
-	A = str;
-}
-i(A) ::= s(B) SUP s(C) .
-{
-	char *str;
-	asprintf(&str, "<msup>%s%s</msup>", B, strip_brackets(C));
-	A = str;
-}
-i(A) ::= s(B) SUB s(C) SUP s(D) .
-{
-	char *str;
-	asprintf(&str, "<msubsup>%s%s%s</msubsup>", B, strip_brackets(C), strip_brackets(D));
-	A = str;
-}
-i(A) ::= OPERATOR_UNDER_OVER(B) SUB s(C) SUP s(D) .
-{
-	char *str;
-	asprintf(&str, "<munderover><mo>%s</mo>%s%s</munderover>", B, strip_brackets(C), strip_brackets(D));
-	A = str;
+	asprintf(&str, "<m%s>%s%s</m%s>", C->str, strip_brackets(B->str), strip_brackets(D->str), C->str);
+	new->str = str;
+	A = new;
 }
 
 e(A) ::= i(B). { A = B; }
 e(A) ::= i(B) e(C) .
 {
+	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	asprintf(&str, "%s%s", B, C);
-	A = str;
-}
-e(A) ::= i(B) DIV i(C) .
-{
-	char *str;
-	asprintf(&str, "<mfrac>%s%s</mfrac>", strip_brackets(B), strip_brackets(C));
-	A = str;
+	asprintf(&str, "%s%s", B->str, C->str);
+	new->str = str;
+	A = new;
 }
