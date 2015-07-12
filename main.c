@@ -20,6 +20,7 @@ int main(int argc, char **argv)
 		l = strlen(argv[1]);
 		do {
 			my_sym = scan(cursor_ptr, l);
+			if(my_sym == &syms[SYM_ignore]) continue;
 			Parse(parser, my_sym->type, my_sym);
 		} while (my_sym != &syms[SYM_EOL]);
 		ParseFree(parser, free);

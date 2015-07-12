@@ -204,8 +204,9 @@ const struct sym *scan(char **cursor_ptr, int l)
 	"/"		{ NEXTCURSOR; return &syms[SYM_fracdiv]; }
 	"_"		{ NEXTCURSOR; return &syms[SYM_sub]; }
 	"^"		{ NEXTCURSOR; return &syms[SYM_sup]; }
-	[ \t]+		{ NEXTCURSOR; return &syms[SYM_whitespace]; }
+	[ \t]+		{ NEXTCURSOR; return &syms[SYM_ignore]; }
 	[A-Za-z]+	{ NEXTCURSOR; struct sym *a = malloc(sizeof(struct sym)); a->type=IDENTIFIER; a->str=strndup(t, YYCURSOR - t); return a; }
+	[0-9]+'.'?[0-9]*{ NEXTCURSOR; struct sym *a = malloc(sizeof(struct sym)); a->type=NUMBER; a->str=strndup(t, YYCURSOR - t); return a; }
 	"\000"		{ NEXTCURSOR; return &syms[SYM_EOL]; }
 	[^]		{ NEXTCURSOR; return &syms[SYM_EOL]; }
 

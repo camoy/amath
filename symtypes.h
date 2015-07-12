@@ -194,7 +194,7 @@ enum symt {
 	SYM_sub,
 	SYM_sup,
 	SYM_EOL,
-	SYM_whitespace,
+	SYM_ignore,
 	SYM__MAX
 };
 

@@ -67,7 +67,7 @@ s(A) ::= ACCENT(B) s(C) .
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
 
-	if (B->pos == 2) /* TOK_over */
+	if (B->pos == 2)
 		asprintf(&str, "<mover>%s<mo>%s</mo></mover>", C->str, B->str);
 	else
 		asprintf(&str, "<munder>%s<mo>%s</mo></munder>", C->str, B->str);

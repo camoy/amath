@@ -189,5 +189,5 @@ static const struct sym syms[SYM__MAX] = {
 	{ INFIX, "sub" }, /* SYM_sub */
 	{ INFIX, "sup" }, /* SYM_sup */
 	{ 0, 0 }, /* SYM_EOL */
-	{ 0, 0 } /* SYM_whitespace */
+	{ 0, 0 } /* SYM_ignore */
 };
