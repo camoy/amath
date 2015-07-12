@@ -5,7 +5,7 @@
 #include "scanner.c"
 
 void* ParseAlloc(void* (*allocProc)(size_t));
-void Parse(void*, int, struct sym*);
+void Parse(void*, int, const struct sym*);
 void ParseFree(void*, void(*freeProc)(void*));
 
 int main(int argc, char **argv)

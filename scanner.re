@@ -8,7 +8,6 @@
 #define YYLIMIT         (cursor+l)
 #define YYFILL(n)
 #define NEXTCURSOR	*cursor_ptr = cursor
-#define CLONE_STRUCT(A) struct sym *a = malloc(sizeof(struct sym)); a->type=syms[A].type; a->str=strdup(syms[A].str); a->pos=syms[A].pos; return a
 
 const struct sym *scan(char **cursor_ptr, int l)
 {
@@ -19,192 +18,192 @@ const struct sym *scan(char **cursor_ptr, int l)
 /*!re2c
         re2c:indent:top = 2;
 
-	"alpha"		{ NEXTCURSOR; CLONE_STRUCT(SYM_alpha); }
-	"beta"		{ NEXTCURSOR; CLONE_STRUCT(SYM_beta); }
-	"chi"		{ NEXTCURSOR; CLONE_STRUCT(SYM_chi); }
-	"delta"		{ NEXTCURSOR; CLONE_STRUCT(SYM_delta); }
-	"Delta"		{ NEXTCURSOR; CLONE_STRUCT(SYM_Delta); }
-	"epsi"		{ NEXTCURSOR; CLONE_STRUCT(SYM_epsi); }
-	"varepsilon"	{ NEXTCURSOR; CLONE_STRUCT(SYM_varepsilon); }
-	"eta"		{ NEXTCURSOR; CLONE_STRUCT(SYM_eta); }
-	"gamma"		{ NEXTCURSOR; CLONE_STRUCT(SYM_gamma); }
-	"Gamma"		{ NEXTCURSOR; CLONE_STRUCT(SYM_Gamma); }
-	"iota"		{ NEXTCURSOR; CLONE_STRUCT(SYM_iota); }
-	"kappa"		{ NEXTCURSOR; CLONE_STRUCT(SYM_kappa); }
-	"lambda"	{ NEXTCURSOR; CLONE_STRUCT(SYM_lambda); }
-	"Lambda"	{ NEXTCURSOR; CLONE_STRUCT(SYM_Lambda); }
-	"lamda"		{ NEXTCURSOR; CLONE_STRUCT(SYM_lamda); }
-	"Lamda"		{ NEXTCURSOR; CLONE_STRUCT(SYM_Lamda); }
-	"mu"		{ NEXTCURSOR; CLONE_STRUCT(SYM_mu); }
-	"nu"		{ NEXTCURSOR; CLONE_STRUCT(SYM_nu); }
-	"omega"		{ NEXTCURSOR; CLONE_STRUCT(SYM_omega); }
-	"Omega"		{ NEXTCURSOR; CLONE_STRUCT(SYM_Omega); }
-	"phi"		{ NEXTCURSOR; CLONE_STRUCT(SYM_phi); }
-	"varphi"	{ NEXTCURSOR; CLONE_STRUCT(SYM_varphi); }
-	"Phi"		{ NEXTCURSOR; CLONE_STRUCT(SYM_Phi); }
-	"pi"		{ NEXTCURSOR; CLONE_STRUCT(SYM_pi); }
-	"Pi"		{ NEXTCURSOR; CLONE_STRUCT(SYM_Pi); }
-	"psi"		{ NEXTCURSOR; CLONE_STRUCT(SYM_psi); }
-	"Psi"		{ NEXTCURSOR; CLONE_STRUCT(SYM_Psi); }
-	"rho"		{ NEXTCURSOR; CLONE_STRUCT(SYM_rho); }
-	"sigma"		{ NEXTCURSOR; CLONE_STRUCT(SYM_sigma); }
-	"Sigma"		{ NEXTCURSOR; CLONE_STRUCT(SYM_Sigma); }
-	"tau"		{ NEXTCURSOR; CLONE_STRUCT(SYM_tau); }
-	"theta"		{ NEXTCURSOR; CLONE_STRUCT(SYM_theta); }
-	"varthetaut"	{ NEXTCURSOR; CLONE_STRUCT(SYM_varthetaut); }
-	"Theta"		{ NEXTCURSOR; CLONE_STRUCT(SYM_Theta); }
-	"upsilon"	{ NEXTCURSOR; CLONE_STRUCT(SYM_upsilon); }
-	"xi"		{ NEXTCURSOR; CLONE_STRUCT(SYM_xi); }
-	"Xi"		{ NEXTCURSOR; CLONE_STRUCT(SYM_Xi); }
-	"zeta"		{ NEXTCURSOR; CLONE_STRUCT(SYM_zeta); }
-	"+"		{ NEXTCURSOR; CLONE_STRUCT(SYM_plus); }
-	"-"		{ NEXTCURSOR; CLONE_STRUCT(SYM_minus); }
-	"*"		{ NEXTCURSOR; CLONE_STRUCT(SYM_cdot); }
-	"**"		{ NEXTCURSOR; CLONE_STRUCT(SYM_ast); }
-	"***"		{ NEXTCURSOR; CLONE_STRUCT(SYM_star); }
-	"//"		{ NEXTCURSOR; CLONE_STRUCT(SYM_slash); }
-	"\\\\"		{ NEXTCURSOR; CLONE_STRUCT(SYM_backslash); }
-	"setminus"	{ NEXTCURSOR; CLONE_STRUCT(SYM_setminus); }
-	"xx"		{ NEXTCURSOR; CLONE_STRUCT(SYM_times); }
-	"-:"		{ NEXTCURSOR; CLONE_STRUCT(SYM_div); }
-	"divide"	{ NEXTCURSOR; CLONE_STRUCT(SYM_divide); }
-	"@"		{ NEXTCURSOR; CLONE_STRUCT(SYM_circ); }
-	"o+"		{ NEXTCURSOR; CLONE_STRUCT(SYM_oplus); }
-	"ox"		{ NEXTCURSOR; CLONE_STRUCT(SYM_otimes); }
-	"o."		{ NEXTCURSOR; CLONE_STRUCT(SYM_odot); }
-	"sum"		{ NEXTCURSOR; CLONE_STRUCT(SYM_sum); }
-	"prod"		{ NEXTCURSOR; CLONE_STRUCT(SYM_prod); }
-	"^^"		{ NEXTCURSOR; CLONE_STRUCT(SYM_wedge); }
-	"^^^"		{ NEXTCURSOR; CLONE_STRUCT(SYM_bigwedge); }
-	"vv"		{ NEXTCURSOR; CLONE_STRUCT(SYM_vee); }
-	"vvv"		{ NEXTCURSOR; CLONE_STRUCT(SYM_bigvee); }
-	"nn"		{ NEXTCURSOR; CLONE_STRUCT(SYM_cap); }
-	"nnn"		{ NEXTCURSOR; CLONE_STRUCT(SYM_bigcap); }
-	"uu"		{ NEXTCURSOR; CLONE_STRUCT(SYM_cup); }
-	"uuu"		{ NEXTCURSOR; CLONE_STRUCT(SYM_bigcup); }
-	"="		{ NEXTCURSOR; CLONE_STRUCT(SYM_eq); }
-	"!="		{ NEXTCURSOR; CLONE_STRUCT(SYM_ne); }
-	":="		{ NEXTCURSOR; CLONE_STRUCT(SYM_def); }
-	"lt"		{ NEXTCURSOR; CLONE_STRUCT(SYM_lt); }
-	"<="		{ NEXTCURSOR; CLONE_STRUCT(SYM_le); }
-	"lt="		{ NEXTCURSOR; CLONE_STRUCT(SYM_leq); }
-	"gt"		{ NEXTCURSOR; CLONE_STRUCT(SYM_gt); }
-	">="		{ NEXTCURSOR; CLONE_STRUCT(SYM_ge); }
-	"gt="		{ NEXTCURSOR; CLONE_STRUCT(SYM_geq); }
-	"-<"		{ NEXTCURSOR; CLONE_STRUCT(SYM_prec); }
-	"-lt"		{ NEXTCURSOR; CLONE_STRUCT(SYM_lt2); }
-	">-"		{ NEXTCURSOR; CLONE_STRUCT(SYM_succ); }
-	"-<="		{ NEXTCURSOR; CLONE_STRUCT(SYM_preceq); }
-	">-="		{ NEXTCURSOR; CLONE_STRUCT(SYM_succeq); }
-	"in"		{ NEXTCURSOR; CLONE_STRUCT(SYM_in); }
-	"!in"		{ NEXTCURSOR; CLONE_STRUCT(SYM_notin); }
-	"sub"		{ NEXTCURSOR; CLONE_STRUCT(SYM_subset); }
-	"sup"		{ NEXTCURSOR; CLONE_STRUCT(SYM_supset); }
-	"sube"		{ NEXTCURSOR; CLONE_STRUCT(SYM_subseteq); }
-	"supe"		{ NEXTCURSOR; CLONE_STRUCT(SYM_supseteq); }
-	"-="		{ NEXTCURSOR; CLONE_STRUCT(SYM_equiv); }
-	"~="		{ NEXTCURSOR; CLONE_STRUCT(SYM_cong); }
-	"~~"		{ NEXTCURSOR; CLONE_STRUCT(SYM_approx); }
-	"prop"		{ NEXTCURSOR; CLONE_STRUCT(SYM_propto); }
-	"and"		{ NEXTCURSOR; CLONE_STRUCT(SYM_and); }
-	"or"		{ NEXTCURSOR; CLONE_STRUCT(SYM_or); }
-	"not"		{ NEXTCURSOR; CLONE_STRUCT(SYM_neg); }
-	"=>"		{ NEXTCURSOR; CLONE_STRUCT(SYM_implies); }
-	"if"		{ NEXTCURSOR; CLONE_STRUCT(SYM_if); }
-	"<=>"		{ NEXTCURSOR; CLONE_STRUCT(SYM_iff); }
-	"AA"		{ NEXTCURSOR; CLONE_STRUCT(SYM_forall); }
-	"EE"		{ NEXTCURSOR; CLONE_STRUCT(SYM_exists); }
-	"_|_"		{ NEXTCURSOR; CLONE_STRUCT(SYM_bot); }
-	"TT"		{ NEXTCURSOR; CLONE_STRUCT(SYM_top); }
-	"|--"		{ NEXTCURSOR; CLONE_STRUCT(SYM_vdash); }
-	"|=="		{ NEXTCURSOR; CLONE_STRUCT(SYM_models); }
-	"(" 		{ NEXTCURSOR; CLONE_STRUCT(SYM_lparen); }
-	")" 		{ NEXTCURSOR; CLONE_STRUCT(SYM_rparen); }
-	"[" 		{ NEXTCURSOR; CLONE_STRUCT(SYM_lbracket); }
-	"]" 		{ NEXTCURSOR; CLONE_STRUCT(SYM_rbracket); }
-	"{" 		{ NEXTCURSOR; CLONE_STRUCT(SYM_lcurly); }
-	"}" 		{ NEXTCURSOR; CLONE_STRUCT(SYM_rcurly); }
-	"|" 		{ NEXTCURSOR; CLONE_STRUCT(SYM_pipe); }
-	"||"		{ NEXTCURSOR; CLONE_STRUCT(SYM_doublepipe); }
-	"(:" 		{ NEXTCURSOR; CLONE_STRUCT(SYM_lparencolon); }
-	":)" 		{ NEXTCURSOR; CLONE_STRUCT(SYM_rparencolon); }
-	"<<" 		{ NEXTCURSOR; CLONE_STRUCT(SYM_langle); }
-	">>" 		{ NEXTCURSOR; CLONE_STRUCT(SYM_rangle); }
-	"{:" 		{ NEXTCURSOR; CLONE_STRUCT(SYM_linvis); }
-	":}" 		{ NEXTCURSOR; CLONE_STRUCT(SYM_rinvis); }
-	"int"		{ NEXTCURSOR; CLONE_STRUCT(SYM_int); }
-	"dx"		{ NEXTCURSOR; CLONE_STRUCT(SYM_dx); }
-	"dy"		{ NEXTCURSOR; CLONE_STRUCT(SYM_dy); }
-	"dz"		{ NEXTCURSOR; CLONE_STRUCT(SYM_dz); }
-	"dt"		{ NEXTCURSOR; CLONE_STRUCT(SYM_dt); }
-	"oint"		{ NEXTCURSOR; CLONE_STRUCT(SYM_oint); }
-	"del"		{ NEXTCURSOR; CLONE_STRUCT(SYM_partial); }
-	"grad"		{ NEXTCURSOR; CLONE_STRUCT(SYM_nabla); }
-	"+-"		{ NEXTCURSOR; CLONE_STRUCT(SYM_pm); }
-	"..."		{ NEXTCURSOR; CLONE_STRUCT(SYM_emptyset); }
-	":."		{ NEXTCURSOR; CLONE_STRUCT(SYM_infty); }
-	"/_"		{ NEXTCURSOR; CLONE_STRUCT(SYM_aleph); }
-	"/_\\"		{ NEXTCURSOR; CLONE_STRUCT(SYM_ldots); }
-	"'"		{ NEXTCURSOR; CLONE_STRUCT(SYM_therefore); }
-	"tilde"		{ NEXTCURSOR; CLONE_STRUCT(SYM_angle); }
-	"\\ "		{ NEXTCURSOR; CLONE_STRUCT(SYM_triangle); }
-	"quad"		{ NEXTCURSOR; CLONE_STRUCT(SYM_prime); }
-	"qquad"		{ NEXTCURSOR; CLONE_STRUCT(SYM_tilde); }
-	"cdots"		{ NEXTCURSOR; CLONE_STRUCT(SYM_double_backslash); }
-	"vdots"		{ NEXTCURSOR; CLONE_STRUCT(SYM_quad); }
-	"ddots"		{ NEXTCURSOR; CLONE_STRUCT(SYM_qquad); }
-	"diamond"	{ NEXTCURSOR; CLONE_STRUCT(SYM_cdots); }
-	"square"	{ NEXTCURSOR; CLONE_STRUCT(SYM_vdots); }
-	"|__"		{ NEXTCURSOR; CLONE_STRUCT(SYM_ddots); }
-	"__|"		{ NEXTCURSOR; CLONE_STRUCT(SYM_diamond); }
-	"|~"		{ NEXTCURSOR; CLONE_STRUCT(SYM_squar); }
-	"~|"		{ NEXTCURSOR; CLONE_STRUCT(SYM_lfloor); }
-	"O/"		{ NEXTCURSOR; CLONE_STRUCT(SYM_rfloor); }
-	"oo"		{ NEXTCURSOR; CLONE_STRUCT(SYM_lceiling); }
-	"aleph"		{ NEXTCURSOR; CLONE_STRUCT(SYM_rceiling); }
-	"CC"		{ NEXTCURSOR; CLONE_STRUCT(SYM_complex); }
-	"NN"		{ NEXTCURSOR; CLONE_STRUCT(SYM_natural); }
-	"QQ"		{ NEXTCURSOR; CLONE_STRUCT(SYM_rational); }
-	"RR"		{ NEXTCURSOR; CLONE_STRUCT(SYM_real); }
-	"ZZ"		{ NEXTCURSOR; CLONE_STRUCT(SYM_integer); }
-	"f"		{ NEXTCURSOR; CLONE_STRUCT(SYM_f); }
-	"g"		{ NEXTCURSOR; CLONE_STRUCT(SYM_g); }
-	"lim"		{ NEXTCURSOR; CLONE_STRUCT(SYM_lim); }
-	"Lim"		{ NEXTCURSOR; CLONE_STRUCT(SYM_Lim); }
-	"sin" 		{ NEXTCURSOR; CLONE_STRUCT(SYM_sin); }
-	"cos" 		{ NEXTCURSOR; CLONE_STRUCT(SYM_cos); }
-	"tan" 		{ NEXTCURSOR; CLONE_STRUCT(SYM_tan); }
-	"sinh" 		{ NEXTCURSOR; CLONE_STRUCT(SYM_sinh); }
-	"cosh" 		{ NEXTCURSOR; CLONE_STRUCT(SYM_cosh); }
-	"tanh" 		{ NEXTCURSOR; CLONE_STRUCT(SYM_tanh); }
-	"cot"		{ NEXTCURSOR; CLONE_STRUCT(SYM_cot); }
-	"sec"		{ NEXTCURSOR; CLONE_STRUCT(SYM_sec); }
-	"csc"		{ NEXTCURSOR; CLONE_STRUCT(SYM_csc); }
-	"log"		{ NEXTCURSOR; CLONE_STRUCT(SYM_log); }
-	"ln"		{ NEXTCURSOR; CLONE_STRUCT(SYM_ln); }
-	"det"		{ NEXTCURSOR; CLONE_STRUCT(SYM_det); }
-	"dim"		{ NEXTCURSOR; CLONE_STRUCT(SYM_dim); }
-	"mod"		{ NEXTCURSOR; CLONE_STRUCT(SYM_mod); }
-	"gcd"		{ NEXTCURSOR; CLONE_STRUCT(SYM_gcd); }
-	"lcm"		{ NEXTCURSOR; CLONE_STRUCT(SYM_lcm); }
-	"lub"		{ NEXTCURSOR; CLONE_STRUCT(SYM_lub); }
-	"glb"		{ NEXTCURSOR; CLONE_STRUCT(SYM_glb); }
-	"min"		{ NEXTCURSOR; CLONE_STRUCT(SYM_min); }
-	"max"		{ NEXTCURSOR; CLONE_STRUCT(SYM_max); }
-	"hat"		{ NEXTCURSOR; CLONE_STRUCT(SYM_hat); }
-	"bar"		{ NEXTCURSOR; CLONE_STRUCT(SYM_bar); }
-	"ul"		{ NEXTCURSOR; CLONE_STRUCT(SYM_ul); }
-	"vec"		{ NEXTCURSOR; CLONE_STRUCT(SYM_vec); }
-	"dot"		{ NEXTCURSOR; CLONE_STRUCT(SYM_dot); }
-	"ddot"		{ NEXTCURSOR; CLONE_STRUCT(SYM_ddot); }
-	"sqrt"		{ NEXTCURSOR; CLONE_STRUCT(SYM_sqrt); }
-	"text"		{ NEXTCURSOR; CLONE_STRUCT(SYM_text); }
-	"frac"		{ NEXTCURSOR; CLONE_STRUCT(SYM_frac); }
-	"root"		{ NEXTCURSOR; CLONE_STRUCT(SYM_root); }
-	"stackrel"	{ NEXTCURSOR; CLONE_STRUCT(SYM_stackrel); }
-	"/"		{ NEXTCURSOR; CLONE_STRUCT(SYM_fracdiv); }
-	"_"		{ NEXTCURSOR; CLONE_STRUCT(SYM_sub); }
-	"^"		{ NEXTCURSOR; CLONE_STRUCT(SYM_sup); }
+	"alpha"		{ NEXTCURSOR; return &syms[SYM_alpha]; }
+	"beta"		{ NEXTCURSOR; return &syms[SYM_beta]; }
+	"chi"		{ NEXTCURSOR; return &syms[SYM_chi]; }
+	"delta"		{ NEXTCURSOR; return &syms[SYM_delta]; }
+	"Delta"		{ NEXTCURSOR; return &syms[SYM_Delta]; }
+	"epsi"		{ NEXTCURSOR; return &syms[SYM_epsi]; }
+	"varepsilon"	{ NEXTCURSOR; return &syms[SYM_varepsilon]; }
+	"eta"		{ NEXTCURSOR; return &syms[SYM_eta]; }
+	"gamma"		{ NEXTCURSOR; return &syms[SYM_gamma]; }
+	"Gamma"		{ NEXTCURSOR; return &syms[SYM_Gamma]; }
+	"iota"		{ NEXTCURSOR; return &syms[SYM_iota]; }
+	"kappa"		{ NEXTCURSOR; return &syms[SYM_kappa]; }
+	"lambda"	{ NEXTCURSOR; return &syms[SYM_lambda]; }
+	"Lambda"	{ NEXTCURSOR; return &syms[SYM_Lambda]; }
+	"lamda"		{ NEXTCURSOR; return &syms[SYM_lamda]; }
+	"Lamda"		{ NEXTCURSOR; return &syms[SYM_Lamda]; }
+	"mu"		{ NEXTCURSOR; return &syms[SYM_mu]; }
+	"nu"		{ NEXTCURSOR; return &syms[SYM_nu]; }
+	"omega"		{ NEXTCURSOR; return &syms[SYM_omega]; }
+	"Omega"		{ NEXTCURSOR; return &syms[SYM_Omega]; }
+	"phi"		{ NEXTCURSOR; return &syms[SYM_phi]; }
+	"varphi"	{ NEXTCURSOR; return &syms[SYM_varphi]; }
+	"Phi"		{ NEXTCURSOR; return &syms[SYM_Phi]; }
+	"pi"		{ NEXTCURSOR; return &syms[SYM_pi]; }
+	"Pi"		{ NEXTCURSOR; return &syms[SYM_Pi]; }
+	"psi"		{ NEXTCURSOR; return &syms[SYM_psi]; }
+	"Psi"		{ NEXTCURSOR; return &syms[SYM_Psi]; }
+	"rho"		{ NEXTCURSOR; return &syms[SYM_rho]; }
+	"sigma"		{ NEXTCURSOR; return &syms[SYM_sigma]; }
+	"Sigma"		{ NEXTCURSOR; return &syms[SYM_Sigma]; }
+	"tau"		{ NEXTCURSOR; return &syms[SYM_tau]; }
+	"theta"		{ NEXTCURSOR; return &syms[SYM_theta]; }
+	"varthetaut"	{ NEXTCURSOR; return &syms[SYM_varthetaut]; }
+	"Theta"		{ NEXTCURSOR; return &syms[SYM_Theta]; }
+	"upsilon"	{ NEXTCURSOR; return &syms[SYM_upsilon]; }
+	"xi"		{ NEXTCURSOR; return &syms[SYM_xi]; }
+	"Xi"		{ NEXTCURSOR; return &syms[SYM_Xi]; }
+	"zeta"		{ NEXTCURSOR; return &syms[SYM_zeta]; }
+	"+"		{ NEXTCURSOR; return &syms[SYM_plus]; }
+	"-"		{ NEXTCURSOR; return &syms[SYM_minus]; }
+	"*"		{ NEXTCURSOR; return &syms[SYM_cdot]; }
+	"**"		{ NEXTCURSOR; return &syms[SYM_ast]; }
+	"***"		{ NEXTCURSOR; return &syms[SYM_star]; }
+	"//"		{ NEXTCURSOR; return &syms[SYM_slash]; }
+	"\\\\"		{ NEXTCURSOR; return &syms[SYM_backslash]; }
+	"setminus"	{ NEXTCURSOR; return &syms[SYM_setminus]; }
+	"xx"		{ NEXTCURSOR; return &syms[SYM_times]; }
+	"-:"		{ NEXTCURSOR; return &syms[SYM_div]; }
+	"divide"	{ NEXTCURSOR; return &syms[SYM_divide]; }
+	"@"		{ NEXTCURSOR; return &syms[SYM_circ]; }
+	"o+"		{ NEXTCURSOR; return &syms[SYM_oplus]; }
+	"ox"		{ NEXTCURSOR; return &syms[SYM_otimes]; }
+	"o."		{ NEXTCURSOR; return &syms[SYM_odot]; }
+	"sum"		{ NEXTCURSOR; return &syms[SYM_sum]; }
+	"prod"		{ NEXTCURSOR; return &syms[SYM_prod]; }
+	"^^"		{ NEXTCURSOR; return &syms[SYM_wedge]; }
+	"^^^"		{ NEXTCURSOR; return &syms[SYM_bigwedge]; }
+	"vv"		{ NEXTCURSOR; return &syms[SYM_vee]; }
+	"vvv"		{ NEXTCURSOR; return &syms[SYM_bigvee]; }
+	"nn"		{ NEXTCURSOR; return &syms[SYM_cap]; }
+	"nnn"		{ NEXTCURSOR; return &syms[SYM_bigcap]; }
+	"uu"		{ NEXTCURSOR; return &syms[SYM_cup]; }
+	"uuu"		{ NEXTCURSOR; return &syms[SYM_bigcup]; }
+	"="		{ NEXTCURSOR; return &syms[SYM_eq]; }
+	"!="		{ NEXTCURSOR; return &syms[SYM_ne]; }
+	":="		{ NEXTCURSOR; return &syms[SYM_def]; }
+	"lt"		{ NEXTCURSOR; return &syms[SYM_lt]; }
+	"<="		{ NEXTCURSOR; return &syms[SYM_le]; }
+	"lt="		{ NEXTCURSOR; return &syms[SYM_leq]; }
+	"gt"		{ NEXTCURSOR; return &syms[SYM_gt]; }
+	">="		{ NEXTCURSOR; return &syms[SYM_ge]; }
+	"gt="		{ NEXTCURSOR; return &syms[SYM_geq]; }
+	"-<"		{ NEXTCURSOR; return &syms[SYM_prec]; }
+	"-lt"		{ NEXTCURSOR; return &syms[SYM_lt2]; }
+	">-"		{ NEXTCURSOR; return &syms[SYM_succ]; }
+	"-<="		{ NEXTCURSOR; return &syms[SYM_preceq]; }
+	">-="		{ NEXTCURSOR; return &syms[SYM_succeq]; }
+	"in"		{ NEXTCURSOR; return &syms[SYM_in]; }
+	"!in"		{ NEXTCURSOR; return &syms[SYM_notin]; }
+	"sub"		{ NEXTCURSOR; return &syms[SYM_subset]; }
+	"sup"		{ NEXTCURSOR; return &syms[SYM_supset]; }
+	"sube"		{ NEXTCURSOR; return &syms[SYM_subseteq]; }
+	"supe"		{ NEXTCURSOR; return &syms[SYM_supseteq]; }
+	"-="		{ NEXTCURSOR; return &syms[SYM_equiv]; }
+	"~="		{ NEXTCURSOR; return &syms[SYM_cong]; }
+	"~~"		{ NEXTCURSOR; return &syms[SYM_approx]; }
+	"prop"		{ NEXTCURSOR; return &syms[SYM_propto]; }
+	"and"		{ NEXTCURSOR; return &syms[SYM_and]; }
+	"or"		{ NEXTCURSOR; return &syms[SYM_or]; }
+	"not"		{ NEXTCURSOR; return &syms[SYM_neg]; }
+	"=>"		{ NEXTCURSOR; return &syms[SYM_implies]; }
+	"if"		{ NEXTCURSOR; return &syms[SYM_if]; }
+	"<=>"		{ NEXTCURSOR; return &syms[SYM_iff]; }
+	"AA"		{ NEXTCURSOR; return &syms[SYM_forall]; }
+	"EE"		{ NEXTCURSOR; return &syms[SYM_exists]; }
+	"_|_"		{ NEXTCURSOR; return &syms[SYM_bot]; }
+	"TT"		{ NEXTCURSOR; return &syms[SYM_top]; }
+	"|--"		{ NEXTCURSOR; return &syms[SYM_vdash]; }
+	"|=="		{ NEXTCURSOR; return &syms[SYM_models]; }
+	"(" 		{ NEXTCURSOR; return &syms[SYM_lparen]; }
+	")" 		{ NEXTCURSOR; return &syms[SYM_rparen]; }
+	"[" 		{ NEXTCURSOR; return &syms[SYM_lbracket]; }
+	"]" 		{ NEXTCURSOR; return &syms[SYM_rbracket]; }
+	"{" 		{ NEXTCURSOR; return &syms[SYM_lcurly]; }
+	"}" 		{ NEXTCURSOR; return &syms[SYM_rcurly]; }
+	"|" 		{ NEXTCURSOR; return &syms[SYM_pipe]; }
+	"||"		{ NEXTCURSOR; return &syms[SYM_doublepipe]; }
+	"(:" 		{ NEXTCURSOR; return &syms[SYM_lparencolon]; }
+	":)" 		{ NEXTCURSOR; return &syms[SYM_rparencolon]; }
+	"<<" 		{ NEXTCURSOR; return &syms[SYM_langle]; }
+	">>" 		{ NEXTCURSOR; return &syms[SYM_rangle]; }
+	"{:" 		{ NEXTCURSOR; return &syms[SYM_linvis]; }
+	":}" 		{ NEXTCURSOR; return &syms[SYM_rinvis]; }
+	"int"		{ NEXTCURSOR; return &syms[SYM_int]; }
+	"dx"		{ NEXTCURSOR; return &syms[SYM_dx]; }
+	"dy"		{ NEXTCURSOR; return &syms[SYM_dy]; }
+	"dz"		{ NEXTCURSOR; return &syms[SYM_dz]; }
+	"dt"		{ NEXTCURSOR; return &syms[SYM_dt]; }
+	"oint"		{ NEXTCURSOR; return &syms[SYM_oint]; }
+	"del"		{ NEXTCURSOR; return &syms[SYM_partial]; }
+	"grad"		{ NEXTCURSOR; return &syms[SYM_nabla]; }
+	"+-"		{ NEXTCURSOR; return &syms[SYM_pm]; }
+	"..."		{ NEXTCURSOR; return &syms[SYM_emptyset]; }
+	":."		{ NEXTCURSOR; return &syms[SYM_infty]; }
+	"/_"		{ NEXTCURSOR; return &syms[SYM_aleph]; }
+	"/_\\"		{ NEXTCURSOR; return &syms[SYM_ldots]; }
+	"'"		{ NEXTCURSOR; return &syms[SYM_therefore]; }
+	"tilde"		{ NEXTCURSOR; return &syms[SYM_angle]; }
+	"\\ "		{ NEXTCURSOR; return &syms[SYM_triangle]; }
+	"quad"		{ NEXTCURSOR; return &syms[SYM_prime]; }
+	"qquad"		{ NEXTCURSOR; return &syms[SYM_tilde]; }
+	"cdots"		{ NEXTCURSOR; return &syms[SYM_double_backslash]; }
+	"vdots"		{ NEXTCURSOR; return &syms[SYM_quad]; }
+	"ddots"		{ NEXTCURSOR; return &syms[SYM_qquad]; }
+	"diamond"	{ NEXTCURSOR; return &syms[SYM_cdots]; }
+	"square"	{ NEXTCURSOR; return &syms[SYM_vdots]; }
+	"|__"		{ NEXTCURSOR; return &syms[SYM_ddots]; }
+	"__|"		{ NEXTCURSOR; return &syms[SYM_diamond]; }
+	"|~"		{ NEXTCURSOR; return &syms[SYM_squar]; }
+	"~|"		{ NEXTCURSOR; return &syms[SYM_lfloor]; }
+	"O/"		{ NEXTCURSOR; return &syms[SYM_rfloor]; }
+	"oo"		{ NEXTCURSOR; return &syms[SYM_lceiling]; }
+	"aleph"		{ NEXTCURSOR; return &syms[SYM_rceiling]; }
+	"CC"		{ NEXTCURSOR; return &syms[SYM_complex]; }
+	"NN"		{ NEXTCURSOR; return &syms[SYM_natural]; }
+	"QQ"		{ NEXTCURSOR; return &syms[SYM_rational]; }
+	"RR"		{ NEXTCURSOR; return &syms[SYM_real]; }
+	"ZZ"		{ NEXTCURSOR; return &syms[SYM_integer]; }
+	"f"		{ NEXTCURSOR; return &syms[SYM_f]; }
+	"g"		{ NEXTCURSOR; return &syms[SYM_g]; }
+	"lim"		{ NEXTCURSOR; return &syms[SYM_lim]; }
+	"Lim"		{ NEXTCURSOR; return &syms[SYM_Lim]; }
+	"sin" 		{ NEXTCURSOR; return &syms[SYM_sin]; }
+	"cos" 		{ NEXTCURSOR; return &syms[SYM_cos]; }
+	"tan" 		{ NEXTCURSOR; return &syms[SYM_tan]; }
+	"sinh" 		{ NEXTCURSOR; return &syms[SYM_sinh]; }
+	"cosh" 		{ NEXTCURSOR; return &syms[SYM_cosh]; }
+	"tanh" 		{ NEXTCURSOR; return &syms[SYM_tanh]; }
+	"cot"		{ NEXTCURSOR; return &syms[SYM_cot]; }
+	"sec"		{ NEXTCURSOR; return &syms[SYM_sec]; }
+	"csc"		{ NEXTCURSOR; return &syms[SYM_csc]; }
+	"log"		{ NEXTCURSOR; return &syms[SYM_log]; }
+	"ln"		{ NEXTCURSOR; return &syms[SYM_ln]; }
+	"det"		{ NEXTCURSOR; return &syms[SYM_det]; }
+	"dim"		{ NEXTCURSOR; return &syms[SYM_dim]; }
+	"mod"		{ NEXTCURSOR; return &syms[SYM_mod]; }
+	"gcd"		{ NEXTCURSOR; return &syms[SYM_gcd]; }
+	"lcm"		{ NEXTCURSOR; return &syms[SYM_lcm]; }
+	"lub"		{ NEXTCURSOR; return &syms[SYM_lub]; }
+	"glb"		{ NEXTCURSOR; return &syms[SYM_glb]; }
+	"min"		{ NEXTCURSOR; return &syms[SYM_min]; }
+	"max"		{ NEXTCURSOR; return &syms[SYM_max]; }
+	"hat"		{ NEXTCURSOR; return &syms[SYM_hat]; }
+	"bar"		{ NEXTCURSOR; return &syms[SYM_bar]; }
+	"ul"		{ NEXTCURSOR; return &syms[SYM_ul]; }
+	"vec"		{ NEXTCURSOR; return &syms[SYM_vec]; }
+	"dot"		{ NEXTCURSOR; return &syms[SYM_dot]; }
+	"ddot"		{ NEXTCURSOR; return &syms[SYM_ddot]; }
+	"sqrt"		{ NEXTCURSOR; return &syms[SYM_sqrt]; }
+	"text"		{ NEXTCURSOR; return &syms[SYM_text]; }
+	"frac"		{ NEXTCURSOR; return &syms[SYM_frac]; }
+	"root"		{ NEXTCURSOR; return &syms[SYM_root]; }
+	"stackrel"	{ NEXTCURSOR; return &syms[SYM_stackrel]; }
+	"/"		{ NEXTCURSOR; return &syms[SYM_fracdiv]; }
+	"_"		{ NEXTCURSOR; return &syms[SYM_sub]; }
+	"^"		{ NEXTCURSOR; return &syms[SYM_sup]; }
 	[ \t]+		{ NEXTCURSOR; return &syms[SYM_whitespace]; }
 	[A-Za-z]+	{ NEXTCURSOR; struct sym *a = malloc(sizeof(struct sym)); a->type=IDENTIFIER; a->str=strndup(t, YYCURSOR - t); return a; }
 	"\000"		{ NEXTCURSOR; return &syms[SYM_EOL]; }

@@ -7,7 +7,7 @@
 #include "symtypes.h"
 }
 
-%token_type {struct sym*}
+%token_type {const struct sym*}
 
 %syntax_error
 {
@@ -16,7 +16,7 @@
 
 start ::= e(A) .
 {
-	printf(A->str);
+	printf("%s", A->str);
 }
 
 v(A) ::= IDENTIFIER(B) .
