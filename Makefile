@@ -15,4 +15,4 @@ parser.h parser.c: parser.y
 
 clean:
 	rm -f *.o
-	rm -f parser.h parser.c parser.out main main.c
+	rm -f parser.h parser.c parser.out main
