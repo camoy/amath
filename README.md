@@ -4,9 +4,8 @@
 
 ## TODO
 
-* Add support for the other delimeters `(:` and `{:`
-* Separate parser and scanner functionality
-* Use struct for the token data to hold appropriate information
+* Ternary underover
+* Arrows
 * Generate shared library
 * Write an actual Makefile
 * Write CLI
