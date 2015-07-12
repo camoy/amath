@@ -196,6 +196,19 @@ const struct sym *scan(char **cursor_ptr, int l)
 	"vec"		{ NEXTCURSOR; return &syms[SYM_vec]; }
 	"dot"		{ NEXTCURSOR; return &syms[SYM_dot]; }
 	"ddot"		{ NEXTCURSOR; return &syms[SYM_ddot]; }
+	"uarr" 		{ NEXTCURSOR; return &syms[SYM_uarr]; }
+	"darr" 		{ NEXTCURSOR; return &syms[SYM_darr]; }
+	"rarr" 		{ NEXTCURSOR; return &syms[SYM_rarr]; }
+	"->" 		{ NEXTCURSOR; return &syms[SYM_to]; }
+	">->" 		{ NEXTCURSOR; return &syms[SYM_inject]; }
+	"->>" 		{ NEXTCURSOR; return &syms[SYM_surject]; }
+	">->>" 		{ NEXTCURSOR; return &syms[SYM_biject]; }
+	"|->" 		{ NEXTCURSOR; return &syms[SYM_maps]; }
+	"larr" 		{ NEXTCURSOR; return &syms[SYM_larr]; }
+	"harr" 		{ NEXTCURSOR; return &syms[SYM_harr]; }
+	"rArr" 		{ NEXTCURSOR; return &syms[SYM_rArr]; }
+	"lArr" 		{ NEXTCURSOR; return &syms[SYM_lArr]; }
+	"hArr" 		{ NEXTCURSOR; return &syms[SYM_hArr]; }
 	"sqrt"		{ NEXTCURSOR; return &syms[SYM_sqrt]; }
 	"text"		{ NEXTCURSOR; return &syms[SYM_text]; }
 	"frac"		{ NEXTCURSOR; return &syms[SYM_frac]; }

@@ -173,13 +173,25 @@ static const struct sym syms[SYM__MAX] = {
 	{ OPERATOR, "glb" }, /* SYM_glb */
 	{ OPERATOR, "min", TOK_underover }, /* SYM_min */
 	{ OPERATOR, "max", TOK_underover }, /* SYM_max */
-	{ ACCENT, "&#x005E;", TOK_over }, /* SYM_hat */
-	{ ACCENT, "&#x00AF;", TOK_over }, /* SYM_bar */
+	{ ACCENT, "^", TOK_over }, /* SYM_hat */
+	{ ACCENT, "\u00AF", TOK_over }, /* SYM_bar */
 	{ ACCENT, "_", TOK_under }, /* SYM_ul */
-	{ ACCENT, "&#x2192;", TOK_over }, /* SYM_vec */
+	{ ACCENT, "\u2192", TOK_over }, /* SYM_vec */
 	{ ACCENT, ".", TOK_over }, /* SYM_dot */
 	{ ACCENT, "..", TOK_over }, /* SYM_ddot */
-	/* arrows */
+	{ OPERATOR, "\u2191"}, /* SYM_uarr */
+	{ OPERATOR, "\u2193"}, /* SYM_darr */
+	{ OPERATOR, "\u2192"}, /* SYM_rarr */
+	{ OPERATOR, "\u2192"}, /* SYM_to */
+	{ OPERATOR, "\u21A3"}, /* SYM_inject */
+	{ OPERATOR, "\u21A0"}, /* SYM_surject */
+	{ OPERATOR, "\u2916"}, /* SYM_biject */
+	{ OPERATOR, "\u21A6"}, /* SYM_maps */
+	{ OPERATOR, "\u2190"}, /* SYM_larr */
+	{ OPERATOR, "\u2194"}, /* SYM_harr */
+	{ OPERATOR, "\u21D2"}, /* SYM_rArr */
+	{ OPERATOR, "\u21D0"}, /* SYM_lArr */
+	{ OPERATOR, "\u21D4"}, /* SYM_hArr */
 	{ UNARY, "sqrt" }, /* SYM_sqrt */
 	{ UNARY, "text" }, /* SYM_text */
 	{ BINARY, "frac" }, /* SYM_frac */
