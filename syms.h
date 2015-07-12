@@ -185,9 +185,9 @@ static const struct sym syms[SYM__MAX] = {
 	{ BINARY, "frac" }, /* SYM_frac */
 	{ BINARY, "root" }, /* SYM_root */
 	{ BINARY, "over" }, /* SYM_stackrel */
-	{ INFIX, "frac" }, /* SYM_fracdiv */
-	{ INFIX, "sub" }, /* SYM_sub */
-	{ INFIX, "sup" }, /* SYM_sup */
+	{ DIV, 0 }, /* SYM_fracdiv */
+	{ SUB, 0 }, /* SYM_sub */
+	{ SUP, 0 }, /* SYM_sup */
 	{ 0, 0 }, /* SYM_EOL */
 	{ 0, 0 } /* SYM_ignore */
 };

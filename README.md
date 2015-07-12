@@ -4,7 +4,9 @@
 
 ## TODO
 
-* Ternary underover
+* Fix binary operators from translation rules
+* Matrix
+* Quoted text
 * Arrows
 * Generate shared library
 * Write an actual Makefile

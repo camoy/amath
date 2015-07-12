@@ -16,7 +16,7 @@
 
 start ::= e(A) .
 {
-	printf("%s", A->str);
+	printf("%s\n", A->str);
 }
 
 v(A) ::= IDENTIFIER(B) .
@@ -32,7 +32,7 @@ v(A) ::= NUMBER(B) .
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
 	asprintf(&str, "<mn>%s</mn>", B->str);
-	new->str = str;
+	new->str = str; new->pos = B->pos;
 	A = new;
 }
 v(A) ::= OPERATOR(B) .
@@ -40,7 +40,7 @@ v(A) ::= OPERATOR(B) .
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
 	asprintf(&str, "<mo>%s</mo>", B->str);
-	new->str = str;
+	new->str = str; new->pos = B->pos;
 	A = new;
 }
 v(A) ::= TEXT(B) .
@@ -48,7 +48,7 @@ v(A) ::= TEXT(B) .
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
 	asprintf(&str, "<mtext>%s</mtext>", B->str);
-	new->str = str;
+	new->str = str; new->pos = B->pos;
 	A = new;
 }
 
@@ -95,11 +95,38 @@ s(A) ::= BINARY(B) s(C) s(D) .
 }
 
 i(A) ::= s(B). { A = B; }
-i(A) ::= s(B) INFIX(C) s(D) .
+i(A) ::= s(B) DIV s(C) .
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	asprintf(&str, "<m%s>%s%s</m%s>", C->str, strip_brackets(B->str), strip_brackets(D->str), C->str);
+	asprintf(&str, "<mfrac>%s%s</mfrac>", strip_brackets(B->str), strip_brackets(C->str));
+	new->str = str;
+	A = new;
+}
+i(A) ::= s(B) SUB s(C) .
+{
+	struct sym *new = malloc(sizeof(struct sym));
+	char *str;
+	asprintf(&str, "<msub>%s%s</msub>", B->str, strip_brackets(C->str));
+	new->str = str;
+	A = new;
+}
+i(A) ::= s(B) SUP s(C) .
+{
+	struct sym *new = malloc(sizeof(struct sym));
+	char *str;
+	asprintf(&str, "<msup>%s%s</msup>", B->str, strip_brackets(C->str));
+	new->str = str;
+	A = new;
+}
+i(A) ::= s(B) SUB s(C) SUP s(D) .
+{
+	struct sym *new = malloc(sizeof(struct sym));
+	char *str;
+	if (B->pos == TOK_underover)
+		asprintf(&str, "<munderover>%s%s%s</munderover>", B->str, strip_brackets(C->str), strip_brackets(D->str));
+	else
+		asprintf(&str, "<msubsup>%s%s%s</msubsup>", B->str, strip_brackets(C->str), strip_brackets(D->str));
 	new->str = str;
 	A = new;
 }
