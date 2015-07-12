@@ -4,7 +4,6 @@
 #include <string.h>
 #include <assert.h>
 #include "strip.c"
-#include "symtypes.h"
 }
 
 %token_type {const struct sym*}
@@ -89,7 +88,13 @@ s(A) ::= BINARY(B) s(C) s(D) .
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	asprintf(&str, "<m%s>%s%s</m%s>", B->str, strip_brackets(C->str), strip_brackets(D->str), B->str);
+	/* TODO: maybe use B == syms[SYM_sqrt], check header deps */
+	if(strcmp("sqrt", B->str) == 0){
+		asprintf(&str, "<m%s>%s%s</m%s>", B->str, strip_brackets(C->str), strip_brackets(D->str), B->str);
+	}
+	else{
+		asprintf(&str, "<m%s>%s%s</m%s>", B->str, strip_brackets(D->str), strip_brackets(C->str), B->str);
+	}
 	new->str = str;
 	A = new;
 }
