@@ -1,4 +1,5 @@
 #include "symtypes.h"
+#include "parser.h"
 
 static const struct sym syms[SYM__MAX] = {
 	{ IDENTIFIER, "\u03B1" }, /* SYM_alpha */
@@ -201,5 +202,5 @@ static const struct sym syms[SYM__MAX] = {
 	{ SUB, 0 }, /* SYM_sub */
 	{ SUP, 0 }, /* SYM_sup */
 	{ 0, 0 }, /* SYM_EOL */
-	{ 0, 0 } /* SYM_ignore */
+	{ -1, 0 } /* SYM_ignore */
 };

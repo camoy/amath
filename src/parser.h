@@ -1,0 +1,12 @@
+#define IDENTIFIER                      1
+#define NUMBER                          2
+#define OPERATOR                        3
+#define TEXT                            4
+#define LEFT                            5
+#define RIGHT                           6
+#define ACCENT                          7
+#define UNARY                           8
+#define BINARY                          9
+#define DIV                            10
+#define SUB                            11
+#define SUP                            12

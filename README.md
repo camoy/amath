@@ -2,13 +2,11 @@
 
 `amath` is an AsciiMath to MathML parser written in C with the re2c lexer generator and lemon parser generator.
 
-## TODO
+## Not Yet Implemented
 
 * Matrix
 * Quoted text
-* Generate shared library
-* Write an actual Makefile
-* Write CLI
+* Shared library
 
 ## Resources
 

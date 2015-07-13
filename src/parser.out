@@ -1,0 +1,399 @@
+State 0:
+          start ::= * e
+          v ::= * IDENTIFIER
+          v ::= * NUMBER
+          v ::= * OPERATOR
+          v ::= * TEXT
+          s ::= * v
+          s ::= * LEFT e RIGHT
+          s ::= * ACCENT s
+          s ::= * UNARY s
+          s ::= * BINARY s s
+          i ::= * s
+          i ::= * s DIV s
+          i ::= * s SUB s
+          i ::= * s SUP s
+          i ::= * s SUB s SUP s
+          e ::= * i
+          e ::= * i e
+
+                    IDENTIFIER shift  26
+                        NUMBER shift  24
+                      OPERATOR shift  22
+                          TEXT shift  20
+                          LEFT shift  1
+                        ACCENT shift  10
+                         UNARY shift  9
+                        BINARY shift  8
+                         start accept
+                             e shift  12
+                             v shift  18
+                             s shift  11
+                             i shift  2
+
+State 1:
+          v ::= * IDENTIFIER
+          v ::= * NUMBER
+          v ::= * OPERATOR
+          v ::= * TEXT
+          s ::= * v
+          s ::= * LEFT e RIGHT
+          s ::= LEFT * e RIGHT
+          s ::= * ACCENT s
+          s ::= * UNARY s
+          s ::= * BINARY s s
+          i ::= * s
+          i ::= * s DIV s
+          i ::= * s SUB s
+          i ::= * s SUP s
+          i ::= * s SUB s SUP s
+          e ::= * i
+          e ::= * i e
+
+                    IDENTIFIER shift  26
+                        NUMBER shift  24
+                      OPERATOR shift  22
+                          TEXT shift  20
+                          LEFT shift  1
+                        ACCENT shift  10
+                         UNARY shift  9
+                        BINARY shift  8
+                             e shift  13
+                             v shift  18
+                             s shift  11
+                             i shift  2
+
+State 2:
+          v ::= * IDENTIFIER
+          v ::= * NUMBER
+          v ::= * OPERATOR
+          v ::= * TEXT
+          s ::= * v
+          s ::= * LEFT e RIGHT
+          s ::= * ACCENT s
+          s ::= * UNARY s
+          s ::= * BINARY s s
+          i ::= * s
+          i ::= * s DIV s
+          i ::= * s SUB s
+          i ::= * s SUP s
+          i ::= * s SUB s SUP s
+          e ::= * i
+     (15) e ::= i *
+          e ::= * i e
+          e ::= i * e
+
+                    IDENTIFIER shift  26
+                        NUMBER shift  24
+                      OPERATOR shift  22
+                          TEXT shift  20
+                          LEFT shift  1
+                        ACCENT shift  10
+                         UNARY shift  9
+                        BINARY shift  8
+                             e shift  21
+                             v shift  18
+                             s shift  11
+                             i shift  2
+                     {default} reduce 15
+
+State 3:
+          v ::= * IDENTIFIER
+          v ::= * NUMBER
+          v ::= * OPERATOR
+          v ::= * TEXT
+          s ::= * v
+          s ::= * LEFT e RIGHT
+          s ::= * ACCENT s
+          s ::= * UNARY s
+          s ::= * BINARY s s
+          i ::= s SUP * s
+
+                    IDENTIFIER shift  26
+                        NUMBER shift  24
+                      OPERATOR shift  22
+                          TEXT shift  20
+                          LEFT shift  1
+                        ACCENT shift  10
+                         UNARY shift  9
+                        BINARY shift  8
+                             v shift  18
+                             s shift  25
+
+State 4:
+          v ::= * IDENTIFIER
+          v ::= * NUMBER
+          v ::= * OPERATOR
+          v ::= * TEXT
+          s ::= * v
+          s ::= * LEFT e RIGHT
+          s ::= * ACCENT s
+          s ::= * UNARY s
+          s ::= * BINARY s s
+          i ::= s SUB s SUP * s
+
+                    IDENTIFIER shift  26
+                        NUMBER shift  24
+                      OPERATOR shift  22
+                          TEXT shift  20
+                          LEFT shift  1
+                        ACCENT shift  10
+                         UNARY shift  9
+                        BINARY shift  8
+                             v shift  18
+                             s shift  23
+
+State 5:
+          v ::= * IDENTIFIER
+          v ::= * NUMBER
+          v ::= * OPERATOR
+          v ::= * TEXT
+          s ::= * v
+          s ::= * LEFT e RIGHT
+          s ::= * ACCENT s
+          s ::= * UNARY s
+          s ::= * BINARY s s
+          i ::= s SUB * s
+          i ::= s SUB * s SUP s
+
+                    IDENTIFIER shift  26
+                        NUMBER shift  24
+                      OPERATOR shift  22
+                          TEXT shift  20
+                          LEFT shift  1
+                        ACCENT shift  10
+                         UNARY shift  9
+                        BINARY shift  8
+                             v shift  18
+                             s shift  14
+
+State 6:
+          v ::= * IDENTIFIER
+          v ::= * NUMBER
+          v ::= * OPERATOR
+          v ::= * TEXT
+          s ::= * v
+          s ::= * LEFT e RIGHT
+          s ::= * ACCENT s
+          s ::= * UNARY s
+          s ::= * BINARY s s
+          i ::= s DIV * s
+
+                    IDENTIFIER shift  26
+                        NUMBER shift  24
+                      OPERATOR shift  22
+                          TEXT shift  20
+                          LEFT shift  1
+                        ACCENT shift  10
+                         UNARY shift  9
+                        BINARY shift  8
+                             v shift  18
+                             s shift  19
+
+State 7:
+          v ::= * IDENTIFIER
+          v ::= * NUMBER
+          v ::= * OPERATOR
+          v ::= * TEXT
+          s ::= * v
+          s ::= * LEFT e RIGHT
+          s ::= * ACCENT s
+          s ::= * UNARY s
+          s ::= * BINARY s s
+          s ::= BINARY s * s
+
+                    IDENTIFIER shift  26
+                        NUMBER shift  24
+                      OPERATOR shift  22
+                          TEXT shift  20
+                          LEFT shift  1
+                        ACCENT shift  10
+                         UNARY shift  9
+                        BINARY shift  8
+                             v shift  18
+                             s shift  16
+
+State 8:
+          v ::= * IDENTIFIER
+          v ::= * NUMBER
+          v ::= * OPERATOR
+          v ::= * TEXT
+          s ::= * v
+          s ::= * LEFT e RIGHT
+          s ::= * ACCENT s
+          s ::= * UNARY s
+          s ::= * BINARY s s
+          s ::= BINARY * s s
+
+                    IDENTIFIER shift  26
+                        NUMBER shift  24
+                      OPERATOR shift  22
+                          TEXT shift  20
+                          LEFT shift  1
+                        ACCENT shift  10
+                         UNARY shift  9
+                        BINARY shift  8
+                             v shift  18
+                             s shift  7
+
+State 9:
+          v ::= * IDENTIFIER
+          v ::= * NUMBER
+          v ::= * OPERATOR
+          v ::= * TEXT
+          s ::= * v
+          s ::= * LEFT e RIGHT
+          s ::= * ACCENT s
+          s ::= * UNARY s
+          s ::= UNARY * s
+          s ::= * BINARY s s
+
+                    IDENTIFIER shift  26
+                        NUMBER shift  24
+                      OPERATOR shift  22
+                          TEXT shift  20
+                          LEFT shift  1
+                        ACCENT shift  10
+                         UNARY shift  9
+                        BINARY shift  8
+                             v shift  18
+                             s shift  15
+
+State 10:
+          v ::= * IDENTIFIER
+          v ::= * NUMBER
+          v ::= * OPERATOR
+          v ::= * TEXT
+          s ::= * v
+          s ::= * LEFT e RIGHT
+          s ::= * ACCENT s
+          s ::= ACCENT * s
+          s ::= * UNARY s
+          s ::= * BINARY s s
+
+                    IDENTIFIER shift  26
+                        NUMBER shift  24
+                      OPERATOR shift  22
+                          TEXT shift  20
+                          LEFT shift  1
+                        ACCENT shift  10
+                         UNARY shift  9
+                        BINARY shift  8
+                             v shift  18
+                             s shift  27
+
+State 11:
+     (10) i ::= s *
+          i ::= s * DIV s
+          i ::= s * SUB s
+          i ::= s * SUP s
+          i ::= s * SUB s SUP s
+
+                           DIV shift  6
+                           SUB shift  5
+                           SUP shift  3
+                     {default} reduce 10
+
+State 12:
+      (0) start ::= e *
+
+                             $ reduce 0
+
+State 13:
+          s ::= LEFT e * RIGHT
+
+                         RIGHT shift  17
+
+State 14:
+     (12) i ::= s SUB s *
+          i ::= s SUB s * SUP s
+
+                           SUP shift  4
+                     {default} reduce 12
+
+State 15:
+      (8) s ::= UNARY s *
+
+                     {default} reduce 8
+
+State 16:
+      (9) s ::= BINARY s s *
+
+                     {default} reduce 9
+
+State 17:
+      (6) s ::= LEFT e RIGHT *
+
+                     {default} reduce 6
+
+State 18:
+      (5) s ::= v *
+
+                     {default} reduce 5
+
+State 19:
+     (11) i ::= s DIV s *
+
+                     {default} reduce 11
+
+State 20:
+      (4) v ::= TEXT *
+
+                     {default} reduce 4
+
+State 21:
+     (16) e ::= i e *
+
+                     {default} reduce 16
+
+State 22:
+      (3) v ::= OPERATOR *
+
+                     {default} reduce 3
+
+State 23:
+     (14) i ::= s SUB s SUP s *
+
+                     {default} reduce 14
+
+State 24:
+      (2) v ::= NUMBER *
+
+                     {default} reduce 2
+
+State 25:
+     (13) i ::= s SUP s *
+
+                     {default} reduce 13
+
+State 26:
+      (1) v ::= IDENTIFIER *
+
+                     {default} reduce 1
+
+State 27:
+      (7) s ::= ACCENT s *
+
+                     {default} reduce 7
+
+----------------------------------------------------
+Symbols:
+    0: $:
+    1: IDENTIFIER
+    2: NUMBER
+    3: OPERATOR
+    4: TEXT
+    5: LEFT
+    6: RIGHT
+    7: ACCENT
+    8: UNARY
+    9: BINARY
+   10: DIV
+   11: SUB
+   12: SUP
+   13: error:
+   14: start: IDENTIFIER NUMBER OPERATOR TEXT LEFT ACCENT UNARY BINARY
+   15: e: IDENTIFIER NUMBER OPERATOR TEXT LEFT ACCENT UNARY BINARY
+   16: v: IDENTIFIER NUMBER OPERATOR TEXT
+   17: s: IDENTIFIER NUMBER OPERATOR TEXT LEFT ACCENT UNARY BINARY
+   18: i: IDENTIFIER NUMBER OPERATOR TEXT LEFT ACCENT UNARY BINARY

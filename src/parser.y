@@ -3,19 +3,22 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-#include "strip.c"
+#include "strip.h"
+#include "symtypes.h"
 }
 
 %token_type {const struct sym*}
+%extra_argument {char **f}
 
 %syntax_error
 {
 	printf("Problem");
+	exit(0);
 }
 
-start ::= e(A) .
+start ::= e(B) .
 {
-	printf("%s\n", A->str);
+	*f = strdup(B->str);
 }
 
 v(A) ::= IDENTIFIER(B) .

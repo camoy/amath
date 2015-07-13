@@ -1,18 +1,29 @@
-.PHONY: all clean
+CC = gcc
+BUILD = build
+SRC = src
+BINARY = $(BUILD)/amath
+SOURCES = $(wildcard $(SRC)/*.c)
+HEADERS = $(wildcard $(SRC)/*.h)
+OBJECTS = $(patsubst $(SRC)/%.c,$(BUILD)/%.o,$(SOURCES))
 
-all: main.o parser.o
-	$(CC) -o main main.o parser.o
+all: $(BINARY)
 
-main.o: main.c parser.h scanner.c
+$(SRC)/parser.c: $(SRC)/parser.y
+	lemon $<
 
-scanner.c: scanner.re
-	re2c scanner.re > scanner.c
+$(SRC)/scanner.c: $(SRC)/scanner.re
+	re2c $< > $@
 
-parser.o: parser.h parser.c
+$(BINARY): $(OBJECTS)
+	$(CC) -o $(BINARY) $(OBJECTS)
 
-parser.h parser.c: parser.y
-	lemon parser.y
+$(BUILD)/%.o: src/%.c $(BUILD)
+	$(CC) -c $< -o $@
+
+$(BUILD):
+	mkdir -p $(BUILD)
 
 clean:
-	rm -f *.o
-	rm -f parser.h parser.c parser.out main
+	rm -rf $(BUILD)
+
+.PHONY: all clean
