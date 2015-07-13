@@ -10,7 +10,7 @@ char *strip_brackets(const char *src)
 		case '{':
 		{
 			char *str2;
-			char *str = strndup(src+7, sizeof(char)*(strlen(src)-14));
+			char *str = strndup(src+7, sizeof(char)*(strlen(src)-15));
 			asprintf(&str2, "<mrow>%s</mrow>", str);
 			free(str);
 			return str2;
