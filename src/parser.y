@@ -49,7 +49,7 @@ v(A) ::= TEXT(B) .
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	asprintf(&str, "<mtext>%s</mtext>", B->str);
+	asprintf(&str, "<mtext>%s</mtext>", strip_quotes(B->str));
 	new->str = str; new->pos = B->pos;
 	A = new;
 }

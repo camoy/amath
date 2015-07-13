@@ -17,7 +17,7 @@ $(SRC)/scanner.c: $(SRC)/scanner.re
 $(BINARY): $(OBJECTS)
 	$(CC) -o $(BINARY) $(OBJECTS)
 
-$(BUILD)/%.o: src/%.c $(BUILD)
+$(BUILD)/%.o: $(SRC)/%.c $(BUILD)
 	$(CC) -c $< -o $@
 
 $(BUILD):

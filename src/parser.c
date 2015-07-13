@@ -749,7 +749,7 @@ static void yy_reduce(
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	asprintf(&str, "<mtext>%s</mtext>", yymsp[0].minor.yy0->str);
+	asprintf(&str, "<mtext>%s</mtext>", strip_quotes(yymsp[0].minor.yy0->str));
 	new->str = str; new->pos = yymsp[0].minor.yy0->pos;
 	yygotominor.yy0 = new;
 }

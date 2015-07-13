@@ -18,3 +18,11 @@ char *strip_brackets(const char *src)
 	}
 	return (char*)src;
 }
+
+char *strip_quotes(const char *src)
+{
+	if (src[0] == '"')
+		return strndup(src+1, sizeof(char)*(strlen(src)-2));
+	else
+		return (char*)src;
+}

@@ -4,7 +4,6 @@
 
 ## Not Yet Implemented
 
-* Quoted text
 * Shared library
 
 ## Resources

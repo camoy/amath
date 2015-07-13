@@ -225,6 +225,7 @@ const struct sym *scan(char **cursor_ptr, size_t len)
 	"_"		{ SYM(SYM_sub) }
 	"^"		{ SYM(SYM_sup) }
 	","		{ SYM(SYM_comma) }
+	'"'.+'"'	{ NEW_SYM(TEXT) }
 	[ \t]+		{ SYM(SYM_ignore) }
 	[A-Za-z]+	{ NEW_SYM(IDENTIFIER) }
 	[0-9]+'.'?[0-9]*{ NEW_SYM(NUMBER) }
