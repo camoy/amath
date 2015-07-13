@@ -7,7 +7,7 @@
 #include "symtypes.h"
 }
 
-%token_type {const struct sym*}
+%token_type {struct sym*}
 %extra_argument {char **f}
 
 %syntax_error
@@ -18,7 +18,8 @@
 
 start ::= e(B) .
 {
-	*f = strdup(B->str);
+	*f = B->str;
+	free(B);
 }
 
 v(A) ::= IDENTIFIER(B) .
@@ -27,6 +28,7 @@ v(A) ::= IDENTIFIER(B) .
 	char *str;
 	asprintf(&str, "<mi>%s</mi>", B->str);
 	new->str = str;
+	free(B->str); free(B);
 	A = new;
 }
 v(A) ::= NUMBER(B) .
@@ -35,6 +37,7 @@ v(A) ::= NUMBER(B) .
 	char *str;
 	asprintf(&str, "<mn>%s</mn>", B->str);
 	new->str = str; new->pos = B->pos;
+	free(B->str); free(B);
 	A = new;
 }
 v(A) ::= OPERATOR(B) .
@@ -195,5 +198,7 @@ e(A) ::= i(B) e(C) .
 	char *str;
 	asprintf(&str, "%s%s", B->str, C->str);
 	new->str = str;
+	free(B->str); free(C->str);
+	free(B); free(C);
 	A = new;
 }

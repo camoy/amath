@@ -65,7 +65,7 @@
 #define YYCODETYPE unsigned char
 #define YYNOCODE 25
 #define YYACTIONTYPE unsigned char
-#define ParseTOKENTYPE const struct sym*
+#define ParseTOKENTYPE struct sym*
 typedef union {
   int yyinit;
   ParseTOKENTYPE yy0;
@@ -707,34 +707,37 @@ static void yy_reduce(
       case 0: /* start ::= e */
 #line 20 "src/parser.y"
 {
-	*f = strdup(yymsp[0].minor.yy0->str);
+	*f = yymsp[0].minor.yy0->str;
+	free(yymsp[0].minor.yy0);
 }
-#line 713 "src/parser.c"
+#line 714 "src/parser.c"
         break;
       case 1: /* v ::= IDENTIFIER */
-#line 25 "src/parser.y"
+#line 26 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
 	asprintf(&str, "<mi>%s</mi>", yymsp[0].minor.yy0->str);
 	new->str = str;
+	free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0);
 	yygotominor.yy0 = new;
 }
-#line 724 "src/parser.c"
+#line 726 "src/parser.c"
         break;
       case 2: /* v ::= NUMBER */
-#line 33 "src/parser.y"
+#line 35 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
 	asprintf(&str, "<mn>%s</mn>", yymsp[0].minor.yy0->str);
 	new->str = str; new->pos = yymsp[0].minor.yy0->pos;
+	free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0);
 	yygotominor.yy0 = new;
 }
-#line 735 "src/parser.c"
+#line 738 "src/parser.c"
         break;
       case 3: /* v ::= OPERATOR */
-#line 41 "src/parser.y"
+#line 44 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
@@ -742,10 +745,10 @@ static void yy_reduce(
 	new->str = str; new->pos = yymsp[0].minor.yy0->pos;
 	yygotominor.yy0 = new;
 }
-#line 746 "src/parser.c"
+#line 749 "src/parser.c"
         break;
       case 4: /* v ::= TEXT */
-#line 49 "src/parser.y"
+#line 52 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
@@ -753,19 +756,19 @@ static void yy_reduce(
 	new->str = str; new->pos = yymsp[0].minor.yy0->pos;
 	yygotominor.yy0 = new;
 }
-#line 757 "src/parser.c"
+#line 760 "src/parser.c"
         break;
       case 5: /* s ::= v */
       case 10: /* i ::= s */ yytestcase(yyruleno==10);
       case 15: /* i ::= matrixList */ yytestcase(yyruleno==15);
       case 17: /* matrixListLoop ::= commaList */ yytestcase(yyruleno==17);
       case 22: /* e ::= i */ yytestcase(yyruleno==22);
-#line 57 "src/parser.y"
+#line 60 "src/parser.y"
 { yygotominor.yy0 = yymsp[0].minor.yy0; }
-#line 766 "src/parser.c"
+#line 769 "src/parser.c"
         break;
       case 6: /* s ::= LEFT e RIGHT */
-#line 59 "src/parser.y"
+#line 62 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
@@ -773,10 +776,10 @@ static void yy_reduce(
 	new->str = str;
 	yygotominor.yy0 = new;
 }
-#line 777 "src/parser.c"
+#line 780 "src/parser.c"
         break;
       case 7: /* s ::= ACCENT s */
-#line 68 "src/parser.y"
+#line 71 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
@@ -789,10 +792,10 @@ static void yy_reduce(
 	new->str = str;
 	yygotominor.yy0 = new;
 }
-#line 793 "src/parser.c"
+#line 796 "src/parser.c"
         break;
       case 8: /* s ::= UNARY s */
-#line 82 "src/parser.y"
+#line 85 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
@@ -800,10 +803,10 @@ static void yy_reduce(
 	new->str = str;
 	yygotominor.yy0 = new;
 }
-#line 804 "src/parser.c"
+#line 807 "src/parser.c"
         break;
       case 9: /* s ::= BINARY s s */
-#line 91 "src/parser.y"
+#line 94 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
@@ -817,10 +820,10 @@ static void yy_reduce(
 	new->str = str;
 	yygotominor.yy0 = new;
 }
-#line 821 "src/parser.c"
+#line 824 "src/parser.c"
         break;
       case 11: /* i ::= s DIV s */
-#line 107 "src/parser.y"
+#line 110 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
@@ -828,10 +831,10 @@ static void yy_reduce(
 	new->str = str;
 	yygotominor.yy0 = new;
 }
-#line 832 "src/parser.c"
+#line 835 "src/parser.c"
         break;
       case 12: /* i ::= s SUB s */
-#line 115 "src/parser.y"
+#line 118 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
@@ -839,10 +842,10 @@ static void yy_reduce(
 	new->str = str;
 	yygotominor.yy0 = new;
 }
-#line 843 "src/parser.c"
+#line 846 "src/parser.c"
         break;
       case 13: /* i ::= s SUP s */
-#line 123 "src/parser.y"
+#line 126 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
@@ -850,10 +853,10 @@ static void yy_reduce(
 	new->str = str;
 	yygotominor.yy0 = new;
 }
-#line 854 "src/parser.c"
+#line 857 "src/parser.c"
         break;
       case 14: /* i ::= s SUB s SUP s */
-#line 131 "src/parser.y"
+#line 134 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
@@ -864,10 +867,10 @@ static void yy_reduce(
 	new->str = str;
 	yygotominor.yy0 = new;
 }
-#line 868 "src/parser.c"
+#line 871 "src/parser.c"
         break;
       case 16: /* matrixList ::= LEFT commaList COMMA matrixListLoop RIGHT */
-#line 144 "src/parser.y"
+#line 147 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
@@ -876,10 +879,10 @@ static void yy_reduce(
 	yygotominor.yy0 = new;
 
 }
-#line 880 "src/parser.c"
+#line 883 "src/parser.c"
         break;
       case 18: /* matrixListLoop ::= commaList COMMA matrixListLoop */
-#line 155 "src/parser.y"
+#line 158 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
@@ -887,10 +890,10 @@ static void yy_reduce(
 	new->str = str;
 	yygotominor.yy0 = new;
 }
-#line 891 "src/parser.c"
+#line 894 "src/parser.c"
         break;
       case 19: /* commaList ::= LEFT i COMMA commaListLoop RIGHT */
-#line 164 "src/parser.y"
+#line 167 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
@@ -899,10 +902,10 @@ static void yy_reduce(
 	yygotominor.yy0 = new;
 
 }
-#line 903 "src/parser.c"
+#line 906 "src/parser.c"
         break;
       case 20: /* commaListLoop ::= i */
-#line 174 "src/parser.y"
+#line 177 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
@@ -910,10 +913,10 @@ static void yy_reduce(
 	new->str = str;
 	yygotominor.yy0 = new;
 }
-#line 914 "src/parser.c"
+#line 917 "src/parser.c"
         break;
       case 21: /* commaListLoop ::= i COMMA commaListLoop */
-#line 183 "src/parser.y"
+#line 186 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
@@ -921,18 +924,20 @@ static void yy_reduce(
 	new->str = str;
 	yygotominor.yy0 = new;
 }
-#line 925 "src/parser.c"
+#line 928 "src/parser.c"
         break;
       case 23: /* e ::= i e */
-#line 193 "src/parser.y"
+#line 196 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
 	asprintf(&str, "%s%s", yymsp[-1].minor.yy0->str, yymsp[0].minor.yy0->str);
 	new->str = str;
+	free(yymsp[-1].minor.yy0->str); free(yymsp[0].minor.yy0->str);
+	free(yymsp[-1].minor.yy0); free(yymsp[0].minor.yy0);
 	yygotominor.yy0 = new;
 }
-#line 936 "src/parser.c"
+#line 941 "src/parser.c"
         break;
       default:
         break;
@@ -998,7 +1003,7 @@ static void yy_syntax_error(
 
 	printf("Problem");
 	exit(0);
-#line 1002 "src/parser.c"
+#line 1007 "src/parser.c"
   ParseARG_STORE; /* Suppress warning about unused %extra_argument variable */
 }
 

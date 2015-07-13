@@ -6,14 +6,14 @@
 #include "symtypes.h"
 
 void* ParseAlloc(void* (*allocProc)(size_t));
-void Parse(void*, int, const struct sym*, char**);
+void Parse(void*, int, struct sym*, char**);
 void ParseFree(void*, void(*freeProc)(void*));
 
 char *amath_asciimath_to_mathml(char *text, size_t len)
 {
 	void *parser = ParseAlloc(malloc);
 	char **cursor_ptr = &text;
-	const struct sym *cur_sym;
+	struct sym *cur_sym;
 	char *f;
 
 	do {

@@ -213,6 +213,6 @@ enum symt {
 
 struct sym {
 	int type;
-        const char *str;
+        char *str;
 	enum tok_position pos;
 };

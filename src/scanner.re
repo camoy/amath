@@ -9,14 +9,14 @@
 #define YYLIMIT         (cursor+len)
 #define YYFILL(n)
 #define SYM(t)		*cursor_ptr = cursor;\
-			return &syms[t];
+			/* TODO FIX THIS */ return (struct sym*)&syms[t];
 #define NEW_SYM(t)	*cursor_ptr = cursor;\
 			struct sym *a = malloc(sizeof(struct sym));\
 			a->type=t;\
 			a->str=strndup(old, YYCURSOR - old);\
 			return a;
 
-const struct sym *scan(char **cursor_ptr, size_t len)
+struct sym *scan(char **cursor_ptr, size_t len)
 {
 	char *marker = 0;
 	char *cursor = *cursor_ptr;

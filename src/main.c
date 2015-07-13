@@ -23,5 +23,9 @@ int main(int argc, char *argv[])
 	while (fgets(buffer, BUF_SIZE, stdin))
 		asprintf(&content, "%s%s", content, buffer);
 
-	printf("%s\n", amath_asciimath_to_mathml(content, strlen(content)));
+	char *result = amath_asciimath_to_mathml(content, strlen(content));
+	printf("%s\n", result);
+
+	free(content);
+	free(result);
 }
