@@ -4,7 +4,6 @@
 
 ## Not Yet Implemented
 
-* Matrix
 * Quoted text
 * Shared library
 

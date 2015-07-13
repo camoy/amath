@@ -138,6 +138,55 @@ i(A) ::= s(B) SUB s(C) SUP s(D) .
 	new->str = str;
 	A = new;
 }
+i(A) ::= matrixList(B). { A = B; }
+
+matrixList(A) ::= LEFT(B) commaList(C) COMMA matrixListLoop(D) RIGHT(E).
+{
+	struct sym *new = malloc(sizeof(struct sym));
+	char *str;
+	asprintf(&str, "<mrow><mo>%s</mo><mtable>%s%s</mtable><mo>%s</mo></mrow>", B->str, C->str, D->str, E->str);
+	new->str = str;
+	A = new;
+
+}
+
+matrixListLoop(A) ::= commaList(B). { A = B; }
+matrixListLoop(A) ::= commaList(B) COMMA matrixListLoop(C).
+{
+	struct sym *new = malloc(sizeof(struct sym));
+	char *str;
+	asprintf(&str, "%s%s", B->str, C->str);
+	new->str = str;
+	A = new;
+}
+
+commaList(A) ::= LEFT i(B) COMMA commaListLoop(C) RIGHT.
+{
+	struct sym *new = malloc(sizeof(struct sym));
+	char *str;
+	asprintf(&str, "<mtr><mtd>%s</mtd>%s</mtr>", B->str, C->str);
+	new->str = str;
+	A = new;
+
+}
+
+commaListLoop(A) ::= i(B).
+{
+	struct sym *new = malloc(sizeof(struct sym));
+	char *str;
+	asprintf(&str, "<mtd>%s</mtd>", B->str);
+	new->str = str;
+	A = new;
+}
+
+commaListLoop(A) ::= i(B) COMMA commaListLoop(C).
+{
+	struct sym *new = malloc(sizeof(struct sym));
+	char *str;
+	asprintf(&str, "<mtd>%s</mtd>%s", B->str, C->str);
+	new->str = str;
+	A = new;
+}
 
 e(A) ::= i(B). { A = B; }
 e(A) ::= i(B) e(C) .

@@ -205,6 +205,7 @@ enum symt {
 	SYM_fracdiv,
 	SYM_sub,
 	SYM_sup,
+	SYM_comma,
 	SYM_EOL,
 	SYM_ignore,
 	SYM__MAX

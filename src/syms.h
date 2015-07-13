@@ -201,6 +201,7 @@ static const struct sym syms[SYM__MAX] = {
 	{ DIV, 0 }, /* SYM_fracdiv */
 	{ SUB, 0 }, /* SYM_sub */
 	{ SUP, 0 }, /* SYM_sup */
+	{ COMMA, 0 }, /* SYM_comma */
 	{ 0, 0 }, /* SYM_EOL */
 	{ -1, 0 } /* SYM_ignore */
 };
