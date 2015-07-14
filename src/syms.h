@@ -203,5 +203,5 @@ static const struct sym syms[SYM__MAX] = {
 	{ SUP, 0 }, /* SYM_sup */
 	{ COMMA, 0 }, /* SYM_comma */
 	{ 0, 0 }, /* SYM_EOL */
-	{ -1, 0 } /* SYM_ignore */
+	{ -1, 0, TOK_ignore } /* SYM_ignore */
 };

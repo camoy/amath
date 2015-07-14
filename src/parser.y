@@ -36,7 +36,7 @@ v(A) ::= NUMBER(B) .
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
 	asprintf(&str, "<mn>%s</mn>", B->str);
-	new->str = str; new->pos = B->pos;
+	new->str = str; new->extra = B->extra;
 	free(B->str); free(B);
 	A = new;
 }
@@ -45,7 +45,7 @@ v(A) ::= OPERATOR(B) .
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
 	asprintf(&str, "<mo>%s</mo>", B->str);
-	new->str = str; new->pos = B->pos;
+	new->str = str; new->extra = B->extra;
 	A = new;
 }
 v(A) ::= TEXT(B) .
@@ -53,7 +53,7 @@ v(A) ::= TEXT(B) .
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
 	asprintf(&str, "<mtext>%s</mtext>", strip_quotes(B->str));
-	new->str = str; new->pos = B->pos;
+	new->str = str; new->extra = B->extra;
 	A = new;
 }
 
@@ -72,7 +72,7 @@ s(A) ::= ACCENT(B) s(C) .
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
 
-	if (B->pos == 2)
+	if (B->extra == TOK_over)
 		asprintf(&str, "<mover>%s<mo>%s</mo></mover>", C->str, B->str);
 	else
 		asprintf(&str, "<munder>%s<mo>%s</mo></munder>", C->str, B->str);
@@ -134,7 +134,7 @@ i(A) ::= s(B) SUB s(C) SUP s(D) .
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	if (B->pos == TOK_underover)
+	if (B->extra == TOK_underover)
 		asprintf(&str, "<munderover>%s%s%s</munderover>", B->str, strip_brackets(C->str), strip_brackets(D->str));
 	else
 		asprintf(&str, "<msubsup>%s%s%s</msubsup>", B->str, strip_brackets(C->str), strip_brackets(D->str));

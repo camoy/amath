@@ -18,7 +18,7 @@ char *amath_asciimath_to_mathml(char *text, size_t len)
 
 	do {
 		cur_sym = scan(cursor_ptr, len);
-		if(cur_sym->type == -1) continue;
+		if(cur_sym->extra == TOK_ignore) continue;
 		Parse(parser, cur_sym->type, cur_sym, &f);
 	} while (cur_sym->type != 0);
 	ParseFree(parser, free);

@@ -1,8 +1,9 @@
-enum tok_position {
+enum tok_extra {
 	TOK_none,
 	TOK_under,
 	TOK_over,
-	TOK_underover
+	TOK_underover,
+	TOK_ignore
 };
 
 enum symt {
@@ -214,5 +215,5 @@ enum symt {
 struct sym {
 	int type;
         char *str;
-	enum tok_position pos;
+	enum tok_extra extra;
 };

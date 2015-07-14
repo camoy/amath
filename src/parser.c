@@ -730,7 +730,7 @@ static void yy_reduce(
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
 	asprintf(&str, "<mn>%s</mn>", yymsp[0].minor.yy0->str);
-	new->str = str; new->pos = yymsp[0].minor.yy0->pos;
+	new->str = str; new->extra = yymsp[0].minor.yy0->extra;
 	free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0);
 	yygotominor.yy0 = new;
 }
@@ -742,7 +742,7 @@ static void yy_reduce(
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
 	asprintf(&str, "<mo>%s</mo>", yymsp[0].minor.yy0->str);
-	new->str = str; new->pos = yymsp[0].minor.yy0->pos;
+	new->str = str; new->extra = yymsp[0].minor.yy0->extra;
 	yygotominor.yy0 = new;
 }
 #line 749 "src/parser.c"
@@ -753,7 +753,7 @@ static void yy_reduce(
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
 	asprintf(&str, "<mtext>%s</mtext>", strip_quotes(yymsp[0].minor.yy0->str));
-	new->str = str; new->pos = yymsp[0].minor.yy0->pos;
+	new->str = str; new->extra = yymsp[0].minor.yy0->extra;
 	yygotominor.yy0 = new;
 }
 #line 760 "src/parser.c"
@@ -784,7 +784,7 @@ static void yy_reduce(
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
 
-	if (yymsp[-1].minor.yy0->pos == 2)
+	if (yymsp[-1].minor.yy0->extra == TOK_over)
 		asprintf(&str, "<mover>%s<mo>%s</mo></mover>", yymsp[0].minor.yy0->str, yymsp[-1].minor.yy0->str);
 	else
 		asprintf(&str, "<munder>%s<mo>%s</mo></munder>", yymsp[0].minor.yy0->str, yymsp[-1].minor.yy0->str);
@@ -860,7 +860,7 @@ static void yy_reduce(
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	if (yymsp[-4].minor.yy0->pos == TOK_underover)
+	if (yymsp[-4].minor.yy0->extra == TOK_underover)
 		asprintf(&str, "<munderover>%s%s%s</munderover>", yymsp[-4].minor.yy0->str, strip_brackets(yymsp[-2].minor.yy0->str), strip_brackets(yymsp[0].minor.yy0->str));
 	else
 		asprintf(&str, "<msubsup>%s%s%s</msubsup>", yymsp[-4].minor.yy0->str, strip_brackets(yymsp[-2].minor.yy0->str), strip_brackets(yymsp[0].minor.yy0->str));

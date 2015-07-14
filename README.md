@@ -6,7 +6,7 @@
 
 	make
 
-This will create a `build` directory which contains the binary, shared library, and objects files. If you wish to modify the lexer or parser, you will need to install [re2c](http://re2c.org/) or [lemon](http://www.hwaci.com/sw/lemon/) respectively.
+This will create a `build` directory which contains the binary, shared library, and object files. If you wish to modify the lexer or parser, you will need to install [re2c](http://re2c.org/) or [lemon](http://www.hwaci.com/sw/lemon/) respectively.
 
 	make install
 
