@@ -14,6 +14,7 @@
 			struct sym *a = malloc(sizeof(struct sym));\
 			a->type=t;\
 			a->str=strndup(old, YYCURSOR - old);\
+			a->extra=TOK_none;\
 			return a;
 
 struct sym *scan(char **cursor_ptr, size_t len)
