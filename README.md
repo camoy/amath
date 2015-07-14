@@ -1,14 +1,20 @@
 # amath
 
-`amath` is an AsciiMath to MathML parser written in C with the re2c lexer generator and lemon parser generator.
+`amath` is an AsciiMath to MathML parser written in C. It is free software under the ISC license.
 
-## Not Yet Implemented
+## Building
 
-* Shared library
+	make
 
-## Resources
+This will create a `build` directory which contains the binary, shared library, and objects files. If you wish to modify the lexer or parser, you will need to install [re2c](http://re2c.org/) or [lemon](http://www.hwaci.com/sw/lemon/) respectively.
 
-* http://asciimath.org/
-* https://github.com/asciimath/asciimathml
-* http://www1.chapman.edu/~jipsen/mathml/asciimathsyntax.html
-* https://github.com/pepijnve/asciimath
+	make install
+
+This will install to `/usr/local/` as usual.
+
+## Usage
+
+`amath` will reads AsciiMath input from `stdin` and prints out the equivalent MathML.
+
+	echo "x+y" | amath
+	# <mi>x</mi><mo>+</mo><mi>y</mi>

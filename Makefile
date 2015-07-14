@@ -1,12 +1,24 @@
 CC = gcc
+PREFIX = /usr/local
 BUILD = build
 SRC = src
 BINARY = $(BUILD)/amath
+LIBRARY = $(BUILD)/libamath.so
 SOURCES = $(wildcard $(SRC)/*.c)
 HEADERS = $(wildcard $(SRC)/*.h)
 OBJECTS = $(patsubst $(SRC)/%.c,$(BUILD)/%.o,$(SOURCES))
 
-all: $(BINARY)
+all: $(LIBRARY) $(BINARY)
+
+install: $(LIBRARY) $(BINARY)
+	install -m 0755 $(BINARY) $(PREFIX)/bin
+	install -m 0755 $(LIBRARY) $(PREFIX)/lib
+	install -m 0644 $(SRC)/amath.h $(PREFIX)/include
+
+uninstall:
+	rm -f $(PREFIX)/bin/amath
+	rm -f $(PREFIX)/lib/libamath.so
+	rm -f $(PREFIX)/include/amath.h
 
 $(SRC)/parser.c: $(SRC)/parser.y
 	lemon $<
@@ -17,6 +29,9 @@ $(SRC)/scanner.c: $(SRC)/scanner.re
 $(BINARY): $(OBJECTS)
 	$(CC) -o $(BINARY) $(OBJECTS)
 
+$(LIBRARY): $(OBJECTS)
+	$(CC) -shared -o $(LIBRARY) $(OBJECTS)
+
 $(BUILD)/%.o: $(SRC)/%.c $(BUILD)
 	$(CC) -c $< -o $@
 
@@ -26,4 +41,4 @@ $(BUILD):
 clean:
 	rm -rf $(BUILD)
 
-.PHONY: all clean
+.PHONY: all install uninstall clean
