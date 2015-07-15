@@ -2,6 +2,7 @@ CC = gcc
 PREFIX = /usr/local
 BUILD = build
 SRC = src
+CFLAGS = -D _GNU_SOURCE -fPIC
 BINARY = $(BUILD)/amath
 LIBRARY = $(BUILD)/libamath.so
 SOURCES = $(wildcard $(SRC)/*.c)
@@ -33,7 +34,7 @@ $(LIBRARY): $(OBJECTS)
 	$(CC) -shared -o $(LIBRARY) $(OBJECTS)
 
 $(BUILD)/%.o: $(SRC)/%.c $(BUILD)
-	$(CC) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(BUILD):
 	mkdir -p $(BUILD)
