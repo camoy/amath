@@ -752,34 +752,37 @@ static void yy_reduce(
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	asprintf(&str, "<mtext>%s</mtext>", strip_quotes(yymsp[0].minor.yy0->str));
+	char *unquoted = strip_quotes(yymsp[0].minor.yy0->str);
+	asprintf(&str, "<mtext>%s</mtext>", unquoted);
 	new->str = str; new->extra = yymsp[0].minor.yy0->extra;
+	free(unquoted); free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0);
 	yygotominor.yy0 = new;
 }
-#line 760 "src/parser.c"
+#line 762 "src/parser.c"
         break;
       case 5: /* s ::= v */
       case 10: /* i ::= s */ yytestcase(yyruleno==10);
       case 15: /* i ::= matrixList */ yytestcase(yyruleno==15);
       case 17: /* matrixListLoop ::= commaList */ yytestcase(yyruleno==17);
       case 22: /* e ::= i */ yytestcase(yyruleno==22);
-#line 60 "src/parser.y"
+#line 62 "src/parser.y"
 { yygotominor.yy0 = yymsp[0].minor.yy0; }
-#line 769 "src/parser.c"
+#line 771 "src/parser.c"
         break;
       case 6: /* s ::= LEFT e RIGHT */
-#line 62 "src/parser.y"
+#line 64 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
 	asprintf(&str, "<mrow>%s%s%s</mrow>", yymsp[-2].minor.yy0->str, yymsp[-1].minor.yy0->str, yymsp[0].minor.yy0->str);
 	new->str = str;
+	free(yymsp[-1].minor.yy0->str); free(yymsp[-1].minor.yy0);
 	yygotominor.yy0 = new;
 }
-#line 780 "src/parser.c"
+#line 783 "src/parser.c"
         break;
       case 7: /* s ::= ACCENT s */
-#line 71 "src/parser.y"
+#line 74 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
@@ -790,133 +793,154 @@ static void yy_reduce(
 		asprintf(&str, "<munder>%s<mo>%s</mo></munder>", yymsp[0].minor.yy0->str, yymsp[-1].minor.yy0->str);
 
 	new->str = str;
+	free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0);
 	yygotominor.yy0 = new;
 }
-#line 796 "src/parser.c"
+#line 800 "src/parser.c"
         break;
       case 8: /* s ::= UNARY s */
-#line 85 "src/parser.y"
+#line 89 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	asprintf(&str, "<m%s>%s</m%s>", yymsp[-1].minor.yy0->str, strip_brackets(yymsp[0].minor.yy0->str), yymsp[-1].minor.yy0->str);
+	char *unbracketed = strip_brackets(yymsp[0].minor.yy0->str);
+	asprintf(&str, "<m%s>%s</m%s>", yymsp[-1].minor.yy0->str, unbracketed, yymsp[-1].minor.yy0->str);
 	new->str = str;
+	free(unbracketed); free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0);
 	yygotominor.yy0 = new;
 }
-#line 807 "src/parser.c"
+#line 813 "src/parser.c"
         break;
       case 9: /* s ::= BINARY s s */
-#line 94 "src/parser.y"
+#line 100 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
+	char *unbracketed_C = strip_brackets(yymsp[-1].minor.yy0->str);
+	char *unbracketed_D = strip_brackets(yymsp[0].minor.yy0->str);
+
 	/* TODO: maybe use yymsp[-2].minor.yy0 == syms[SYM_sqrt], check header deps */
-	if(strcmp("sqrt", yymsp[-2].minor.yy0->str) == 0){
-		asprintf(&str, "<m%s>%s%s</m%s>", yymsp[-2].minor.yy0->str, strip_brackets(yymsp[-1].minor.yy0->str), strip_brackets(yymsp[0].minor.yy0->str), yymsp[-2].minor.yy0->str);
-	}
-	else{
-		asprintf(&str, "<m%s>%s%s</m%s>", yymsp[-2].minor.yy0->str, strip_brackets(yymsp[0].minor.yy0->str), strip_brackets(yymsp[-1].minor.yy0->str), yymsp[-2].minor.yy0->str);
-	}
+	if(strcmp("sqrt", yymsp[-2].minor.yy0->str) == 0)
+		asprintf(&str, "<m%s>%s%s</m%s>", yymsp[-2].minor.yy0->str, unbracketed_C, unbracketed_D, yymsp[-2].minor.yy0->str);
+	else
+		asprintf(&str, "<m%s>%s%s</m%s>", yymsp[-2].minor.yy0->str, unbracketed_D, unbracketed_C, yymsp[-2].minor.yy0->str);
+
 	new->str = str;
+	free(yymsp[-1].minor.yy0->str); free(yymsp[-1].minor.yy0); free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0); free(unbracketed_C); free(unbracketed_D);
 	yygotominor.yy0 = new;
 }
-#line 824 "src/parser.c"
+#line 833 "src/parser.c"
         break;
       case 11: /* i ::= s DIV s */
-#line 110 "src/parser.y"
+#line 119 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	asprintf(&str, "<mfrac>%s%s</mfrac>", strip_brackets(yymsp[-2].minor.yy0->str), strip_brackets(yymsp[0].minor.yy0->str));
+	char *unbracketed_B = strip_brackets(yymsp[-2].minor.yy0->str);
+	char *unbracketed_C = strip_brackets(yymsp[0].minor.yy0->str);
+	asprintf(&str, "<mfrac>%s%s</mfrac>", unbracketed_B, unbracketed_C);
 	new->str = str;
+	free(yymsp[-2].minor.yy0->str); free(yymsp[-2].minor.yy0); free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0); free(unbracketed_B); free(unbracketed_C);
 	yygotominor.yy0 = new;
 }
-#line 835 "src/parser.c"
+#line 847 "src/parser.c"
         break;
       case 12: /* i ::= s SUB s */
-#line 118 "src/parser.y"
+#line 130 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	asprintf(&str, "<msub>%s%s</msub>", yymsp[-2].minor.yy0->str, strip_brackets(yymsp[0].minor.yy0->str));
+	char *unbracketed = strip_brackets(yymsp[0].minor.yy0->str);
+	asprintf(&str, "<msub>%s%s</msub>", yymsp[-2].minor.yy0->str, unbracketed);
 	new->str = str;
+	free(yymsp[-2].minor.yy0->str); free(yymsp[-2].minor.yy0); free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0); free(unbracketed);
 	yygotominor.yy0 = new;
 }
-#line 846 "src/parser.c"
+#line 860 "src/parser.c"
         break;
       case 13: /* i ::= s SUP s */
-#line 126 "src/parser.y"
+#line 140 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	asprintf(&str, "<msup>%s%s</msup>", yymsp[-2].minor.yy0->str, strip_brackets(yymsp[0].minor.yy0->str));
+	char *unbracketed = strip_brackets(yymsp[0].minor.yy0->str);
+	asprintf(&str, "<msup>%s%s</msup>", yymsp[-2].minor.yy0->str, unbracketed);
 	new->str = str;
+	free(yymsp[-2].minor.yy0->str); free(yymsp[-2].minor.yy0); free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0); free(unbracketed);
 	yygotominor.yy0 = new;
 }
-#line 857 "src/parser.c"
+#line 873 "src/parser.c"
         break;
       case 14: /* i ::= s SUB s SUP s */
-#line 134 "src/parser.y"
+#line 150 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
+	char *unbracketed_C = strip_brackets(yymsp[-2].minor.yy0->str);
+	char *unbracketed_D = strip_brackets(yymsp[0].minor.yy0->str);
 	if (yymsp[-4].minor.yy0->extra == TOK_underover)
-		asprintf(&str, "<munderover>%s%s%s</munderover>", yymsp[-4].minor.yy0->str, strip_brackets(yymsp[-2].minor.yy0->str), strip_brackets(yymsp[0].minor.yy0->str));
+		asprintf(&str, "<munderover>%s%s%s</munderover>", yymsp[-4].minor.yy0->str, unbracketed_C, unbracketed_D);
 	else
-		asprintf(&str, "<msubsup>%s%s%s</msubsup>", yymsp[-4].minor.yy0->str, strip_brackets(yymsp[-2].minor.yy0->str), strip_brackets(yymsp[0].minor.yy0->str));
+		asprintf(&str, "<msubsup>%s%s%s</msubsup>", yymsp[-4].minor.yy0->str, unbracketed_C, unbracketed_D);
 	new->str = str;
+	free(yymsp[-4].minor.yy0->str); free(yymsp[-4].minor.yy0);
+	free(yymsp[-2].minor.yy0->str); free(yymsp[-2].minor.yy0); free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0); free(unbracketed_C); free(unbracketed_D);
 	yygotominor.yy0 = new;
 }
-#line 871 "src/parser.c"
+#line 891 "src/parser.c"
         break;
       case 16: /* matrixList ::= LEFT commaList COMMA matrixListLoop RIGHT */
-#line 147 "src/parser.y"
+#line 167 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
 	asprintf(&str, "<mrow><mo>%s</mo><mtable>%s%s</mtable><mo>%s</mo></mrow>", yymsp[-4].minor.yy0->str, yymsp[-3].minor.yy0->str, yymsp[-1].minor.yy0->str, yymsp[0].minor.yy0->str);
 	new->str = str;
+	free(yymsp[-3].minor.yy0->str); free(yymsp[-3].minor.yy0); free(yymsp[-1].minor.yy0->str); free(yymsp[-1].minor.yy0);
 	yygotominor.yy0 = new;
 
 }
-#line 883 "src/parser.c"
+#line 904 "src/parser.c"
         break;
       case 18: /* matrixListLoop ::= commaList COMMA matrixListLoop */
-#line 158 "src/parser.y"
+#line 179 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
 	asprintf(&str, "%s%s", yymsp[-2].minor.yy0->str, yymsp[0].minor.yy0->str);
 	new->str = str;
+	free(yymsp[-2].minor.yy0->str); free(yymsp[-2].minor.yy0); free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0);
 	yygotominor.yy0 = new;
 }
-#line 894 "src/parser.c"
+#line 916 "src/parser.c"
         break;
       case 19: /* commaList ::= LEFT i COMMA commaListLoop RIGHT */
-#line 167 "src/parser.y"
+#line 189 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
 	asprintf(&str, "<mtr><mtd>%s</mtd>%s</mtr>", yymsp[-3].minor.yy0->str, yymsp[-1].minor.yy0->str);
 	new->str = str;
+	free(yymsp[-3].minor.yy0->str); free(yymsp[-3].minor.yy0); free(yymsp[-1].minor.yy0->str); free(yymsp[-1].minor.yy0);
 	yygotominor.yy0 = new;
 
 }
-#line 906 "src/parser.c"
+#line 929 "src/parser.c"
         break;
       case 20: /* commaListLoop ::= i */
-#line 177 "src/parser.y"
+#line 200 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
 	asprintf(&str, "<mtd>%s</mtd>", yymsp[0].minor.yy0->str);
 	new->str = str;
+	free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0);
 	yygotominor.yy0 = new;
 }
-#line 917 "src/parser.c"
+#line 941 "src/parser.c"
         break;
       case 21: /* commaListLoop ::= i COMMA commaListLoop */
-#line 186 "src/parser.y"
+#line 210 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
@@ -924,10 +948,10 @@ static void yy_reduce(
 	new->str = str;
 	yygotominor.yy0 = new;
 }
-#line 928 "src/parser.c"
+#line 952 "src/parser.c"
         break;
       case 23: /* e ::= i e */
-#line 196 "src/parser.y"
+#line 220 "src/parser.y"
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
@@ -937,7 +961,7 @@ static void yy_reduce(
 	free(yymsp[-1].minor.yy0); free(yymsp[0].minor.yy0);
 	yygotominor.yy0 = new;
 }
-#line 941 "src/parser.c"
+#line 965 "src/parser.c"
         break;
       default:
         break;
@@ -1003,7 +1027,7 @@ static void yy_syntax_error(
 
 	printf("Problem");
 	exit(0);
-#line 1007 "src/parser.c"
+#line 1031 "src/parser.c"
   ParseARG_STORE; /* Suppress warning about unused %extra_argument variable */
 }
 

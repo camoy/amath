@@ -52,8 +52,10 @@ v(A) ::= TEXT(B) .
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	asprintf(&str, "<mtext>%s</mtext>", strip_quotes(B->str));
+	char *unquoted = strip_quotes(B->str);
+	asprintf(&str, "<mtext>%s</mtext>", unquoted);
 	new->str = str; new->extra = B->extra;
+	free(unquoted); free(B->str); free(B);
 	A = new;
 }
 
@@ -64,6 +66,7 @@ s(A) ::= LEFT(B) e(C) RIGHT(D) .
 	char *str;
 	asprintf(&str, "<mrow>%s%s%s</mrow>", B->str, C->str, D->str);
 	new->str = str;
+	free(C->str); free(C);
 	A = new;
 }
 
@@ -78,6 +81,7 @@ s(A) ::= ACCENT(B) s(C) .
 		asprintf(&str, "<munder>%s<mo>%s</mo></munder>", C->str, B->str);
 
 	new->str = str;
+	free(C->str); free(C);
 	A = new;
 }
 
@@ -85,8 +89,10 @@ s(A) ::= UNARY(B) s(C) .
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	asprintf(&str, "<m%s>%s</m%s>", B->str, strip_brackets(C->str), B->str);
+	char *unbracketed = strip_brackets(C->str);
+	asprintf(&str, "<m%s>%s</m%s>", B->str, unbracketed, B->str);
 	new->str = str;
+	free(unbracketed); free(C->str); free(C);
 	A = new;
 }
 
@@ -94,14 +100,17 @@ s(A) ::= BINARY(B) s(C) s(D) .
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
+	char *unbracketed_C = strip_brackets(C->str);
+	char *unbracketed_D = strip_brackets(D->str);
+
 	/* TODO: maybe use B == syms[SYM_sqrt], check header deps */
-	if(strcmp("sqrt", B->str) == 0){
-		asprintf(&str, "<m%s>%s%s</m%s>", B->str, strip_brackets(C->str), strip_brackets(D->str), B->str);
-	}
-	else{
-		asprintf(&str, "<m%s>%s%s</m%s>", B->str, strip_brackets(D->str), strip_brackets(C->str), B->str);
-	}
+	if(strcmp("sqrt", B->str) == 0)
+		asprintf(&str, "<m%s>%s%s</m%s>", B->str, unbracketed_C, unbracketed_D, B->str);
+	else
+		asprintf(&str, "<m%s>%s%s</m%s>", B->str, unbracketed_D, unbracketed_C, B->str);
+
 	new->str = str;
+	free(C->str); free(C); free(D->str); free(D); free(unbracketed_C); free(unbracketed_D);
 	A = new;
 }
 
@@ -110,35 +119,46 @@ i(A) ::= s(B) DIV s(C) .
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	asprintf(&str, "<mfrac>%s%s</mfrac>", strip_brackets(B->str), strip_brackets(C->str));
+	char *unbracketed_B = strip_brackets(B->str);
+	char *unbracketed_C = strip_brackets(C->str);
+	asprintf(&str, "<mfrac>%s%s</mfrac>", unbracketed_B, unbracketed_C);
 	new->str = str;
+	free(B->str); free(B); free(C->str); free(C); free(unbracketed_B); free(unbracketed_C);
 	A = new;
 }
 i(A) ::= s(B) SUB s(C) .
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	asprintf(&str, "<msub>%s%s</msub>", B->str, strip_brackets(C->str));
+	char *unbracketed = strip_brackets(C->str);
+	asprintf(&str, "<msub>%s%s</msub>", B->str, unbracketed);
 	new->str = str;
+	free(B->str); free(B); free(C->str); free(C); free(unbracketed);
 	A = new;
 }
 i(A) ::= s(B) SUP s(C) .
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
-	asprintf(&str, "<msup>%s%s</msup>", B->str, strip_brackets(C->str));
+	char *unbracketed = strip_brackets(C->str);
+	asprintf(&str, "<msup>%s%s</msup>", B->str, unbracketed);
 	new->str = str;
+	free(B->str); free(B); free(C->str); free(C); free(unbracketed);
 	A = new;
 }
 i(A) ::= s(B) SUB s(C) SUP s(D) .
 {
 	struct sym *new = malloc(sizeof(struct sym));
 	char *str;
+	char *unbracketed_C = strip_brackets(C->str);
+	char *unbracketed_D = strip_brackets(D->str);
 	if (B->extra == TOK_underover)
-		asprintf(&str, "<munderover>%s%s%s</munderover>", B->str, strip_brackets(C->str), strip_brackets(D->str));
+		asprintf(&str, "<munderover>%s%s%s</munderover>", B->str, unbracketed_C, unbracketed_D);
 	else
-		asprintf(&str, "<msubsup>%s%s%s</msubsup>", B->str, strip_brackets(C->str), strip_brackets(D->str));
+		asprintf(&str, "<msubsup>%s%s%s</msubsup>", B->str, unbracketed_C, unbracketed_D);
 	new->str = str;
+	free(B->str); free(B);
+	free(C->str); free(C); free(D->str); free(D); free(unbracketed_C); free(unbracketed_D);
 	A = new;
 }
 i(A) ::= matrixList(B). { A = B; }
@@ -149,6 +169,7 @@ matrixList(A) ::= LEFT(B) commaList(C) COMMA matrixListLoop(D) RIGHT(E).
 	char *str;
 	asprintf(&str, "<mrow><mo>%s</mo><mtable>%s%s</mtable><mo>%s</mo></mrow>", B->str, C->str, D->str, E->str);
 	new->str = str;
+	free(C->str); free(C); free(D->str); free(D);
 	A = new;
 
 }
@@ -160,6 +181,7 @@ matrixListLoop(A) ::= commaList(B) COMMA matrixListLoop(C).
 	char *str;
 	asprintf(&str, "%s%s", B->str, C->str);
 	new->str = str;
+	free(B->str); free(B); free(C->str); free(C);
 	A = new;
 }
 
@@ -169,6 +191,7 @@ commaList(A) ::= LEFT i(B) COMMA commaListLoop(C) RIGHT.
 	char *str;
 	asprintf(&str, "<mtr><mtd>%s</mtd>%s</mtr>", B->str, C->str);
 	new->str = str;
+	free(B->str); free(B); free(C->str); free(C);
 	A = new;
 
 }
@@ -179,6 +202,7 @@ commaListLoop(A) ::= i(B).
 	char *str;
 	asprintf(&str, "<mtd>%s</mtd>", B->str);
 	new->str = str;
+	free(B->str); free(B);
 	A = new;
 }
 
