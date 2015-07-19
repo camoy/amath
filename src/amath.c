@@ -12,14 +12,16 @@ char *amath_asciimath_to_mathml(char *text, size_t len)
 {
 	void *parser = ParseAlloc(malloc);
 	char **cursor_ptr = &text;
-	struct amath_node *cur_sym;
+	struct amath_node *cur_node;
 	char *f;
 
 	do {
-		cur_sym = scan(cursor_ptr, len);
-		if(cur_sym->extra == AMATH_ignore) continue;
-		Parse(parser, cur_sym->type, cur_sym, &f);
-	} while (cur_sym->type != 0);
+		cur_node = scan(cursor_ptr, len);
+		if (cur_node->extra == AMATH_ignore)
+			continue;
+		Parse(parser, cur_node->token, cur_node, &f);
+	} while (cur_node->token != 0);
+
 	ParseFree(parser, free);
 
 	return f;

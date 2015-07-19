@@ -214,7 +214,7 @@ enum amath_extra {
 
 
 struct amath_node {
-	int type;
+	int token;
         char *str;
 	enum amath_extra extra;
 };
