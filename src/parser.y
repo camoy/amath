@@ -4,10 +4,10 @@
 #include <string.h>
 #include <assert.h>
 #include "strip.h"
-#include "symtypes.h"
+#include "types.h"
 }
 
-%token_type {struct sym*}
+%token_type {struct amath_node*}
 %extra_argument {char **f}
 
 %syntax_error
@@ -24,7 +24,7 @@ start ::= e(B) .
 
 v(A) ::= IDENTIFIER(B) .
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	asprintf(&str, "<mi>%s</mi>", B->str);
 	new->str = str;
@@ -33,7 +33,7 @@ v(A) ::= IDENTIFIER(B) .
 }
 v(A) ::= NUMBER(B) .
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	asprintf(&str, "<mn>%s</mn>", B->str);
 	new->str = str; new->extra = B->extra;
@@ -42,7 +42,7 @@ v(A) ::= NUMBER(B) .
 }
 v(A) ::= OPERATOR(B) .
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	asprintf(&str, "<mo>%s</mo>", B->str);
 	new->str = str; new->extra = B->extra;
@@ -50,7 +50,7 @@ v(A) ::= OPERATOR(B) .
 }
 v(A) ::= TEXT(B) .
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	char *unquoted = strip_quotes(B->str);
 	asprintf(&str, "<mtext>%s</mtext>", unquoted);
@@ -62,7 +62,7 @@ v(A) ::= TEXT(B) .
 s(A) ::= v(B). { A = B; }
 s(A) ::= LEFT(B) e(C) RIGHT(D) .
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	asprintf(&str, "<mrow>%s%s%s</mrow>", B->str, C->str, D->str);
 	new->str = str;
@@ -72,10 +72,10 @@ s(A) ::= LEFT(B) e(C) RIGHT(D) .
 
 s(A) ::= ACCENT(B) s(C) .
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 
-	if (B->extra == TOK_over)
+	if (B->extra == AMATH_over)
 		asprintf(&str, "<mover>%s<mo>%s</mo></mover>", C->str, B->str);
 	else
 		asprintf(&str, "<munder>%s<mo>%s</mo></munder>", C->str, B->str);
@@ -87,7 +87,7 @@ s(A) ::= ACCENT(B) s(C) .
 
 s(A) ::= UNARY(B) s(C) .
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	char *unbracketed = strip_brackets(C->str);
 	asprintf(&str, "<m%s>%s</m%s>", B->str, unbracketed, B->str);
@@ -98,7 +98,7 @@ s(A) ::= UNARY(B) s(C) .
 
 s(A) ::= BINARY(B) s(C) s(D) .
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	char *unbracketed_C = strip_brackets(C->str);
 	char *unbracketed_D = strip_brackets(D->str);
@@ -117,7 +117,7 @@ s(A) ::= BINARY(B) s(C) s(D) .
 i(A) ::= s(B). { A = B; }
 i(A) ::= s(B) DIV s(C) .
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	char *unbracketed_B = strip_brackets(B->str);
 	char *unbracketed_C = strip_brackets(C->str);
@@ -128,7 +128,7 @@ i(A) ::= s(B) DIV s(C) .
 }
 i(A) ::= s(B) SUB s(C) .
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	char *unbracketed = strip_brackets(C->str);
 	asprintf(&str, "<msub>%s%s</msub>", B->str, unbracketed);
@@ -138,7 +138,7 @@ i(A) ::= s(B) SUB s(C) .
 }
 i(A) ::= s(B) SUP s(C) .
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	char *unbracketed = strip_brackets(C->str);
 	asprintf(&str, "<msup>%s%s</msup>", B->str, unbracketed);
@@ -148,11 +148,11 @@ i(A) ::= s(B) SUP s(C) .
 }
 i(A) ::= s(B) SUB s(C) SUP s(D) .
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	char *unbracketed_C = strip_brackets(C->str);
 	char *unbracketed_D = strip_brackets(D->str);
-	if (B->extra == TOK_underover)
+	if (B->extra == AMATH_underover)
 		asprintf(&str, "<munderover>%s%s%s</munderover>", B->str, unbracketed_C, unbracketed_D);
 	else
 		asprintf(&str, "<msubsup>%s%s%s</msubsup>", B->str, unbracketed_C, unbracketed_D);
@@ -165,7 +165,7 @@ i(A) ::= matrixList(B). { A = B; }
 
 matrixList(A) ::= LEFT(B) commaList(C) COMMA matrixListLoop(D) RIGHT(E).
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	asprintf(&str, "<mrow><mo>%s</mo><mtable>%s%s</mtable><mo>%s</mo></mrow>", B->str, C->str, D->str, E->str);
 	new->str = str;
@@ -177,7 +177,7 @@ matrixList(A) ::= LEFT(B) commaList(C) COMMA matrixListLoop(D) RIGHT(E).
 matrixListLoop(A) ::= commaList(B). { A = B; }
 matrixListLoop(A) ::= commaList(B) COMMA matrixListLoop(C).
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	asprintf(&str, "%s%s", B->str, C->str);
 	new->str = str;
@@ -187,7 +187,7 @@ matrixListLoop(A) ::= commaList(B) COMMA matrixListLoop(C).
 
 commaList(A) ::= LEFT i(B) COMMA commaListLoop(C) RIGHT.
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	asprintf(&str, "<mtr><mtd>%s</mtd>%s</mtr>", B->str, C->str);
 	new->str = str;
@@ -198,7 +198,7 @@ commaList(A) ::= LEFT i(B) COMMA commaListLoop(C) RIGHT.
 
 commaListLoop(A) ::= i(B).
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	asprintf(&str, "<mtd>%s</mtd>", B->str);
 	new->str = str;
@@ -208,7 +208,7 @@ commaListLoop(A) ::= i(B).
 
 commaListLoop(A) ::= i(B) COMMA commaListLoop(C).
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	asprintf(&str, "<mtd>%s</mtd>%s", B->str, C->str);
 	new->str = str;
@@ -218,7 +218,7 @@ commaListLoop(A) ::= i(B) COMMA commaListLoop(C).
 e(A) ::= i(B). { A = B; }
 e(A) ::= i(B) e(C) .
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	asprintf(&str, "%s%s", B->str, C->str);
 	new->str = str;

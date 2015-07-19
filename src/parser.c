@@ -11,7 +11,7 @@
 #include <string.h>
 #include <assert.h>
 #include "strip.h"
-#include "symtypes.h"
+#include "types.h"
 #line 16 "src/parser.c"
 /* Next is all token values, in a form suitable for use by makeheaders.
 ** This section will be null unless lemon is run with the -m switch.
@@ -65,7 +65,7 @@
 #define YYCODETYPE unsigned char
 #define YYNOCODE 25
 #define YYACTIONTYPE unsigned char
-#define ParseTOKENTYPE struct sym*
+#define ParseTOKENTYPE struct amath_node*
 typedef union {
   int yyinit;
   ParseTOKENTYPE yy0;
@@ -715,7 +715,7 @@ static void yy_reduce(
       case 1: /* v ::= IDENTIFIER */
 #line 26 "src/parser.y"
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	asprintf(&str, "<mi>%s</mi>", yymsp[0].minor.yy0->str);
 	new->str = str;
@@ -727,7 +727,7 @@ static void yy_reduce(
       case 2: /* v ::= NUMBER */
 #line 35 "src/parser.y"
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	asprintf(&str, "<mn>%s</mn>", yymsp[0].minor.yy0->str);
 	new->str = str; new->extra = yymsp[0].minor.yy0->extra;
@@ -739,7 +739,7 @@ static void yy_reduce(
       case 3: /* v ::= OPERATOR */
 #line 44 "src/parser.y"
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	asprintf(&str, "<mo>%s</mo>", yymsp[0].minor.yy0->str);
 	new->str = str; new->extra = yymsp[0].minor.yy0->extra;
@@ -750,7 +750,7 @@ static void yy_reduce(
       case 4: /* v ::= TEXT */
 #line 52 "src/parser.y"
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	char *unquoted = strip_quotes(yymsp[0].minor.yy0->str);
 	asprintf(&str, "<mtext>%s</mtext>", unquoted);
@@ -772,7 +772,7 @@ static void yy_reduce(
       case 6: /* s ::= LEFT e RIGHT */
 #line 64 "src/parser.y"
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	asprintf(&str, "<mrow>%s%s%s</mrow>", yymsp[-2].minor.yy0->str, yymsp[-1].minor.yy0->str, yymsp[0].minor.yy0->str);
 	new->str = str;
@@ -784,10 +784,10 @@ static void yy_reduce(
       case 7: /* s ::= ACCENT s */
 #line 74 "src/parser.y"
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 
-	if (yymsp[-1].minor.yy0->extra == TOK_over)
+	if (yymsp[-1].minor.yy0->extra == AMATH_over)
 		asprintf(&str, "<mover>%s<mo>%s</mo></mover>", yymsp[0].minor.yy0->str, yymsp[-1].minor.yy0->str);
 	else
 		asprintf(&str, "<munder>%s<mo>%s</mo></munder>", yymsp[0].minor.yy0->str, yymsp[-1].minor.yy0->str);
@@ -801,7 +801,7 @@ static void yy_reduce(
       case 8: /* s ::= UNARY s */
 #line 89 "src/parser.y"
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	char *unbracketed = strip_brackets(yymsp[0].minor.yy0->str);
 	asprintf(&str, "<m%s>%s</m%s>", yymsp[-1].minor.yy0->str, unbracketed, yymsp[-1].minor.yy0->str);
@@ -814,7 +814,7 @@ static void yy_reduce(
       case 9: /* s ::= BINARY s s */
 #line 100 "src/parser.y"
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	char *unbracketed_C = strip_brackets(yymsp[-1].minor.yy0->str);
 	char *unbracketed_D = strip_brackets(yymsp[0].minor.yy0->str);
@@ -834,7 +834,7 @@ static void yy_reduce(
       case 11: /* i ::= s DIV s */
 #line 119 "src/parser.y"
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	char *unbracketed_B = strip_brackets(yymsp[-2].minor.yy0->str);
 	char *unbracketed_C = strip_brackets(yymsp[0].minor.yy0->str);
@@ -848,7 +848,7 @@ static void yy_reduce(
       case 12: /* i ::= s SUB s */
 #line 130 "src/parser.y"
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	char *unbracketed = strip_brackets(yymsp[0].minor.yy0->str);
 	asprintf(&str, "<msub>%s%s</msub>", yymsp[-2].minor.yy0->str, unbracketed);
@@ -861,7 +861,7 @@ static void yy_reduce(
       case 13: /* i ::= s SUP s */
 #line 140 "src/parser.y"
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	char *unbracketed = strip_brackets(yymsp[0].minor.yy0->str);
 	asprintf(&str, "<msup>%s%s</msup>", yymsp[-2].minor.yy0->str, unbracketed);
@@ -874,11 +874,11 @@ static void yy_reduce(
       case 14: /* i ::= s SUB s SUP s */
 #line 150 "src/parser.y"
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	char *unbracketed_C = strip_brackets(yymsp[-2].minor.yy0->str);
 	char *unbracketed_D = strip_brackets(yymsp[0].minor.yy0->str);
-	if (yymsp[-4].minor.yy0->extra == TOK_underover)
+	if (yymsp[-4].minor.yy0->extra == AMATH_underover)
 		asprintf(&str, "<munderover>%s%s%s</munderover>", yymsp[-4].minor.yy0->str, unbracketed_C, unbracketed_D);
 	else
 		asprintf(&str, "<msubsup>%s%s%s</msubsup>", yymsp[-4].minor.yy0->str, unbracketed_C, unbracketed_D);
@@ -892,7 +892,7 @@ static void yy_reduce(
       case 16: /* matrixList ::= LEFT commaList COMMA matrixListLoop RIGHT */
 #line 167 "src/parser.y"
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	asprintf(&str, "<mrow><mo>%s</mo><mtable>%s%s</mtable><mo>%s</mo></mrow>", yymsp[-4].minor.yy0->str, yymsp[-3].minor.yy0->str, yymsp[-1].minor.yy0->str, yymsp[0].minor.yy0->str);
 	new->str = str;
@@ -905,7 +905,7 @@ static void yy_reduce(
       case 18: /* matrixListLoop ::= commaList COMMA matrixListLoop */
 #line 179 "src/parser.y"
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	asprintf(&str, "%s%s", yymsp[-2].minor.yy0->str, yymsp[0].minor.yy0->str);
 	new->str = str;
@@ -917,7 +917,7 @@ static void yy_reduce(
       case 19: /* commaList ::= LEFT i COMMA commaListLoop RIGHT */
 #line 189 "src/parser.y"
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	asprintf(&str, "<mtr><mtd>%s</mtd>%s</mtr>", yymsp[-3].minor.yy0->str, yymsp[-1].minor.yy0->str);
 	new->str = str;
@@ -930,7 +930,7 @@ static void yy_reduce(
       case 20: /* commaListLoop ::= i */
 #line 200 "src/parser.y"
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	asprintf(&str, "<mtd>%s</mtd>", yymsp[0].minor.yy0->str);
 	new->str = str;
@@ -942,7 +942,7 @@ static void yy_reduce(
       case 21: /* commaListLoop ::= i COMMA commaListLoop */
 #line 210 "src/parser.y"
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	asprintf(&str, "<mtd>%s</mtd>%s", yymsp[-2].minor.yy0->str, yymsp[0].minor.yy0->str);
 	new->str = str;
@@ -953,7 +953,7 @@ static void yy_reduce(
       case 23: /* e ::= i e */
 #line 220 "src/parser.y"
 {
-	struct sym *new = malloc(sizeof(struct sym));
+	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	asprintf(&str, "%s%s", yymsp[-1].minor.yy0->str, yymsp[0].minor.yy0->str);
 	new->str = str;
