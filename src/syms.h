@@ -116,10 +116,6 @@ static struct amath_node amath_syms[AMATH__MAX] = {
 	{ LEFT,		"",		AMATH_none }, /* AMATH_linvis */
 	{ RIGHT,	"",		AMATH_none }, /* AMATH_rinvis */
 	{ OPERATOR,	"\u222B",	AMATH_none }, /* AMATH_int */
-	{ IDENTIFIER,	"dx",		AMATH_none }, /* AMATH_dx */
-	{ IDENTIFIER,	"dy",		AMATH_none }, /* AMATH_dy */
-	{ IDENTIFIER,	"dz",		AMATH_none }, /* AMATH_dz */
-	{ IDENTIFIER,	"dt",		AMATH_none }, /* AMATH_dt */
 	{ OPERATOR,	"\u222E",	AMATH_none }, /* AMATH_oint */
 	{ OPERATOR,	"\u2202",	AMATH_none }, /* AMATH_partial */
 	{ OPERATOR,	"\u2207",	AMATH_none }, /* AMATH_nabla */
@@ -150,8 +146,6 @@ static struct amath_node amath_syms[AMATH__MAX] = {
 	{ OPERATOR,	"\u211A",	AMATH_none }, /* AMATH_rational */
 	{ OPERATOR,	"\u211D",	AMATH_none }, /* AMATH_real */
 	{ OPERATOR,	"\u2124",	AMATH_none }, /* AMATH_integer */
-	{ IDENTIFIER,	"f",		AMATH_none }, /* AMATH_f */
-	{ IDENTIFIER,	"g",		AMATH_none }, /* AMATH_g */
 	{ OPERATOR,	"lim",		AMATH_underover }, /* AMATH_lim */
 	{ OPERATOR,	"Lim",		AMATH_underover }, /* AMATH_Lim */
 	{ OPERATOR,	"sin",		AMATH_none }, /* AMATH_sin */

@@ -73,7 +73,7 @@ struct amath_node *scan(char **c_ptr, size_t len)
 	"Xi"		{ return get_sym(c, c_ptr, AMATH_Xi); }
 	"zeta"		{ return get_sym(c, c_ptr, AMATH_zeta); }
 	"+"		{ return get_sym(c, c_ptr, AMATH_plus); }
-	" - "		{ return get_sym(c, c_ptr, AMATH_minus); }
+	"-"		{ return get_sym(c, c_ptr, AMATH_minus); }
 	"*"		{ return get_sym(c, c_ptr, AMATH_cdot); }
 	"**"		{ return get_sym(c, c_ptr, AMATH_ast); }
 	"***"		{ return get_sym(c, c_ptr, AMATH_star); }
@@ -148,10 +148,6 @@ struct amath_node *scan(char **c_ptr, size_t len)
 	"{:" 		{ return get_sym(c, c_ptr, AMATH_linvis); }
 	":}" 		{ return get_sym(c, c_ptr, AMATH_rinvis); }
 	"int"		{ return get_sym(c, c_ptr, AMATH_int); }
-	"dx"		{ return get_sym(c, c_ptr, AMATH_dx); }
-	"dy"		{ return get_sym(c, c_ptr, AMATH_dy); }
-	"dz"		{ return get_sym(c, c_ptr, AMATH_dz); }
-	"dt"		{ return get_sym(c, c_ptr, AMATH_dt); }
 	"oint"		{ return get_sym(c, c_ptr, AMATH_oint); }
 	"del"		{ return get_sym(c, c_ptr, AMATH_partial); }
 	"grad"		{ return get_sym(c, c_ptr, AMATH_nabla); }
@@ -182,8 +178,6 @@ struct amath_node *scan(char **c_ptr, size_t len)
 	"QQ"		{ return get_sym(c, c_ptr, AMATH_rational); }
 	"RR"		{ return get_sym(c, c_ptr, AMATH_real); }
 	"ZZ"		{ return get_sym(c, c_ptr, AMATH_integer); }
-	"f"		{ return get_sym(c, c_ptr, AMATH_f); }
-	"g"		{ return get_sym(c, c_ptr, AMATH_g); }
 	"lim"		{ return get_sym(c, c_ptr, AMATH_lim); }
 	"Lim"		{ return get_sym(c, c_ptr, AMATH_Lim); }
 	"sin" 		{ return get_sym(c, c_ptr, AMATH_sin); }
