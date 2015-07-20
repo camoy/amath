@@ -133,7 +133,7 @@ enum amath_symt {
 	AMATH_vdots,
 	AMATH_ddots,
 	AMATH_diamond,
-	AMATH_squar,
+	AMATH_square,
 	AMATH_lfloor,
 	AMATH_rfloor,
 	AMATH_lceiling,

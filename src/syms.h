@@ -136,7 +136,7 @@ static struct amath_node amath_syms[AMATH__MAX] = {
 	{ OPERATOR,	"\u22EE",	AMATH_none }, /* AMATH_vdots */
 	{ OPERATOR,	"\u22F1",	AMATH_none }, /* AMATH_ddots */
 	{ OPERATOR,	"\u22C4",	AMATH_none }, /* AMATH_diamond */
-	{ OPERATOR,	"\u25A1",	AMATH_none }, /* AMATH_squar */
+	{ OPERATOR,	"\u25A1",	AMATH_none }, /* AMATH_square */
 	{ OPERATOR,	"\u230A",	AMATH_none }, /* AMATH_lfloor */
 	{ OPERATOR,	"\u230B",	AMATH_none }, /* AMATH_rfloor */
 	{ OPERATOR,	"\u2308",	AMATH_none }, /* AMATH_lceiling */

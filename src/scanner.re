@@ -152,27 +152,27 @@ struct amath_node *scan(char **c_ptr, size_t len)
 	"del"		{ return get_sym(c, c_ptr, AMATH_partial); }
 	"grad"		{ return get_sym(c, c_ptr, AMATH_nabla); }
 	"+-"		{ return get_sym(c, c_ptr, AMATH_pm); }
-	"..."		{ return get_sym(c, c_ptr, AMATH_emptyset); }
-	":."		{ return get_sym(c, c_ptr, AMATH_infty); }
-	"/_"		{ return get_sym(c, c_ptr, AMATH_aleph); }
-	"/_\\"		{ return get_sym(c, c_ptr, AMATH_ldots); }
-	"'"		{ return get_sym(c, c_ptr, AMATH_therefore); }
-	"tilde"		{ return get_sym(c, c_ptr, AMATH_angle); }
-	"\\ "		{ return get_sym(c, c_ptr, AMATH_triangle); }
-	"quad"		{ return get_sym(c, c_ptr, AMATH_prime); }
-	"qquad"		{ return get_sym(c, c_ptr, AMATH_tilde); }
-	"cdots"		{ return get_sym(c, c_ptr, AMATH_double_backslash); }
-	"vdots"		{ return get_sym(c, c_ptr, AMATH_quad); }
-	"ddots"		{ return get_sym(c, c_ptr, AMATH_qquad); }
-	"diamond"	{ return get_sym(c, c_ptr, AMATH_cdots); }
-	"square"	{ return get_sym(c, c_ptr, AMATH_vdots); }
-	"|__"		{ return get_sym(c, c_ptr, AMATH_ddots); }
-	"__|"		{ return get_sym(c, c_ptr, AMATH_diamond); }
-	"|~"		{ return get_sym(c, c_ptr, AMATH_squar); }
-	"~|"		{ return get_sym(c, c_ptr, AMATH_lfloor); }
-	"O/"		{ return get_sym(c, c_ptr, AMATH_rfloor); }
-	"oo"		{ return get_sym(c, c_ptr, AMATH_lceiling); }
-	"aleph"		{ return get_sym(c, c_ptr, AMATH_rceiling); }
+	"O/"		{ return get_sym(c, c_ptr, AMATH_emptyset); }
+	"oo"		{ return get_sym(c, c_ptr, AMATH_infty); }
+	"aleph"		{ return get_sym(c, c_ptr, AMATH_aleph); }
+	"..."		{ return get_sym(c, c_ptr, AMATH_ldots); }
+	":."		{ return get_sym(c, c_ptr, AMATH_therefore); }
+	"/_"		{ return get_sym(c, c_ptr, AMATH_angle); }
+	"/_\\"		{ return get_sym(c, c_ptr, AMATH_triangle); }
+	"'"		{ return get_sym(c, c_ptr, AMATH_prime); }
+	"tilde"		{ return get_sym(c, c_ptr, AMATH_tilde); }
+	"\\ "		{ return get_sym(c, c_ptr, AMATH_double_backslash); }
+	"quad"		{ return get_sym(c, c_ptr, AMATH_quad); }
+	"qquad"		{ return get_sym(c, c_ptr, AMATH_qquad); }
+	"cdots"		{ return get_sym(c, c_ptr, AMATH_cdots); }
+	"vdots"		{ return get_sym(c, c_ptr, AMATH_vdots); }
+	"ddots"		{ return get_sym(c, c_ptr, AMATH_ddots); }
+	"diamond"	{ return get_sym(c, c_ptr, AMATH_diamond); }
+	"square"	{ return get_sym(c, c_ptr, AMATH_square); }
+	"|__"		{ return get_sym(c, c_ptr, AMATH_lfloor); }
+	"__|"		{ return get_sym(c, c_ptr, AMATH_rfloor); }
+	"|~"		{ return get_sym(c, c_ptr, AMATH_lceiling); }
+	"~|"		{ return get_sym(c, c_ptr, AMATH_rceiling); }
 	"CC"		{ return get_sym(c, c_ptr, AMATH_complex); }
 	"NN"		{ return get_sym(c, c_ptr, AMATH_natural); }
 	"QQ"		{ return get_sym(c, c_ptr, AMATH_rational); }
