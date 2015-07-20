@@ -7,14 +7,14 @@ int tests_run = 0;
 
 static char * test_subscripts() {
 	char *expr = "x^2+y_1+z_12^34";
-	char *against = "<msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msub><mi>y</mi><mn>1</mn></msub><mo>+</mo><mrow><msubsup><mi>z</mi><mn>12</mn><mn>34</mn></msubsup></mrow>";
+	char *against = "<msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msub><mi>y</mi><mn>1</mn></msub><mo>+</mo><msubsup><mi>z</mi><mn>12</mn><mn>34</mn></msubsup>";
 	mu_assert("FAILED: subscripts", strcmp(against, amath_asciimath_to_mathml(expr, strlen(expr))) == 0);
 	return 0;
 }
 
 static char * test_function() {
 	char *expr = "sin^-1(x)";
-	char *against = "<mrow><msup><mo>sin</mo><mrow><mo>-</mo><mn>1</mn></mrow></msup><mrow><mo>(</mo><mi>x</mi><mo>)</mo></mrow></mrow>";
+	char *against = "<msup><mo>sin</mo><mn>-1</mn></msup><mrow>(<mi>x</mi>)</mrow>";
 	mu_assert("FAILED: function", strcmp(against, amath_asciimath_to_mathml(expr, strlen(expr))) == 0);
 	return 0;
 }

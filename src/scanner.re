@@ -73,7 +73,7 @@ struct amath_node *scan(char **c_ptr, size_t len)
 	"Xi"		{ return get_sym(c, c_ptr, AMATH_Xi); }
 	"zeta"		{ return get_sym(c, c_ptr, AMATH_zeta); }
 	"+"		{ return get_sym(c, c_ptr, AMATH_plus); }
-	"-"		{ return get_sym(c, c_ptr, AMATH_minus); }
+	" - "		{ return get_sym(c, c_ptr, AMATH_minus); }
 	"*"		{ return get_sym(c, c_ptr, AMATH_cdot); }
 	"**"		{ return get_sym(c, c_ptr, AMATH_ast); }
 	"***"		{ return get_sym(c, c_ptr, AMATH_star); }
@@ -237,7 +237,7 @@ struct amath_node *scan(char **c_ptr, size_t len)
 	'"'.+'"'	{ return new_sym(c, c_ptr, old, TEXT); }
 	[ \t]+		{ return get_sym(c, c_ptr, AMATH_whitespace); }
 	[A-Za-z]+	{ return new_sym(c, c_ptr, old, IDENTIFIER); }
-	[0-9]+'.'?[0-9]*{ return new_sym(c, c_ptr, old, NUMBER); }
+	"-"?[0-9]+'.'?[0-9]*{ return new_sym(c, c_ptr, old, NUMBER); }
 	"\000"		{ return get_sym(c, c_ptr, AMATH_EOL); }
 	[^]		{ return get_sym(c, c_ptr, AMATH_EOL); }
 

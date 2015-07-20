@@ -30,7 +30,7 @@ $(SRC)/parser.c: $(SRC)/parser.y
 $(SRC)/scanner.c: $(SRC)/scanner.re
 	re2c $< > $@
 
-$(TEST): $(LIBRARY)
+$(TEST): $(LIBRARY) test/test.c
 	$(CC) test/test.c -o $(TEST) -L$(BUILD) -lamath
 
 $(BINARY): $(OBJECTS)
