@@ -851,15 +851,18 @@ static void yy_reduce(
 	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	char *unbracketed = strip_brackets(yymsp[0].minor.yy0->str);
-	asprintf(&str, "<msub>%s%s</msub>", yymsp[-2].minor.yy0->str, unbracketed);
+	if (yymsp[-2].minor.yy0->extra == AMATH_underover)
+		asprintf(&str, "<munder>%s%s</munder>", yymsp[-2].minor.yy0->str, unbracketed);
+	else
+		asprintf(&str, "<msub>%s%s</msub>", yymsp[-2].minor.yy0->str, unbracketed);
 	new->str = str;
 	free(yymsp[-2].minor.yy0->str); free(yymsp[-2].minor.yy0); free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0); free(unbracketed);
 	yygotominor.yy0 = new;
 }
-#line 860 "src/parser.c"
+#line 863 "src/parser.c"
         break;
       case 13: /* i ::= s SUP s */
-#line 140 "src/parser.y"
+#line 143 "src/parser.y"
 {
 	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
@@ -869,10 +872,10 @@ static void yy_reduce(
 	free(yymsp[-2].minor.yy0->str); free(yymsp[-2].minor.yy0); free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0); free(unbracketed);
 	yygotominor.yy0 = new;
 }
-#line 873 "src/parser.c"
+#line 876 "src/parser.c"
         break;
       case 14: /* i ::= s SUB s SUP s */
-#line 150 "src/parser.y"
+#line 153 "src/parser.y"
 {
 	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
@@ -887,10 +890,10 @@ static void yy_reduce(
 	free(yymsp[-2].minor.yy0->str); free(yymsp[-2].minor.yy0); free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0); free(unbracketed_C); free(unbracketed_D);
 	yygotominor.yy0 = new;
 }
-#line 891 "src/parser.c"
+#line 894 "src/parser.c"
         break;
       case 16: /* matrixList ::= LEFT commaList COMMA matrixListLoop RIGHT */
-#line 167 "src/parser.y"
+#line 170 "src/parser.y"
 {
 	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
@@ -900,10 +903,10 @@ static void yy_reduce(
 	yygotominor.yy0 = new;
 
 }
-#line 904 "src/parser.c"
+#line 907 "src/parser.c"
         break;
       case 18: /* matrixListLoop ::= commaList COMMA matrixListLoop */
-#line 179 "src/parser.y"
+#line 182 "src/parser.y"
 {
 	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
@@ -912,10 +915,10 @@ static void yy_reduce(
 	free(yymsp[-2].minor.yy0->str); free(yymsp[-2].minor.yy0); free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0);
 	yygotominor.yy0 = new;
 }
-#line 916 "src/parser.c"
+#line 919 "src/parser.c"
         break;
       case 19: /* commaList ::= LEFT i COMMA commaListLoop RIGHT */
-#line 189 "src/parser.y"
+#line 192 "src/parser.y"
 {
 	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
@@ -925,10 +928,10 @@ static void yy_reduce(
 	yygotominor.yy0 = new;
 
 }
-#line 929 "src/parser.c"
+#line 932 "src/parser.c"
         break;
       case 20: /* commaListLoop ::= i */
-#line 200 "src/parser.y"
+#line 203 "src/parser.y"
 {
 	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
@@ -937,10 +940,10 @@ static void yy_reduce(
 	free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0);
 	yygotominor.yy0 = new;
 }
-#line 941 "src/parser.c"
+#line 944 "src/parser.c"
         break;
       case 21: /* commaListLoop ::= i COMMA commaListLoop */
-#line 210 "src/parser.y"
+#line 213 "src/parser.y"
 {
 	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
@@ -948,10 +951,10 @@ static void yy_reduce(
 	new->str = str;
 	yygotominor.yy0 = new;
 }
-#line 952 "src/parser.c"
+#line 955 "src/parser.c"
         break;
       case 23: /* e ::= i e */
-#line 220 "src/parser.y"
+#line 223 "src/parser.y"
 {
 	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
@@ -961,7 +964,7 @@ static void yy_reduce(
 	free(yymsp[-1].minor.yy0); free(yymsp[0].minor.yy0);
 	yygotominor.yy0 = new;
 }
-#line 965 "src/parser.c"
+#line 968 "src/parser.c"
         break;
       default:
         break;
@@ -1027,7 +1030,7 @@ static void yy_syntax_error(
 
 	printf("Problem");
 	exit(0);
-#line 1031 "src/parser.c"
+#line 1034 "src/parser.c"
   ParseARG_STORE; /* Suppress warning about unused %extra_argument variable */
 }
 

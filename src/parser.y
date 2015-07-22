@@ -131,7 +131,10 @@ i(A) ::= s(B) SUB s(C) .
 	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
 	char *unbracketed = strip_brackets(C->str);
-	asprintf(&str, "<msub>%s%s</msub>", B->str, unbracketed);
+	if (B->extra == AMATH_underover)
+		asprintf(&str, "<munder>%s%s</munder>", B->str, unbracketed);
+	else
+		asprintf(&str, "<msub>%s%s</msub>", B->str, unbracketed);
 	new->str = str;
 	free(B->str); free(B); free(C->str); free(C); free(unbracketed);
 	A = new;
