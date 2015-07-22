@@ -20,22 +20,22 @@ static char * test_function() {
 }
 
 static char * test_deriv() {
-	char *expr = "d/dxf(x)=lim_(h->0)(f(x+h)-f(x))/h";
-	char *against = "<mfrac><mi>d</mi><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mrow><mi>f</mi><mrow><mo>(</mo><mi>x</mi><mo>)</mo></mrow></mrow><mo>=</mo><munder><mo>lim</mo><mrow><mi>h</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mrow><mi>f</mi><mrow><mo>(</mo><mi>x</mi><mo>+</mo><mi>h</mi><mo>)</mo></mrow></mrow><mo>-</mo><mrow><mi>f</mi><mrow><mo>(</mo><mi>x</mi><mo>)</mo></mrow></mrow></mrow><mi>h</mi></mfrac>";
+	char *expr = "d/dx f(x)=lim_(h->0)(f(x+h)-f(x))/h";
+	char *against = "<mfrac><mi>d</mi><mi>dx</mi></mfrac><mi>f</mi><mrow>(<mi>x</mi>)</mrow><mo>=</mo><munder><mo>lim</mo><mrow><mi>h</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi>f</mi><mrow>(<mi>x</mi><mo>+</mo><mi>h</mi>)</mrow><mo>−</mo><mi>f</mi><mrow>(<mi>x</mi>)</mrow></mrow><mi>h</mi></mfrac>";
 	mu_assert("FAILED: deriv", strcmp(against, amath_asciimath_to_mathml(expr, strlen(expr))) == 0);
 	return 0;
 }
 
 static char * test_taylor() {
 	char *expr = "f(x)=sum_(n=0)^oo(f^((n))(a))/(n!)(x-a)^n";
-	char *against = "<mrow><mi>f</mi><mrow><mo>(</mo><mi>x</mi><mo>)</mo></mrow></mrow><mo>=</mo><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mo>∞</mo></munderover></mrow><mfrac><mrow><mrow><msup><mi>f</mi><mrow><mrow><mo>(</mo><mi>n</mi><mo>)</mo></mrow></mrow></msup><mrow><mo>(</mo><mi>a</mi><mo>)</mo></mrow></mrow></mrow><mrow><mi>n</mi><mo>!</mo></mrow></mfrac><msup><mrow><mo>(</mo><mi>x</mi><mo>-</mo><mi>a</mi><mo>)</mo></mrow><mi>n</mi></msup>";
+	char *against = "<mi>f</mi><mrow>(<mi>x</mi>)</mrow><mo>=</mo><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mo>∞</mo></munderover><mfrac><mrow><msup><mi>f</mi><mrow><mrow>(<mi>n</mi>)</mrow></mrow></msup><mrow>(<mi>a</mi>)</mrow></mrow><mrow><mi>n</mi><mo>!</mo></mrow></mfrac><msup><mrow>(<mi>x</mi><mo>−</mo><mi>a</mi>)</mrow><mi>n</mi></msup>";
 	mu_assert("FAILED: taylor", strcmp(against, amath_asciimath_to_mathml(expr, strlen(expr))) == 0);
 	return 0;
 }
 
 static char * test_integral() {
 	char *expr = "int_0^1f(x)dx";
-	char *against = "<mrow><msubsup><mo>∫</mo><mn>0</mn><mn>1</mn></msubsup></mrow><mrow><mi>f</mi><mrow><mo>(</mo><mi>x</mi><mo>)</mo></mrow></mrow><mrow><mi>d</mi><mi>x</mi></mrow>";
+	char *against = "<msubsup><mo>∫</mo><mn>0</mn><mn>1</mn></msubsup><mi>f</mi><mrow>(<mi>x</mi>)</mrow><mi>dx</mi>";
 	mu_assert("FAILED: integral", strcmp(against, amath_asciimath_to_mathml(expr, strlen(expr))) == 0);
 	return 0;
 }

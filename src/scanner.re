@@ -72,6 +72,7 @@ struct amath_node *scan(char **c_ptr, size_t len)
 	"xi"		{ return get_sym(c, c_ptr, AMATH_xi); }
 	"Xi"		{ return get_sym(c, c_ptr, AMATH_Xi); }
 	"zeta"		{ return get_sym(c, c_ptr, AMATH_zeta); }
+	"!"		{ return get_sym(c, c_ptr, AMATH_factorial); }
 	"+"		{ return get_sym(c, c_ptr, AMATH_plus); }
 	"-"		{ return get_sym(c, c_ptr, AMATH_minus); }
 	"*"		{ return get_sym(c, c_ptr, AMATH_cdot); }

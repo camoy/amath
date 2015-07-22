@@ -37,6 +37,7 @@ enum amath_symt {
 	AMATH_xi,
 	AMATH_Xi,
 	AMATH_zeta,
+	AMATH_factorial,
 	AMATH_plus,
 	AMATH_minus,
 	AMATH_cdot,

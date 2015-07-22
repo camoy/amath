@@ -40,6 +40,7 @@ static struct amath_node amath_syms[AMATH__MAX] = {
 	{ IDENTIFIER,	"\u03BE",	AMATH_none }, /* AMATH_xi */
 	{ IDENTIFIER,	"\u039E",	AMATH_none }, /* AMATH_Xi */
 	{ IDENTIFIER,	"\u03B6",	AMATH_none }, /* AMATH_zeta */
+	{ OPERATOR,	"!",		AMATH_none }, /* AMATH_factorial */
 	{ OPERATOR,	"+",		AMATH_none }, /* AMATH_plus */
 	{ OPERATOR,	"\u2212",	AMATH_none }, /* AMATH_minus */
 	{ OPERATOR,	"\u22C5",	AMATH_none }, /* AMATH_cdot */
