@@ -166,7 +166,7 @@ i(A) ::= s(B) SUB s(C) SUP s(D) .
 }
 i(A) ::= matrixList(B). { A = B; }
 
-matrixList(A) ::= LEFT(B) commaList(C) COMMA matrixListLoop(D) RIGHT(E).
+matrixList(A) ::= LEFT(B) commaList(C) matrixListLoop(D) RIGHT(E).
 {
 	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
@@ -178,7 +178,7 @@ matrixList(A) ::= LEFT(B) commaList(C) COMMA matrixListLoop(D) RIGHT(E).
 }
 
 matrixListLoop(A) ::= commaList(B). { A = B; }
-matrixListLoop(A) ::= commaList(B) COMMA matrixListLoop(C).
+matrixListLoop(A) ::= commaList(B) matrixListLoop(C).
 {
 	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
@@ -188,13 +188,13 @@ matrixListLoop(A) ::= commaList(B) COMMA matrixListLoop(C).
 	A = new;
 }
 
-commaList(A) ::= LEFT i(B) COMMA commaListLoop(C) RIGHT.
+commaList(A) ::= COMMA LEFT commaListLoop(C) RIGHT.
 {
 	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
-	asprintf(&str, "<mtr><mtd>%s</mtd>%s</mtr>", B->str, C->str);
+	asprintf(&str, "<mtr>%s</mtr>", C->str);
 	new->str = str;
-	free(B->str); free(B); free(C->str); free(C);
+	free(C->str); free(C);
 	A = new;
 
 }

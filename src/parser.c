@@ -77,7 +77,7 @@ typedef union {
 #define ParseARG_PDECL ,char **f
 #define ParseARG_FETCH char **f = yypParser->f
 #define ParseARG_STORE yypParser->f = f
-#define YYNSTATE 47
+#define YYNSTATE 42
 #define YYNRULE 24
 #define YY_NO_ACTION      (YYNSTATE+YYNRULE+2)
 #define YY_ACCEPT_ACTION  (YYNSTATE+YYNRULE+1)
@@ -148,50 +148,46 @@ static const YYMINORTYPE yyzerominor = { 0 };
 **  yy_default[]       Default action for each state.
 */
 static const YYACTIONTYPE yy_action[] = {
- /*     0 */    35,   39,   40,   38,    1,   18,   11,   15,   16,   25,
- /*    10 */    37,   32,    4,    4,   35,   39,   40,   38,    1,    6,
- /*    20 */    11,   15,   16,   35,   39,   40,   38,    7,    8,   11,
- /*    30 */    15,   16,   35,   39,   40,   38,    2,   17,   11,   15,
- /*    40 */    16,   21,   36,   19,    3,   45,   23,   72,   20,   36,
- /*    50 */    19,    5,   45,   21,   36,   19,    5,   45,   23,   36,
- /*    60 */    19,   28,   45,   36,   42,   31,   46,   36,   19,    5,
- /*    70 */    45,   21,   36,   19,    5,   45,   36,   19,   28,   45,
- /*    80 */    36,   22,   27,   36,   19,   26,   45,   14,   10,   13,
- /*    90 */    36,   30,   36,   43,   33,   36,   44,   36,   41,   36,
- /*   100 */    29,   36,   12,   47,   25,   24,   34,    9,
+ /*     0 */    39,   36,   33,   30,    1,    3,   12,   13,    9,   27,
+ /*    10 */    37,   21,   21,   41,   39,   36,   33,   30,    4,   42,
+ /*    20 */    12,   13,    9,   39,   36,   33,   30,    1,    8,   12,
+ /*    30 */    13,    9,   67,   17,   27,   16,    2,   26,    5,   18,
+ /*    40 */    27,   16,    2,   26,   14,   27,   16,   23,   26,   27,
+ /*    50 */    19,   22,   27,   16,   23,   26,   32,   68,   35,   28,
+ /*    60 */    27,   16,    2,   26,   18,   27,   16,    2,   26,    7,
+ /*    70 */     6,   11,   15,   34,   15,   20,   68,   27,   24,   27,
+ /*    80 */    10,   27,   38,   27,   25,   27,   29,   27,   40,   31,
 };
 static const YYCODETYPE yy_lookahead[] = {
- /*     0 */     1,    2,    3,    4,    5,   13,    7,    8,    9,   21,
- /*    10 */    22,    6,   13,   13,    1,    2,    3,    4,    5,   13,
- /*    20 */     7,    8,    9,    1,    2,    3,    4,    5,    5,    7,
- /*    30 */     8,    9,    1,    2,    3,    4,    5,   13,    7,    8,
- /*    40 */     9,   16,   17,   18,   19,   20,   21,   15,   16,   17,
- /*    50 */    18,   19,   20,   16,   17,   18,   19,   20,   21,   17,
- /*    60 */    18,   19,   20,   17,   18,   23,   16,   17,   18,   19,
- /*    70 */    20,   16,   17,   18,   19,   20,   17,   18,   19,   20,
- /*    80 */    17,   18,   23,   17,   18,   19,   20,   10,   11,   12,
- /*    90 */    17,   18,   17,   18,    6,   17,   18,   17,   18,   17,
- /*   100 */    18,   17,   18,    0,   21,   22,    6,   12,
+ /*     0 */     1,    2,    3,    4,    5,    5,    7,    8,    9,   17,
+ /*    10 */    18,   13,   13,    6,    1,    2,    3,    4,    5,    0,
+ /*    20 */     7,    8,    9,    1,    2,    3,    4,    5,   12,    7,
+ /*    30 */     8,    9,   15,   16,   17,   18,   19,   20,   13,   16,
+ /*    40 */    17,   18,   19,   20,   21,   17,   18,   19,   20,   17,
+ /*    50 */    18,   23,   17,   18,   19,   20,    6,   24,   23,   16,
+ /*    60 */    17,   18,   19,   20,   16,   17,   18,   19,   20,   10,
+ /*    70 */    11,   12,   21,   22,   21,   22,   24,   17,   18,   17,
+ /*    80 */    18,   17,   18,   17,   18,   17,   18,   17,   18,    6,
 };
-#define YY_SHIFT_USE_DFLT (-9)
-#define YY_SHIFT_MAX 28
+#define YY_SHIFT_USE_DFLT (-3)
+#define YY_SHIFT_MAX 23
 static const signed char yy_shift_ofst[] = {
- /*     0 */    13,   31,   31,   -1,   13,   13,   13,   13,   13,   22,
- /*    10 */    22,   22,   22,   22,   22,   22,   22,   23,   23,   77,
- /*    20 */   103,    5,   95,   24,  100,   -8,    0,   88,    6,
+ /*     0 */    22,   -1,   22,   22,   22,   22,   13,   13,   13,   13,
+ /*    10 */    13,   13,   13,   13,   -2,   -2,   59,   19,    7,   16,
+ /*    20 */    50,    0,   83,   25,
 };
-#define YY_REDUCE_USE_DFLT (-13)
-#define YY_REDUCE_MAX 18
+#define YY_REDUCE_USE_DFLT (-9)
+#define YY_REDUCE_MAX 15
 static const signed char yy_reduce_ofst[] = {
- /*     0 */    32,   37,   25,   50,   59,   50,   42,   55,   66,   46,
- /*    10 */    63,   73,   75,   78,   80,   82,   84,   83,  -12,
+ /*     0 */    17,   23,   43,   28,   48,   35,   32,   -8,   60,   62,
+ /*    10 */    64,   66,   68,   70,   53,   51,
 };
 static const YYACTIONTYPE yy_default[] = {
- /*     0 */    71,   71,   71,   69,   71,   69,   71,   71,   71,   71,
- /*    10 */    71,   71,   71,   71,   71,   71,   71,   71,   71,   57,
- /*    20 */    71,   71,   59,   71,   71,   64,   71,   71,   67,   55,
- /*    30 */    54,   68,   53,   66,   63,   48,   52,   65,   51,   49,
- /*    40 */    50,   58,   61,   56,   60,   62,   70,
+ /*     0 */    66,   66,   64,   66,   66,   66,   66,   66,   66,   66,
+ /*    10 */    66,   66,   66,   66,   66,   59,   52,   66,   66,   54,
+ /*    20 */    66,   66,   66,   62,   56,   55,   57,   47,   65,   49,
+ /*    30 */    46,   61,   58,   45,   60,   63,   44,   53,   51,   43,
+ /*    40 */    50,   48,
 };
 #define YY_SZ_ACTTAB (int)(sizeof(yy_action)/sizeof(yy_action[0]))
 
@@ -314,10 +310,10 @@ static const char *const yyRuleName[] = {
  /*  13 */ "i ::= s SUP s",
  /*  14 */ "i ::= s SUB s SUP s",
  /*  15 */ "i ::= matrixList",
- /*  16 */ "matrixList ::= LEFT commaList COMMA matrixListLoop RIGHT",
+ /*  16 */ "matrixList ::= LEFT commaList matrixListLoop RIGHT",
  /*  17 */ "matrixListLoop ::= commaList",
- /*  18 */ "matrixListLoop ::= commaList COMMA matrixListLoop",
- /*  19 */ "commaList ::= LEFT i COMMA commaListLoop RIGHT",
+ /*  18 */ "matrixListLoop ::= commaList matrixListLoop",
+ /*  19 */ "commaList ::= COMMA LEFT commaListLoop RIGHT",
  /*  20 */ "commaListLoop ::= i",
  /*  21 */ "commaListLoop ::= i COMMA commaListLoop",
  /*  22 */ "e ::= i",
@@ -642,10 +638,10 @@ static const struct {
   { 19, 3 },
   { 19, 5 },
   { 19, 1 },
-  { 20, 5 },
+  { 20, 4 },
   { 22, 1 },
-  { 22, 3 },
-  { 21, 5 },
+  { 22, 2 },
+  { 21, 4 },
   { 23, 1 },
   { 23, 3 },
   { 16, 1 },
@@ -710,7 +706,7 @@ static void yy_reduce(
 	*f = yymsp[0].minor.yy0->str;
 	free(yymsp[0].minor.yy0);
 }
-#line 714 "src/parser.c"
+#line 710 "src/parser.c"
         break;
       case 1: /* v ::= IDENTIFIER */
 #line 26 "src/parser.y"
@@ -722,7 +718,7 @@ static void yy_reduce(
 	free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0);
 	yygotominor.yy0 = new;
 }
-#line 726 "src/parser.c"
+#line 722 "src/parser.c"
         break;
       case 2: /* v ::= NUMBER */
 #line 35 "src/parser.y"
@@ -734,7 +730,7 @@ static void yy_reduce(
 	free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0);
 	yygotominor.yy0 = new;
 }
-#line 738 "src/parser.c"
+#line 734 "src/parser.c"
         break;
       case 3: /* v ::= OPERATOR */
 #line 44 "src/parser.y"
@@ -745,7 +741,7 @@ static void yy_reduce(
 	new->str = str; new->extra = yymsp[0].minor.yy0->extra;
 	yygotominor.yy0 = new;
 }
-#line 749 "src/parser.c"
+#line 745 "src/parser.c"
         break;
       case 4: /* v ::= TEXT */
 #line 52 "src/parser.y"
@@ -758,7 +754,7 @@ static void yy_reduce(
 	free(unquoted); free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0);
 	yygotominor.yy0 = new;
 }
-#line 762 "src/parser.c"
+#line 758 "src/parser.c"
         break;
       case 5: /* s ::= v */
       case 10: /* i ::= s */ yytestcase(yyruleno==10);
@@ -767,7 +763,7 @@ static void yy_reduce(
       case 22: /* e ::= i */ yytestcase(yyruleno==22);
 #line 62 "src/parser.y"
 { yygotominor.yy0 = yymsp[0].minor.yy0; }
-#line 771 "src/parser.c"
+#line 767 "src/parser.c"
         break;
       case 6: /* s ::= LEFT e RIGHT */
 #line 64 "src/parser.y"
@@ -779,7 +775,7 @@ static void yy_reduce(
 	free(yymsp[-1].minor.yy0->str); free(yymsp[-1].minor.yy0);
 	yygotominor.yy0 = new;
 }
-#line 783 "src/parser.c"
+#line 779 "src/parser.c"
         break;
       case 7: /* s ::= ACCENT s */
 #line 74 "src/parser.y"
@@ -796,7 +792,7 @@ static void yy_reduce(
 	free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0);
 	yygotominor.yy0 = new;
 }
-#line 800 "src/parser.c"
+#line 796 "src/parser.c"
         break;
       case 8: /* s ::= UNARY s */
 #line 89 "src/parser.y"
@@ -809,7 +805,7 @@ static void yy_reduce(
 	free(unbracketed); free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0);
 	yygotominor.yy0 = new;
 }
-#line 813 "src/parser.c"
+#line 809 "src/parser.c"
         break;
       case 9: /* s ::= BINARY s s */
 #line 100 "src/parser.y"
@@ -829,7 +825,7 @@ static void yy_reduce(
 	free(yymsp[-1].minor.yy0->str); free(yymsp[-1].minor.yy0); free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0); free(unbracketed_C); free(unbracketed_D);
 	yygotominor.yy0 = new;
 }
-#line 833 "src/parser.c"
+#line 829 "src/parser.c"
         break;
       case 11: /* i ::= s DIV s */
 #line 119 "src/parser.y"
@@ -843,7 +839,7 @@ static void yy_reduce(
 	free(yymsp[-2].minor.yy0->str); free(yymsp[-2].minor.yy0); free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0); free(unbracketed_B); free(unbracketed_C);
 	yygotominor.yy0 = new;
 }
-#line 847 "src/parser.c"
+#line 843 "src/parser.c"
         break;
       case 12: /* i ::= s SUB s */
 #line 130 "src/parser.y"
@@ -859,7 +855,7 @@ static void yy_reduce(
 	free(yymsp[-2].minor.yy0->str); free(yymsp[-2].minor.yy0); free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0); free(unbracketed);
 	yygotominor.yy0 = new;
 }
-#line 863 "src/parser.c"
+#line 859 "src/parser.c"
         break;
       case 13: /* i ::= s SUP s */
 #line 143 "src/parser.y"
@@ -872,7 +868,7 @@ static void yy_reduce(
 	free(yymsp[-2].minor.yy0->str); free(yymsp[-2].minor.yy0); free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0); free(unbracketed);
 	yygotominor.yy0 = new;
 }
-#line 876 "src/parser.c"
+#line 872 "src/parser.c"
         break;
       case 14: /* i ::= s SUB s SUP s */
 #line 153 "src/parser.y"
@@ -890,45 +886,45 @@ static void yy_reduce(
 	free(yymsp[-2].minor.yy0->str); free(yymsp[-2].minor.yy0); free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0); free(unbracketed_C); free(unbracketed_D);
 	yygotominor.yy0 = new;
 }
-#line 894 "src/parser.c"
+#line 890 "src/parser.c"
         break;
-      case 16: /* matrixList ::= LEFT commaList COMMA matrixListLoop RIGHT */
+      case 16: /* matrixList ::= LEFT commaList matrixListLoop RIGHT */
 #line 170 "src/parser.y"
 {
 	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
-	asprintf(&str, "<mrow><mo>%s</mo><mtable>%s%s</mtable><mo>%s</mo></mrow>", yymsp[-4].minor.yy0->str, yymsp[-3].minor.yy0->str, yymsp[-1].minor.yy0->str, yymsp[0].minor.yy0->str);
+	asprintf(&str, "<mrow><mo>%s</mo><mtable>%s%s</mtable><mo>%s</mo></mrow>", yymsp[-3].minor.yy0->str, yymsp[-2].minor.yy0->str, yymsp[-1].minor.yy0->str, yymsp[0].minor.yy0->str);
 	new->str = str;
-	free(yymsp[-3].minor.yy0->str); free(yymsp[-3].minor.yy0); free(yymsp[-1].minor.yy0->str); free(yymsp[-1].minor.yy0);
+	free(yymsp[-2].minor.yy0->str); free(yymsp[-2].minor.yy0); free(yymsp[-1].minor.yy0->str); free(yymsp[-1].minor.yy0);
 	yygotominor.yy0 = new;
 
 }
-#line 907 "src/parser.c"
+#line 903 "src/parser.c"
         break;
-      case 18: /* matrixListLoop ::= commaList COMMA matrixListLoop */
+      case 18: /* matrixListLoop ::= commaList matrixListLoop */
 #line 182 "src/parser.y"
 {
 	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
-	asprintf(&str, "%s%s", yymsp[-2].minor.yy0->str, yymsp[0].minor.yy0->str);
+	asprintf(&str, "%s%s", yymsp[-1].minor.yy0->str, yymsp[0].minor.yy0->str);
 	new->str = str;
-	free(yymsp[-2].minor.yy0->str); free(yymsp[-2].minor.yy0); free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0);
+	free(yymsp[-1].minor.yy0->str); free(yymsp[-1].minor.yy0); free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0);
 	yygotominor.yy0 = new;
 }
-#line 919 "src/parser.c"
+#line 915 "src/parser.c"
         break;
-      case 19: /* commaList ::= LEFT i COMMA commaListLoop RIGHT */
+      case 19: /* commaList ::= COMMA LEFT commaListLoop RIGHT */
 #line 192 "src/parser.y"
 {
 	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
-	asprintf(&str, "<mtr><mtd>%s</mtd>%s</mtr>", yymsp[-3].minor.yy0->str, yymsp[-1].minor.yy0->str);
+	asprintf(&str, "<mtr>%s</mtr>", yymsp[-1].minor.yy0->str);
 	new->str = str;
-	free(yymsp[-3].minor.yy0->str); free(yymsp[-3].minor.yy0); free(yymsp[-1].minor.yy0->str); free(yymsp[-1].minor.yy0);
+	free(yymsp[-1].minor.yy0->str); free(yymsp[-1].minor.yy0);
 	yygotominor.yy0 = new;
 
 }
-#line 932 "src/parser.c"
+#line 928 "src/parser.c"
         break;
       case 20: /* commaListLoop ::= i */
 #line 203 "src/parser.y"
@@ -940,7 +936,7 @@ static void yy_reduce(
 	free(yymsp[0].minor.yy0->str); free(yymsp[0].minor.yy0);
 	yygotominor.yy0 = new;
 }
-#line 944 "src/parser.c"
+#line 940 "src/parser.c"
         break;
       case 21: /* commaListLoop ::= i COMMA commaListLoop */
 #line 213 "src/parser.y"
@@ -951,7 +947,7 @@ static void yy_reduce(
 	new->str = str;
 	yygotominor.yy0 = new;
 }
-#line 955 "src/parser.c"
+#line 951 "src/parser.c"
         break;
       case 23: /* e ::= i e */
 #line 223 "src/parser.y"
@@ -964,7 +960,7 @@ static void yy_reduce(
 	free(yymsp[-1].minor.yy0); free(yymsp[0].minor.yy0);
 	yygotominor.yy0 = new;
 }
-#line 968 "src/parser.c"
+#line 964 "src/parser.c"
         break;
       default:
         break;
@@ -1030,7 +1026,7 @@ static void yy_syntax_error(
 
 	printf("Problem");
 	exit(0);
-#line 1034 "src/parser.c"
+#line 1030 "src/parser.c"
   ParseARG_STORE; /* Suppress warning about unused %extra_argument variable */
 }
 
