@@ -77,7 +77,7 @@ typedef union {
 #define ParseARG_PDECL ,char **f
 #define ParseARG_FETCH char **f = yypParser->f
 #define ParseARG_STORE yypParser->f = f
-#define YYNSTATE 42
+#define YYNSTATE 41
 #define YYNRULE 24
 #define YY_NO_ACTION      (YYNSTATE+YYNRULE+2)
 #define YY_ACCEPT_ACTION  (YYNSTATE+YYNRULE+1)
@@ -148,46 +148,46 @@ static const YYMINORTYPE yyzerominor = { 0 };
 **  yy_default[]       Default action for each state.
 */
 static const YYACTIONTYPE yy_action[] = {
- /*     0 */    39,   36,   33,   30,    1,    3,   12,   13,    9,   27,
- /*    10 */    37,   21,   21,   41,   39,   36,   33,   30,    4,   42,
- /*    20 */    12,   13,    9,   39,   36,   33,   30,    1,    8,   12,
- /*    30 */    13,    9,   67,   17,   27,   16,    2,   26,    5,   18,
- /*    40 */    27,   16,    2,   26,   14,   27,   16,   23,   26,   27,
- /*    50 */    19,   22,   27,   16,   23,   26,   32,   68,   35,   28,
- /*    60 */    27,   16,    2,   26,   18,   27,   16,    2,   26,    7,
- /*    70 */     6,   11,   15,   34,   15,   20,   68,   27,   24,   27,
- /*    80 */    10,   27,   38,   27,   25,   27,   29,   27,   40,   31,
+ /*     0 */    39,   35,   32,   27,    1,   10,   11,   12,    8,   24,
+ /*    10 */    25,   30,   20,   20,   39,   35,   32,   27,    1,   41,
+ /*    20 */    11,   12,    8,   39,   35,   32,   27,    2,    3,   11,
+ /*    30 */    12,    8,   17,   24,   15,    5,   26,   19,   14,   66,
+ /*    40 */    16,   24,   15,    5,   26,   31,   17,   24,   15,    5,
+ /*    50 */    26,   24,   15,   22,   26,   24,   40,   34,   28,   24,
+ /*    60 */    15,    5,   26,    4,   24,   15,   22,   26,   24,    6,
+ /*    70 */    21,    9,   13,    7,   24,   29,   24,   38,   23,   24,
+ /*    80 */    18,   67,   24,   37,   24,   36,   67,   33,   14,
 };
 static const YYCODETYPE yy_lookahead[] = {
- /*     0 */     1,    2,    3,    4,    5,    5,    7,    8,    9,   17,
- /*    10 */    18,   13,   13,    6,    1,    2,    3,    4,    5,    0,
- /*    20 */     7,    8,    9,    1,    2,    3,    4,    5,   12,    7,
- /*    30 */     8,    9,   15,   16,   17,   18,   19,   20,   13,   16,
- /*    40 */    17,   18,   19,   20,   21,   17,   18,   19,   20,   17,
- /*    50 */    18,   23,   17,   18,   19,   20,    6,   24,   23,   16,
- /*    60 */    17,   18,   19,   20,   16,   17,   18,   19,   20,   10,
- /*    70 */    11,   12,   21,   22,   21,   22,   24,   17,   18,   17,
- /*    80 */    18,   17,   18,   17,   18,   17,   18,   17,   18,    6,
+ /*     0 */     1,    2,    3,    4,    5,   12,    7,    8,    9,   17,
+ /*    10 */    18,    6,   13,   13,    1,    2,    3,    4,    5,    0,
+ /*    20 */     7,    8,    9,    1,    2,    3,    4,    5,    5,    7,
+ /*    30 */     8,    9,   16,   17,   18,   19,   20,   21,   22,   15,
+ /*    40 */    16,   17,   18,   19,   20,    6,   16,   17,   18,   19,
+ /*    50 */    20,   17,   18,   19,   20,   17,   18,   23,   16,   17,
+ /*    60 */    18,   19,   20,   13,   17,   18,   19,   20,   17,   18,
+ /*    70 */    23,   10,   11,   12,   17,   18,   17,   18,    6,   17,
+ /*    80 */    18,   24,   17,   18,   17,   18,   24,   21,   22,
 };
-#define YY_SHIFT_USE_DFLT (-3)
-#define YY_SHIFT_MAX 23
+#define YY_SHIFT_USE_DFLT (-8)
+#define YY_SHIFT_MAX 22
 static const signed char yy_shift_ofst[] = {
- /*     0 */    22,   -1,   22,   22,   22,   22,   13,   13,   13,   13,
- /*    10 */    13,   13,   13,   13,   -2,   -2,   59,   19,    7,   16,
- /*    20 */    50,    0,   83,   25,
+ /*     0 */    13,   -1,   13,   13,   13,   13,   22,   22,   22,   22,
+ /*    10 */    22,   22,   22,   22,    0,   61,   19,   72,   -7,   39,
+ /*    20 */    23,    5,   50,
 };
 #define YY_REDUCE_USE_DFLT (-9)
-#define YY_REDUCE_MAX 15
+#define YY_REDUCE_MAX 14
 static const signed char yy_reduce_ofst[] = {
- /*     0 */    17,   23,   43,   28,   48,   35,   32,   -8,   60,   62,
- /*    10 */    64,   66,   68,   70,   53,   51,
+ /*     0 */    24,   16,   30,   47,   34,   42,   67,   -8,   51,   65,
+ /*    10 */    38,   57,   59,   62,   66,
 };
 static const YYACTIONTYPE yy_default[] = {
- /*     0 */    66,   66,   64,   66,   66,   66,   66,   66,   66,   66,
- /*    10 */    66,   66,   66,   66,   66,   59,   52,   66,   66,   54,
- /*    20 */    66,   66,   66,   62,   56,   55,   57,   47,   65,   49,
- /*    30 */    46,   61,   58,   45,   60,   63,   44,   53,   51,   43,
- /*    40 */    50,   48,
+ /*     0 */    65,   65,   65,   65,   65,   63,   65,   65,   65,   65,
+ /*    10 */    65,   65,   65,   65,   58,   51,   65,   65,   53,   65,
+ /*    20 */    65,   65,   61,   47,   46,   54,   56,   45,   64,   48,
+ /*    30 */    60,   57,   44,   59,   62,   43,   50,   52,   49,   42,
+ /*    40 */    55,
 };
 #define YY_SZ_ACTTAB (int)(sizeof(yy_action)/sizeof(yy_action[0]))
 
@@ -286,7 +286,7 @@ static const char *const yyTokenName[] = {
   "UNARY",         "BINARY",        "DIV",           "SUB",         
   "SUP",           "COMMA",         "error",         "start",       
   "e",             "v",             "s",             "i",           
-  "matrixList",    "commaList",     "matrixListLoop",  "commaListLoop",
+  "matrixList",    "matrixListLoop",  "commaList",     "commaListLoop",
 };
 #endif /* NDEBUG */
 
@@ -310,7 +310,7 @@ static const char *const yyRuleName[] = {
  /*  13 */ "i ::= s SUP s",
  /*  14 */ "i ::= s SUB s SUP s",
  /*  15 */ "i ::= matrixList",
- /*  16 */ "matrixList ::= LEFT commaList matrixListLoop RIGHT",
+ /*  16 */ "matrixList ::= LEFT matrixListLoop RIGHT",
  /*  17 */ "matrixListLoop ::= commaList",
  /*  18 */ "matrixListLoop ::= commaList matrixListLoop",
  /*  19 */ "commaList ::= COMMA LEFT commaListLoop RIGHT",
@@ -638,10 +638,10 @@ static const struct {
   { 19, 3 },
   { 19, 5 },
   { 19, 1 },
-  { 20, 4 },
-  { 22, 1 },
-  { 22, 2 },
-  { 21, 4 },
+  { 20, 3 },
+  { 21, 1 },
+  { 21, 2 },
+  { 22, 4 },
   { 23, 1 },
   { 23, 3 },
   { 16, 1 },
@@ -888,14 +888,14 @@ static void yy_reduce(
 }
 #line 890 "src/parser.c"
         break;
-      case 16: /* matrixList ::= LEFT commaList matrixListLoop RIGHT */
+      case 16: /* matrixList ::= LEFT matrixListLoop RIGHT */
 #line 170 "src/parser.y"
 {
 	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
-	asprintf(&str, "<mrow><mo>%s</mo><mtable>%s%s</mtable><mo>%s</mo></mrow>", yymsp[-3].minor.yy0->str, yymsp[-2].minor.yy0->str, yymsp[-1].minor.yy0->str, yymsp[0].minor.yy0->str);
+	asprintf(&str, "<mrow><mo>%s</mo><mtable>%s</mtable><mo>%s</mo></mrow>", yymsp[-2].minor.yy0->str, yymsp[-1].minor.yy0->str, yymsp[0].minor.yy0->str);
 	new->str = str;
-	free(yymsp[-2].minor.yy0->str); free(yymsp[-2].minor.yy0); free(yymsp[-1].minor.yy0->str); free(yymsp[-1].minor.yy0);
+	free(yymsp[-1].minor.yy0->str); free(yymsp[-1].minor.yy0);
 	yygotominor.yy0 = new;
 
 }

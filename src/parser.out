@@ -15,23 +15,23 @@ State 0:
           i ::= * s SUP s
           i ::= * s SUB s SUP s
           i ::= * matrixList
-          matrixList ::= * LEFT commaList matrixListLoop RIGHT
+          matrixList ::= * LEFT matrixListLoop RIGHT
           e ::= * i
           e ::= * i e
 
                     IDENTIFIER shift  39
-                        NUMBER shift  36
-                      OPERATOR shift  33
-                          TEXT shift  30
+                        NUMBER shift  35
+                      OPERATOR shift  32
+                          TEXT shift  27
                           LEFT shift  1
-                        ACCENT shift  12
-                         UNARY shift  13
-                        BINARY shift  9
+                        ACCENT shift  11
+                         UNARY shift  12
+                        BINARY shift  8
                          start accept
-                             e shift  17
-                             v shift  27
-                             s shift  16
-                             i shift  2
+                             e shift  16
+                             v shift  24
+                             s shift  15
+                             i shift  5
                     matrixList shift  26
 
 State 1:
@@ -51,26 +51,29 @@ State 1:
           i ::= * s SUP s
           i ::= * s SUB s SUP s
           i ::= * matrixList
-          matrixList ::= * LEFT commaList matrixListLoop RIGHT
-          matrixList ::= LEFT * commaList matrixListLoop RIGHT
+          matrixList ::= * LEFT matrixListLoop RIGHT
+          matrixList ::= LEFT * matrixListLoop RIGHT
+          matrixListLoop ::= * commaList
+          matrixListLoop ::= * commaList matrixListLoop
           commaList ::= * COMMA LEFT commaListLoop RIGHT
           e ::= * i
           e ::= * i e
 
                     IDENTIFIER shift  39
-                        NUMBER shift  36
-                      OPERATOR shift  33
-                          TEXT shift  30
+                        NUMBER shift  35
+                      OPERATOR shift  32
+                          TEXT shift  27
                           LEFT shift  1
-                        ACCENT shift  12
-                         UNARY shift  13
-                        BINARY shift  9
-                         COMMA shift  21
-                             e shift  18
-                             v shift  27
-                             s shift  16
-                             i shift  2
+                        ACCENT shift  11
+                         UNARY shift  12
+                        BINARY shift  8
+                         COMMA shift  20
+                             e shift  17
+                             v shift  24
+                             s shift  15
+                             i shift  5
                     matrixList shift  26
+                matrixListLoop shift  19
                      commaList shift  14
 
 State 2:
@@ -80,6 +83,7 @@ State 2:
           v ::= * TEXT
           s ::= * v
           s ::= * LEFT e RIGHT
+          s ::= LEFT * e RIGHT
           s ::= * ACCENT s
           s ::= * UNARY s
           s ::= * BINARY s s
@@ -89,26 +93,23 @@ State 2:
           i ::= * s SUP s
           i ::= * s SUB s SUP s
           i ::= * matrixList
-          matrixList ::= * LEFT commaList matrixListLoop RIGHT
+          matrixList ::= * LEFT matrixListLoop RIGHT
           e ::= * i
-     (22) e ::= i *
           e ::= * i e
-          e ::= i * e
 
                     IDENTIFIER shift  39
-                        NUMBER shift  36
-                      OPERATOR shift  33
-                          TEXT shift  30
+                        NUMBER shift  35
+                      OPERATOR shift  32
+                          TEXT shift  27
                           LEFT shift  1
-                        ACCENT shift  12
-                         UNARY shift  13
-                        BINARY shift  9
-                             e shift  28
-                             v shift  27
-                             s shift  16
-                             i shift  2
+                        ACCENT shift  11
+                         UNARY shift  12
+                        BINARY shift  8
+                             e shift  17
+                             v shift  24
+                             s shift  15
+                             i shift  5
                     matrixList shift  26
-                     {default} reduce 22
 
 State 3:
           v ::= * IDENTIFIER
@@ -126,24 +127,24 @@ State 3:
           i ::= * s SUP s
           i ::= * s SUB s SUP s
           i ::= * matrixList
-          matrixList ::= * LEFT commaList matrixListLoop RIGHT
+          matrixList ::= * LEFT matrixListLoop RIGHT
           commaList ::= COMMA LEFT * commaListLoop RIGHT
           commaListLoop ::= * i
           commaListLoop ::= * i COMMA commaListLoop
 
                     IDENTIFIER shift  39
-                        NUMBER shift  36
-                      OPERATOR shift  33
-                          TEXT shift  30
+                        NUMBER shift  35
+                      OPERATOR shift  32
+                          TEXT shift  27
                           LEFT shift  1
-                        ACCENT shift  12
-                         UNARY shift  13
-                        BINARY shift  9
-                             v shift  27
-                             s shift  16
-                             i shift  23
+                        ACCENT shift  11
+                         UNARY shift  12
+                        BINARY shift  8
+                             v shift  24
+                             s shift  15
+                             i shift  22
                     matrixList shift  26
-                 commaListLoop shift  22
+                 commaListLoop shift  21
 
 State 4:
           v ::= * IDENTIFIER
@@ -152,7 +153,6 @@ State 4:
           v ::= * TEXT
           s ::= * v
           s ::= * LEFT e RIGHT
-          s ::= LEFT * e RIGHT
           s ::= * ACCENT s
           s ::= * UNARY s
           s ::= * BINARY s s
@@ -162,23 +162,24 @@ State 4:
           i ::= * s SUP s
           i ::= * s SUB s SUP s
           i ::= * matrixList
-          matrixList ::= * LEFT commaList matrixListLoop RIGHT
-          e ::= * i
-          e ::= * i e
+          matrixList ::= * LEFT matrixListLoop RIGHT
+          commaListLoop ::= * i
+          commaListLoop ::= * i COMMA commaListLoop
+          commaListLoop ::= i COMMA * commaListLoop
 
                     IDENTIFIER shift  39
-                        NUMBER shift  36
-                      OPERATOR shift  33
-                          TEXT shift  30
+                        NUMBER shift  35
+                      OPERATOR shift  32
+                          TEXT shift  27
                           LEFT shift  1
-                        ACCENT shift  12
-                         UNARY shift  13
-                        BINARY shift  9
-                             e shift  18
-                             v shift  27
-                             s shift  16
-                             i shift  2
+                        ACCENT shift  11
+                         UNARY shift  12
+                        BINARY shift  8
+                             v shift  24
+                             s shift  15
+                             i shift  22
                     matrixList shift  26
+                 commaListLoop shift  34
 
 State 5:
           v ::= * IDENTIFIER
@@ -196,26 +197,189 @@ State 5:
           i ::= * s SUP s
           i ::= * s SUB s SUP s
           i ::= * matrixList
-          matrixList ::= * LEFT commaList matrixListLoop RIGHT
-          commaListLoop ::= * i
-          commaListLoop ::= * i COMMA commaListLoop
-          commaListLoop ::= i COMMA * commaListLoop
+          matrixList ::= * LEFT matrixListLoop RIGHT
+          e ::= * i
+     (22) e ::= i *
+          e ::= * i e
+          e ::= i * e
 
                     IDENTIFIER shift  39
-                        NUMBER shift  36
-                      OPERATOR shift  33
-                          TEXT shift  30
+                        NUMBER shift  35
+                      OPERATOR shift  32
+                          TEXT shift  27
                           LEFT shift  1
-                        ACCENT shift  12
-                         UNARY shift  13
-                        BINARY shift  9
-                             v shift  27
-                             s shift  16
-                             i shift  23
+                        ACCENT shift  11
+                         UNARY shift  12
+                        BINARY shift  8
+                             e shift  28
+                             v shift  24
+                             s shift  15
+                             i shift  5
                     matrixList shift  26
-                 commaListLoop shift  35
+                     {default} reduce 22
 
 State 6:
+          v ::= * IDENTIFIER
+          v ::= * NUMBER
+          v ::= * OPERATOR
+          v ::= * TEXT
+          s ::= * v
+          s ::= * LEFT e RIGHT
+          s ::= * ACCENT s
+          s ::= * UNARY s
+          s ::= * BINARY s s
+          s ::= BINARY s * s
+
+                    IDENTIFIER shift  39
+                        NUMBER shift  35
+                      OPERATOR shift  32
+                          TEXT shift  27
+                          LEFT shift  2
+                        ACCENT shift  11
+                         UNARY shift  12
+                        BINARY shift  8
+                             v shift  24
+                             s shift  36
+
+State 7:
+          v ::= * IDENTIFIER
+          v ::= * NUMBER
+          v ::= * OPERATOR
+          v ::= * TEXT
+          s ::= * v
+          s ::= * LEFT e RIGHT
+          s ::= * ACCENT s
+          s ::= * UNARY s
+          s ::= * BINARY s s
+          i ::= s SUP * s
+
+                    IDENTIFIER shift  39
+                        NUMBER shift  35
+                      OPERATOR shift  32
+                          TEXT shift  27
+                          LEFT shift  2
+                        ACCENT shift  11
+                         UNARY shift  12
+                        BINARY shift  8
+                             v shift  24
+                             s shift  25
+
+State 8:
+          v ::= * IDENTIFIER
+          v ::= * NUMBER
+          v ::= * OPERATOR
+          v ::= * TEXT
+          s ::= * v
+          s ::= * LEFT e RIGHT
+          s ::= * ACCENT s
+          s ::= * UNARY s
+          s ::= * BINARY s s
+          s ::= BINARY * s s
+
+                    IDENTIFIER shift  39
+                        NUMBER shift  35
+                      OPERATOR shift  32
+                          TEXT shift  27
+                          LEFT shift  2
+                        ACCENT shift  11
+                         UNARY shift  12
+                        BINARY shift  8
+                             v shift  24
+                             s shift  6
+
+State 9:
+          v ::= * IDENTIFIER
+          v ::= * NUMBER
+          v ::= * OPERATOR
+          v ::= * TEXT
+          s ::= * v
+          s ::= * LEFT e RIGHT
+          s ::= * ACCENT s
+          s ::= * UNARY s
+          s ::= * BINARY s s
+          i ::= s DIV * s
+
+                    IDENTIFIER shift  39
+                        NUMBER shift  35
+                      OPERATOR shift  32
+                          TEXT shift  27
+                          LEFT shift  2
+                        ACCENT shift  11
+                         UNARY shift  12
+                        BINARY shift  8
+                             v shift  24
+                             s shift  37
+
+State 10:
+          v ::= * IDENTIFIER
+          v ::= * NUMBER
+          v ::= * OPERATOR
+          v ::= * TEXT
+          s ::= * v
+          s ::= * LEFT e RIGHT
+          s ::= * ACCENT s
+          s ::= * UNARY s
+          s ::= * BINARY s s
+          i ::= s SUB s SUP * s
+
+                    IDENTIFIER shift  39
+                        NUMBER shift  35
+                      OPERATOR shift  32
+                          TEXT shift  27
+                          LEFT shift  2
+                        ACCENT shift  11
+                         UNARY shift  12
+                        BINARY shift  8
+                             v shift  24
+                             s shift  40
+
+State 11:
+          v ::= * IDENTIFIER
+          v ::= * NUMBER
+          v ::= * OPERATOR
+          v ::= * TEXT
+          s ::= * v
+          s ::= * LEFT e RIGHT
+          s ::= * ACCENT s
+          s ::= ACCENT * s
+          s ::= * UNARY s
+          s ::= * BINARY s s
+
+                    IDENTIFIER shift  39
+                        NUMBER shift  35
+                      OPERATOR shift  32
+                          TEXT shift  27
+                          LEFT shift  2
+                        ACCENT shift  11
+                         UNARY shift  12
+                        BINARY shift  8
+                             v shift  24
+                             s shift  29
+
+State 12:
+          v ::= * IDENTIFIER
+          v ::= * NUMBER
+          v ::= * OPERATOR
+          v ::= * TEXT
+          s ::= * v
+          s ::= * LEFT e RIGHT
+          s ::= * ACCENT s
+          s ::= * UNARY s
+          s ::= UNARY * s
+          s ::= * BINARY s s
+
+                    IDENTIFIER shift  39
+                        NUMBER shift  35
+                      OPERATOR shift  32
+                          TEXT shift  27
+                          LEFT shift  2
+                        ACCENT shift  11
+                         UNARY shift  12
+                        BINARY shift  8
+                             v shift  24
+                             s shift  38
+
+State 13:
           v ::= * IDENTIFIER
           v ::= * NUMBER
           v ::= * OPERATOR
@@ -229,254 +393,88 @@ State 6:
           i ::= s SUB * s SUP s
 
                     IDENTIFIER shift  39
-                        NUMBER shift  36
-                      OPERATOR shift  33
-                          TEXT shift  30
-                          LEFT shift  4
-                        ACCENT shift  12
-                         UNARY shift  13
-                        BINARY shift  9
-                             v shift  27
-                             s shift  19
-
-State 7:
-          v ::= * IDENTIFIER
-          v ::= * NUMBER
-          v ::= * OPERATOR
-          v ::= * TEXT
-          s ::= * v
-          s ::= * LEFT e RIGHT
-          s ::= * ACCENT s
-          s ::= * UNARY s
-          s ::= * BINARY s s
-          i ::= s DIV * s
-
-                    IDENTIFIER shift  39
-                        NUMBER shift  36
-                      OPERATOR shift  33
-                          TEXT shift  30
-                          LEFT shift  4
-                        ACCENT shift  12
-                         UNARY shift  13
-                        BINARY shift  9
-                             v shift  27
-                             s shift  37
-
-State 8:
-          v ::= * IDENTIFIER
-          v ::= * NUMBER
-          v ::= * OPERATOR
-          v ::= * TEXT
-          s ::= * v
-          s ::= * LEFT e RIGHT
-          s ::= * ACCENT s
-          s ::= * UNARY s
-          s ::= * BINARY s s
-          i ::= s SUB s SUP * s
-
-                    IDENTIFIER shift  39
-                        NUMBER shift  36
-                      OPERATOR shift  33
-                          TEXT shift  30
-                          LEFT shift  4
-                        ACCENT shift  12
-                         UNARY shift  13
-                        BINARY shift  9
-                             v shift  27
-                             s shift  24
-
-State 9:
-          v ::= * IDENTIFIER
-          v ::= * NUMBER
-          v ::= * OPERATOR
-          v ::= * TEXT
-          s ::= * v
-          s ::= * LEFT e RIGHT
-          s ::= * ACCENT s
-          s ::= * UNARY s
-          s ::= * BINARY s s
-          s ::= BINARY * s s
-
-                    IDENTIFIER shift  39
-                        NUMBER shift  36
-                      OPERATOR shift  33
-                          TEXT shift  30
-                          LEFT shift  4
-                        ACCENT shift  12
-                         UNARY shift  13
-                        BINARY shift  9
-                             v shift  27
-                             s shift  10
-
-State 10:
-          v ::= * IDENTIFIER
-          v ::= * NUMBER
-          v ::= * OPERATOR
-          v ::= * TEXT
-          s ::= * v
-          s ::= * LEFT e RIGHT
-          s ::= * ACCENT s
-          s ::= * UNARY s
-          s ::= * BINARY s s
-          s ::= BINARY s * s
-
-                    IDENTIFIER shift  39
-                        NUMBER shift  36
-                      OPERATOR shift  33
-                          TEXT shift  30
-                          LEFT shift  4
-                        ACCENT shift  12
-                         UNARY shift  13
-                        BINARY shift  9
-                             v shift  27
-                             s shift  38
-
-State 11:
-          v ::= * IDENTIFIER
-          v ::= * NUMBER
-          v ::= * OPERATOR
-          v ::= * TEXT
-          s ::= * v
-          s ::= * LEFT e RIGHT
-          s ::= * ACCENT s
-          s ::= * UNARY s
-          s ::= * BINARY s s
-          i ::= s SUP * s
-
-                    IDENTIFIER shift  39
-                        NUMBER shift  36
-                      OPERATOR shift  33
-                          TEXT shift  30
-                          LEFT shift  4
-                        ACCENT shift  12
-                         UNARY shift  13
-                        BINARY shift  9
-                             v shift  27
-                             s shift  25
-
-State 12:
-          v ::= * IDENTIFIER
-          v ::= * NUMBER
-          v ::= * OPERATOR
-          v ::= * TEXT
-          s ::= * v
-          s ::= * LEFT e RIGHT
-          s ::= * ACCENT s
-          s ::= ACCENT * s
-          s ::= * UNARY s
-          s ::= * BINARY s s
-
-                    IDENTIFIER shift  39
-                        NUMBER shift  36
-                      OPERATOR shift  33
-                          TEXT shift  30
-                          LEFT shift  4
-                        ACCENT shift  12
-                         UNARY shift  13
-                        BINARY shift  9
-                             v shift  27
-                             s shift  29
-
-State 13:
-          v ::= * IDENTIFIER
-          v ::= * NUMBER
-          v ::= * OPERATOR
-          v ::= * TEXT
-          s ::= * v
-          s ::= * LEFT e RIGHT
-          s ::= * ACCENT s
-          s ::= * UNARY s
-          s ::= UNARY * s
-          s ::= * BINARY s s
-
-                    IDENTIFIER shift  39
-                        NUMBER shift  36
-                      OPERATOR shift  33
-                          TEXT shift  30
-                          LEFT shift  4
-                        ACCENT shift  12
-                         UNARY shift  13
-                        BINARY shift  9
-                             v shift  27
-                             s shift  40
+                        NUMBER shift  35
+                      OPERATOR shift  32
+                          TEXT shift  27
+                          LEFT shift  2
+                        ACCENT shift  11
+                         UNARY shift  12
+                        BINARY shift  8
+                             v shift  24
+                             s shift  18
 
 State 14:
-          matrixList ::= LEFT commaList * matrixListLoop RIGHT
-          matrixListLoop ::= * commaList
-          matrixListLoop ::= * commaList matrixListLoop
-          commaList ::= * COMMA LEFT commaListLoop RIGHT
-
-                         COMMA shift  21
-                     commaList shift  15
-                matrixListLoop shift  20
-
-State 15:
           matrixListLoop ::= * commaList
      (17) matrixListLoop ::= commaList *
           matrixListLoop ::= * commaList matrixListLoop
           matrixListLoop ::= commaList * matrixListLoop
           commaList ::= * COMMA LEFT commaListLoop RIGHT
 
-                         COMMA shift  21
-                     commaList shift  15
-                matrixListLoop shift  34
+                         COMMA shift  20
+                matrixListLoop shift  33
+                     commaList shift  14
                      {default} reduce 17
 
-State 16:
+State 15:
      (10) i ::= s *
           i ::= s * DIV s
           i ::= s * SUB s
           i ::= s * SUP s
           i ::= s * SUB s SUP s
 
-                           DIV shift  7
-                           SUB shift  6
-                           SUP shift  11
+                           DIV shift  9
+                           SUB shift  13
+                           SUP shift  7
                      {default} reduce 10
 
-State 17:
+State 16:
       (0) start ::= e *
 
                              $ reduce 0
 
-State 18:
+State 17:
           s ::= LEFT e * RIGHT
 
-                         RIGHT shift  41
+                         RIGHT shift  23
 
-State 19:
+State 18:
      (12) i ::= s SUB s *
           i ::= s SUB s * SUP s
 
-                           SUP shift  8
+                           SUP shift  10
                      {default} reduce 12
 
+State 19:
+          matrixList ::= LEFT matrixListLoop * RIGHT
+
+                         RIGHT shift  31
+
 State 20:
-          matrixList ::= LEFT commaList matrixListLoop * RIGHT
-
-                         RIGHT shift  32
-
-State 21:
           commaList ::= COMMA * LEFT commaListLoop RIGHT
 
                           LEFT shift  3
 
-State 22:
+State 21:
           commaList ::= COMMA LEFT commaListLoop * RIGHT
 
-                         RIGHT shift  31
+                         RIGHT shift  30
 
-State 23:
+State 22:
      (20) commaListLoop ::= i *
           commaListLoop ::= i * COMMA commaListLoop
 
-                         COMMA shift  5
+                         COMMA shift  4
                      {default} reduce 20
 
-State 24:
-     (14) i ::= s SUB s SUP s *
+State 23:
+      (6) s ::= LEFT e RIGHT *
 
-                     {default} reduce 14
+                     {default} reduce 6
+
+State 24:
+      (5) s ::= v *
+
+                     {default} reduce 5
 
 State 25:
      (13) i ::= s SUP s *
@@ -489,9 +487,9 @@ State 26:
                      {default} reduce 15
 
 State 27:
-      (5) s ::= v *
+      (4) v ::= TEXT *
 
-                     {default} reduce 5
+                     {default} reduce 4
 
 State 28:
      (23) e ::= i e *
@@ -504,39 +502,39 @@ State 29:
                      {default} reduce 7
 
 State 30:
-      (4) v ::= TEXT *
-
-                     {default} reduce 4
-
-State 31:
      (19) commaList ::= COMMA LEFT commaListLoop RIGHT *
 
                      {default} reduce 19
 
-State 32:
-     (16) matrixList ::= LEFT commaList matrixListLoop RIGHT *
+State 31:
+     (16) matrixList ::= LEFT matrixListLoop RIGHT *
 
                      {default} reduce 16
 
-State 33:
+State 32:
       (3) v ::= OPERATOR *
 
                      {default} reduce 3
 
-State 34:
+State 33:
      (18) matrixListLoop ::= commaList matrixListLoop *
 
                      {default} reduce 18
 
-State 35:
+State 34:
      (21) commaListLoop ::= i COMMA commaListLoop *
 
                      {default} reduce 21
 
-State 36:
+State 35:
       (2) v ::= NUMBER *
 
                      {default} reduce 2
+
+State 36:
+      (9) s ::= BINARY s s *
+
+                     {default} reduce 9
 
 State 37:
      (11) i ::= s DIV s *
@@ -544,9 +542,9 @@ State 37:
                      {default} reduce 11
 
 State 38:
-      (9) s ::= BINARY s s *
+      (8) s ::= UNARY s *
 
-                     {default} reduce 9
+                     {default} reduce 8
 
 State 39:
       (1) v ::= IDENTIFIER *
@@ -554,14 +552,9 @@ State 39:
                      {default} reduce 1
 
 State 40:
-      (8) s ::= UNARY s *
+     (14) i ::= s SUB s SUP s *
 
-                     {default} reduce 8
-
-State 41:
-      (6) s ::= LEFT e RIGHT *
-
-                     {default} reduce 6
+                     {default} reduce 14
 
 ----------------------------------------------------
 Symbols:
@@ -586,6 +579,6 @@ Symbols:
    18: s: IDENTIFIER NUMBER OPERATOR TEXT LEFT ACCENT UNARY BINARY
    19: i: IDENTIFIER NUMBER OPERATOR TEXT LEFT ACCENT UNARY BINARY
    20: matrixList: LEFT
-   21: commaList: COMMA
-   22: matrixListLoop: COMMA
+   21: matrixListLoop: COMMA
+   22: commaList: COMMA
    23: commaListLoop: IDENTIFIER NUMBER OPERATOR TEXT LEFT ACCENT UNARY BINARY

@@ -166,13 +166,13 @@ i(A) ::= s(B) SUB s(C) SUP s(D) .
 }
 i(A) ::= matrixList(B). { A = B; }
 
-matrixList(A) ::= LEFT(B) commaList(C) matrixListLoop(D) RIGHT(E).
+matrixList(A) ::= LEFT(B) matrixListLoop(D) RIGHT(E).
 {
 	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
-	asprintf(&str, "<mrow><mo>%s</mo><mtable>%s%s</mtable><mo>%s</mo></mrow>", B->str, C->str, D->str, E->str);
+	asprintf(&str, "<mrow><mo>%s</mo><mtable>%s</mtable><mo>%s</mo></mrow>", B->str, D->str, E->str);
 	new->str = str;
-	free(C->str); free(C); free(D->str); free(D);
+	free(D->str); free(D);
 	A = new;
 
 }
