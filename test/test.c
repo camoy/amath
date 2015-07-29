@@ -41,7 +41,7 @@ static char * test_integral() {
 }
 
 static char * test_matrix() {
-	char *expr = "[[a,b],[c,d]]((n),(k))";
+	char *expr = "[,[a,b],[c,d]] (,(n),(k))";
 	char *against = "<mrow><mo>[</mo><mtable><mtr><mtd><mi>a</mi></mtd><mtd><mi>b</mi></mtd></mtr><mtr><mtd><mi>c</mi></mtd><mtd><mi>d</mi></mtd></mtr></mtable><mo>]</mo></mrow><mrow><mo>(</mo><mtable><mtr><mtd><mi>n</mi></mtd></mtr><mtr><mtd><mi>k</mi></mtd></mtr></mtable><mo>)</mo></mrow>";
 	mu_assert("FAILED: matrix", strcmp(against, amath_asciimath_to_mathml(expr, strlen(expr))) == 0);
 	return 0;
