@@ -229,10 +229,10 @@ struct amath_node *scan(char **c_ptr, size_t len)
 	"_"		{ return get_sym(c, c_ptr, AMATH_sub); }
 	"^"		{ return get_sym(c, c_ptr, AMATH_sup); }
 	","		{ return get_sym(c, c_ptr, AMATH_comma); }
-	'"'.+'"'	{ return new_sym(c, c_ptr, old, TEXT); }
+	"\"".+"\""	{ return new_sym(c, c_ptr, old, TEXT); }
 	[ \t]+		{ return get_sym(c, c_ptr, AMATH_whitespace); }
 	[A-Za-z]+	{ return new_sym(c, c_ptr, old, IDENTIFIER); }
-	"-"?[0-9]+'.'?[0-9]*{ return new_sym(c, c_ptr, old, NUMBER); }
+	"-"?[0-9]+"."?[0-9]*{ return new_sym(c, c_ptr, old, NUMBER); }
 	"\000"		{ return get_sym(c, c_ptr, AMATH_EOL); }
 	[^]		{ return get_sym(c, c_ptr, AMATH_EOL); }
 

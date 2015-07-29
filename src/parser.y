@@ -199,7 +199,7 @@ commaList(A) ::= COMMA LEFT commaListLoop(C) RIGHT.
 
 }
 
-commaListLoop(A) ::= i(B).
+commaListLoop(A) ::= e(B).
 {
 	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;
@@ -209,7 +209,7 @@ commaListLoop(A) ::= i(B).
 	A = new;
 }
 
-commaListLoop(A) ::= i(B) COMMA commaListLoop(C).
+commaListLoop(A) ::= e(B) COMMA commaListLoop(C).
 {
 	struct amath_node *new = malloc(sizeof(struct amath_node));
 	char *str;

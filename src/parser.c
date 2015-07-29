@@ -149,14 +149,14 @@ static const YYMINORTYPE yyzerominor = { 0 };
 */
 static const YYACTIONTYPE yy_action[] = {
  /*     0 */    39,   35,   32,   27,    1,   10,   11,   12,    8,   24,
- /*    10 */    25,   30,   20,   20,   39,   35,   32,   27,    1,   41,
- /*    20 */    11,   12,    8,   39,   35,   32,   27,    2,    3,   11,
+ /*    10 */    40,   30,   20,   20,   39,   35,   32,   27,    1,   41,
+ /*    20 */    11,   12,    8,   39,   35,   32,   27,    4,    2,   11,
  /*    30 */    12,    8,   17,   24,   15,    5,   26,   19,   14,   66,
- /*    40 */    16,   24,   15,    5,   26,   31,   17,   24,   15,    5,
- /*    50 */    26,   24,   15,   22,   26,   24,   40,   34,   28,   24,
- /*    60 */    15,    5,   26,    4,   24,   15,   22,   26,   24,    6,
- /*    70 */    21,    9,   13,    7,   24,   29,   24,   38,   23,   24,
- /*    80 */    18,   67,   24,   37,   24,   36,   67,   33,   14,
+ /*    40 */    16,   24,   15,    5,   26,   23,   22,   24,   15,    5,
+ /*    50 */    26,   24,   25,   21,   22,   24,   15,    5,   26,   24,
+ /*    60 */    29,   34,    3,   17,   24,   15,    5,   26,   24,    6,
+ /*    70 */    28,   24,   15,    5,   26,    9,   13,    7,   24,   37,
+ /*    80 */    31,   24,   18,   24,   38,   24,   36,   67,   33,   14,
 };
 static const YYCODETYPE yy_lookahead[] = {
  /*     0 */     1,    2,    3,    4,    5,   12,    7,    8,    9,   17,
@@ -164,23 +164,23 @@ static const YYCODETYPE yy_lookahead[] = {
  /*    20 */     7,    8,    9,    1,    2,    3,    4,    5,    5,    7,
  /*    30 */     8,    9,   16,   17,   18,   19,   20,   21,   22,   15,
  /*    40 */    16,   17,   18,   19,   20,    6,   16,   17,   18,   19,
- /*    50 */    20,   17,   18,   19,   20,   17,   18,   23,   16,   17,
- /*    60 */    18,   19,   20,   13,   17,   18,   19,   20,   17,   18,
- /*    70 */    23,   10,   11,   12,   17,   18,   17,   18,    6,   17,
- /*    80 */    18,   24,   17,   18,   17,   18,   24,   21,   22,
+ /*    50 */    20,   17,   18,   23,   16,   17,   18,   19,   20,   17,
+ /*    60 */    18,   23,   13,   16,   17,   18,   19,   20,   17,   18,
+ /*    70 */    16,   17,   18,   19,   20,   10,   11,   12,   17,   18,
+ /*    80 */     6,   17,   18,   17,   18,   17,   18,   24,   21,   22,
 };
 #define YY_SHIFT_USE_DFLT (-8)
 #define YY_SHIFT_MAX 22
 static const signed char yy_shift_ofst[] = {
  /*     0 */    13,   -1,   13,   13,   13,   13,   22,   22,   22,   22,
- /*    10 */    22,   22,   22,   22,    0,   61,   19,   72,   -7,   39,
- /*    20 */    23,    5,   50,
+ /*    10 */    22,   22,   22,   22,    0,   65,   19,   39,   -7,   74,
+ /*    20 */    23,    5,   49,
 };
 #define YY_REDUCE_USE_DFLT (-9)
 #define YY_REDUCE_MAX 14
 static const signed char yy_reduce_ofst[] = {
- /*     0 */    24,   16,   30,   47,   34,   42,   67,   -8,   51,   65,
- /*    10 */    38,   57,   59,   62,   66,
+ /*     0 */    24,   16,   30,   38,   47,   54,   68,   34,   51,   61,
+ /*    10 */    -8,   42,   66,   64,   67,
 };
 static const YYACTIONTYPE yy_default[] = {
  /*     0 */    65,   65,   65,   65,   65,   63,   65,   65,   65,   65,
@@ -314,8 +314,8 @@ static const char *const yyRuleName[] = {
  /*  17 */ "matrixListLoop ::= commaList",
  /*  18 */ "matrixListLoop ::= commaList matrixListLoop",
  /*  19 */ "commaList ::= COMMA LEFT commaListLoop RIGHT",
- /*  20 */ "commaListLoop ::= i",
- /*  21 */ "commaListLoop ::= i COMMA commaListLoop",
+ /*  20 */ "commaListLoop ::= e",
+ /*  21 */ "commaListLoop ::= e COMMA commaListLoop",
  /*  22 */ "e ::= i",
  /*  23 */ "e ::= i e",
 };
@@ -926,7 +926,7 @@ static void yy_reduce(
 }
 #line 928 "src/parser.c"
         break;
-      case 20: /* commaListLoop ::= i */
+      case 20: /* commaListLoop ::= e */
 #line 203 "src/parser.y"
 {
 	struct amath_node *new = malloc(sizeof(struct amath_node));
@@ -938,7 +938,7 @@ static void yy_reduce(
 }
 #line 940 "src/parser.c"
         break;
-      case 21: /* commaListLoop ::= i COMMA commaListLoop */
+      case 21: /* commaListLoop ::= e COMMA commaListLoop */
 #line 213 "src/parser.y"
 {
 	struct amath_node *new = malloc(sizeof(struct amath_node));

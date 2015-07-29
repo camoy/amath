@@ -48,8 +48,8 @@ static char * test_matrix() {
 }
 
 static char * test_piecewise() {
-	char *expr = "x/x={(1,if x!=0),(\"undefined\",if x=0):}";
-	char *against = "<mfrac><mi>x</mi><mi>x</mi></mfrac><mo>=</mo><mrow><mo>{</mo><mtable columnalign=\"left\"><mtr><mtd><mn>1</mn></mtd><mtd><mrow><mspace width=\"1ex\"></mspace><mo>if</mo><mspace width=\"1ex\"></mspace></mrow><mi>x</mi><mo>≠</mo><mn>0</mn></mtd></mtr><mtr><mtd><mrow><mtext>undefined</mtext></mrow></mtd><mtd><mrow><mspace width=\"1ex\"></mspace><mo>if</mo><mspace width=\"1ex\"></mspace></mrow><mi>x</mi><mo>=</mo><mn>0</mn></mtd></mtr></mtable></mrow>";
+	char *expr = "x/x={,(1,if x!=0),(\"undefined\",if x=0):}";
+	char *against = "<mfrac><mi>x</mi><mi>x</mi></mfrac><mo>=</mo><mrow><mo>{</mo><mtable><mtr><mtd><mn>1</mn></mtd><mtd><mo>if</mo><mi>x</mi><mo>≠</mo><mn>0</mn></mtd></mtr><mtr><mtd><mtext>undefined</mtext></mtd><mtd><mo>if</mo><mi>x</mi><mo>=</mo><mn>0</mn></mtd></mtr></mtable><mo></mo></mrow>";
 	mu_assert("FAILED: piecewise", strcmp(against, amath_asciimath_to_mathml(expr, strlen(expr))) == 0);
 	return 0;
 }
