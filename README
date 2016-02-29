@@ -1,0 +1,10 @@
+amath is a parsing expression grammar that converts AsciiMath to MathML.
+It uses Ian Piumarta's leg parser generator to accomplish this.
+
+	$ echo -n "x^2 + y^2 = z^2" | amath
+
+This software is in the public domain. Where that dedication is not
+recognized, redistribution and use in source and binary forms, with or
+without modification, are permitted.
+
+amath is maintained by Cameron Moy.

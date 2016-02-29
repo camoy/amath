@@ -2,17 +2,17 @@ CC = gcc
 PREFIX = /usr/local
 BUILD = build
 SRC = src
-CFLAGS = -D _GNU_SOURCE -fPIC
+CFLAGS = -g -D _GNU_SOURCE -fPIC
 BINARY = $(BUILD)/amath
-TEST = $(BUILD)/test
 LIBRARY = $(BUILD)/libamath.so
 SOURCES = $(wildcard $(SRC)/*.c)
 HEADERS = $(wildcard $(SRC)/*.h)
 OBJECTS = $(patsubst $(SRC)/%.c,$(BUILD)/%.o,$(SOURCES))
 
-all: $(LIBRARY) $(BINARY) $(TEST)
+all: $(LIBRARY) $(BINARY)
 
-test: $(TEST)
+test:
+	sh test/all.sh
 
 install: $(LIBRARY) $(BINARY)
 	install -m 0755 $(BINARY) $(PREFIX)/bin
@@ -24,14 +24,8 @@ uninstall:
 	rm -f $(PREFIX)/lib/libamath.so
 	rm -f $(PREFIX)/include/amath.h
 
-$(SRC)/parser.c: $(SRC)/parser.y
-	lemon $<
-
-$(SRC)/scanner.c: $(SRC)/scanner.re
-	re2c $< > $@
-
-$(TEST): $(LIBRARY) test/test.c
-	$(CC) test/test.c -o $(TEST) -L$(BUILD) -lamath
+$(SRC)/amath.c: $(SRC)/amath.leg
+	leg -o $@ $<
 
 $(BINARY): $(OBJECTS)
 	$(CC) -o $(BINARY) $(OBJECTS)
@@ -48,4 +42,4 @@ $(BUILD):
 clean:
 	rm -rf $(BUILD)
 
-.PHONY: all install uninstall clean
+.PHONY: all test install uninstall clean
