@@ -5,14 +5,14 @@
 
 char *input = "";
 
-/* TODO IMPROVE THIS */
 char *inner(char *src)
 {
-	char *str2;
-	char *str = strndup(src+16, sizeof(char)*(strlen(src)-33));
-	asprintf(&str2, "<mrow>%s</mrow>", str);
-	free(str);
-	return str2;
+	char *a, *b, *c;
+	a = strstr(src, "</mo>") + 5;
+	b = strstr(src + strlen(src) - 22, "<mo>");
+	*b = '\0';
+	asprintf(&c, "<mrow>%s</mrow>", a);
+	return c;
 }
 
 char *merror(char *input)
