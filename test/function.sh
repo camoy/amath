@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 input="sin^-1(x)";
 expected="<math><msup><mo>sin</mo><mn>-1</mn></msup><mrow><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math>";

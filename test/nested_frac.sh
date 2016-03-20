@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 input="(a/b)/(c/d)";
 expected="<math><mfrac><mrow><mfrac><mi>a</mi><mi>b</mi></mfrac></mrow><mrow><mfrac><mi>c</mi><mi>d</mi></mfrac></mrow></mfrac></math>";

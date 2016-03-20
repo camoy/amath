@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 input="abc-123.45^-1.1";
 expected="<math><mi>a</mi><mi>b</mi><mi>c</mi><msup><mn>-123.45</mn><mn>-1.1</mn></msup></math>";
