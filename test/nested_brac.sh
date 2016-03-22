@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 input="((a*b))/c";
 expected="<math><mfrac><mrow><mrow><mo>(</mo><mi>a</mi><mo>&sdot;</mo><mi>b</mi><mo>)</mo></mrow></mrow><mi>c</mi></mfrac></math>";

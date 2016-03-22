@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 input="int_0^1f(x)dx";
 expected="<math><msubsup><mo>&int;</mo><mn>0</mn><mn>1</mn></msubsup><mi>f</mi><mrow><mo>(</mo><mi>x</mi><mo>)</mo></mrow><mi>dx</mi></math>";

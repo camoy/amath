@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 input="sqrt sqrt root3x";
 expected="<math><msqrt><msqrt><mroot><mi>x</mi><mn>3</mn></mroot></msqrt></msqrt></math>";

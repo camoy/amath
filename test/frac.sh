@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 input="a//b";
 expected="<math><mi>a</mi><mo>/</mo><mi>b</mi></math>";

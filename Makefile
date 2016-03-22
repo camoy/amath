@@ -12,7 +12,7 @@ OBJECTS = $(patsubst $(SRC)/%.c,$(BUILD)/%.o,$(SOURCES))
 all: $(LIBRARY) $(BINARY)
 
 test:
-	sh test/all.sh
+	bash test/all.sh
 
 install: $(LIBRARY) $(BINARY)
 	install -m 0755 $(BINARY) $(PREFIX)/bin
