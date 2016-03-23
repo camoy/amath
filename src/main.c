@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 		asprintf(&content, "%s%s", content, buffer);
 
 	char *result = amath_to_mathml(content);
-	printf("<math>%s</math>", result);
+	printf("<math xmlns=\"http://www.w3.org/1998/Math/MathML\">%s</math>", result);
 
 	if (strlen(result) > 0) free(result);
 	if (strlen(content) > 0) free(content);
