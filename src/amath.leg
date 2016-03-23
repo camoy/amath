@@ -69,7 +69,7 @@ Intermediate	= Division
 		| Simple
 
 IntermediateE	= Intermediate
-		| < . >					{ operator(&$$, yytext); }
+		| < !EOF . >					{ operator(&$$, yytext); }
 
 Expr		= - c0:IntermediateE - e0:Expr -	{ concat(&$$, c0, e0); }
 		| - c0:IntermediateE - 			{ $$ = strdup(c0); }

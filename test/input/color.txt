@@ -1,0 +1,1 @@
+color(red)(x^2)+3x+color(green)(4) 
