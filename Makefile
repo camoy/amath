@@ -31,7 +31,7 @@ $(BINARY): $(OBJECTS)
 	$(CC) -o $(BINARY) $(OBJECTS)
 
 $(LIBRARY): $(OBJECTS)
-	$(CC) -shared -o $(LIBRARY) $(OBJECTS)
+	$(CC) -shared -o $(LIBRARY) $(filter-out $(BUILD)/main.o, $(OBJECTS))
 
 $(BUILD)/%.o: $(SRC)/%.c $(BUILD)
 	$(CC) $(CFLAGS) -c $< -o $@
