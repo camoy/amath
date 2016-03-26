@@ -2,19 +2,22 @@ CC = gcc
 PREFIX = /usr/local
 BUILD = build
 SRC = src
-CFLAGS = -g -D _GNU_SOURCE -fPIC
+CFLAGS = -ansi -g -D _GNU_SOURCE -fPIC
 BINARY = $(BUILD)/amath
 LIBRARY = $(BUILD)/libamath.so
-SOURCES = $(wildcard $(SRC)/*.c)
-HEADERS = $(wildcard $(SRC)/*.h)
-OBJECTS = $(patsubst $(SRC)/%.c,$(BUILD)/%.o,$(SOURCES))
+SOURCES = $(SRC)/amath.c $(SRC)/main.c $(SRC)/util.c
+OBJECTS = $(BUILD)/amath.o $(BUILD)/main.o $(BUILD)/util.o
+
+# phony targets
+
+.PHONY: all test install uninstall clean
 
 all: $(LIBRARY) $(BINARY)
 
 test:
 	@bash test/test.sh
 
-install: $(LIBRARY) $(BINARY)
+install: all
 	install -m 0755 $(BINARY) $(PREFIX)/bin
 	install -m 0755 $(LIBRARY) $(PREFIX)/lib
 	install -m 0644 $(SRC)/amath.h $(PREFIX)/include
@@ -24,22 +27,31 @@ uninstall:
 	rm -f $(PREFIX)/lib/libamath.so
 	rm -f $(PREFIX)/include/amath.h
 
-$(SRC)/amath.c: $(SRC)/amath.leg
-	leg -o $@ $<
+clean:
+	rm -rf $(BUILD)
+
+# binary and library
 
 $(BINARY): $(OBJECTS)
-	$(CC) -o $(BINARY) $(OBJECTS)
+	$(CC) -o $@ $^
 
 $(LIBRARY): $(OBJECTS)
-	$(CC) -shared -o $(LIBRARY) $(filter-out $(BUILD)/main.o, $(OBJECTS))
+	$(CC) -shared -o $@ $(filter-out $(BUILD)/main.o, $^)
 
-$(BUILD)/%.o: $(SRC)/%.c $(BUILD)
+# object files
+
+$(BUILD)/%.o: $(SRC)/%.c | $(BUILD)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(BUILD):
 	mkdir -p $(BUILD)
 
-clean:
-	rm -rf $(BUILD)
+# C dependencies
 
-.PHONY: all test install uninstall clean
+$(SRC)/amath.c: $(SRC)/amath.leg.c
+	touch $@
+
+$(SRC)/amath.leg.c: $(SRC)/amath.leg
+	greg -o $@ $<
+
+.SUFFIXES:
