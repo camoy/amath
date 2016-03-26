@@ -1,1 +1,1 @@
-char *amath_to_mathml(char *text);
+char *amath_to_mathml(const char *text);

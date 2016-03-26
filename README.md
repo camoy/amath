@@ -1,7 +1,7 @@
 # amath
 
-`amath` is a parsing expression grammar that converts [AsciiMath] to [MathML].
-It uses [Ian Piumarta's leg parser generator][peg] to accomplish this.
+`amath` is a parser which converts [AsciiMath] to [MathML]. It uses the
+[greg parser generator][greg].
 
 ## Installing
 
@@ -29,5 +29,5 @@ without modification, are permitted.
 `amath` is maintained by Cameron Moy.
 
 [AsciiMath]: http://asciimath.org
-[MathML]: https://www.w3.org/TR/MathML/
-[peg]: http://piumarta.com/software/peg/
+[MathML]: https://www.w3.org/TR/MathML
+[greg]: https://github.com/ooc-lang/greg

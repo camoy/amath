@@ -1,24 +1,26 @@
 %{
-#include <stdio.h>
-#include "amath.h"
-#include "util.h"
+
 #define YYSTYPE char*
-#define YY_CTX_LOCAL
-#define YY_CTX_MEMBERS \
-	char *result;
 #define LCURLY "{"
 #define RCURLY "}"
+#define YY_INPUT(buf, result, max_size, D) yy_input_func(buf, &result, max_size, D)
 
-#define YY_INPUT(yy, buf, result, max_size) \
-{ \
-	int yyc = (input && *input != '\0') ? *input++ : EOF; \
-	result = (EOF == yyc) ? 0 : (*(buf) = yyc, 1); \
+void yy_input_func(char *buf, int *result, int max_size, struct greg_data *data)
+{
+	if (data->input && *data->input != '\0') {
+		*buf = *data->input;
+		data->input++;
+		*result = 1;
+	}
+	else {
+		*result = 0;
+	}
 }
 
 %}
 
-Start		= e0:Expr EOF	{ yy->result = e0; }
-		| < .+ > EOF	{ yy->result = merror(yytext); }
+Start		= e0:Expr EOF	{ ((struct greg_data*) G->data)->result = e0; }
+		| < .+ > EOF	{ ((struct greg_data*) G->data)->result = merror(yytext); }
 
 Const		= < NUMBER >		{ number(&$$, yytext); }
 		| ( y:Arrow
@@ -356,21 +358,3 @@ IDENTIFIER	= [a-zA-Z]
 NUMBER		= '-'? [0-9]+ ('.' [0-9]+)?
 -		= [ \t]*
 EOF		= "\n" | !.
-
-%%
-
-char *amath_to_mathml(char *text)
-{
-	char *result = "";
-
-	if(strlen(text) > 0) {
-		input = text;
-		yycontext yy;
-		memset(&yy, 0, sizeof(yy));
-		while (yyparse(&yy));
-		result = yy.result;
-		yyrelease(&yy);
-	}
-
-	return result;
-}

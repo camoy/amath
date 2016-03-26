@@ -1,6 +1,11 @@
 #ifndef UTIL_H
 #define UTIL_H
-extern char *input;
+
+struct greg_data {
+	const char *input;
+	char *result;
+};
+
 char *inner(char *src);
 char *merror(char *input); 
 void matrix(char **v, char *l, char *r0, char *r);
@@ -29,4 +34,5 @@ void underover(char **v, char *s0, char *s1, char *s2);
 void subsup(char **v, char *s0, char *s1, char *s2);
 void ubrace(char **v, char *s0, char *s1);
 void obrace(char **v, char *s0, char *s1);
+
 #endif
