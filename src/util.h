@@ -2,10 +2,11 @@
 #define UTIL_H
 
 enum node_t {
+	NODE_RAW,
 	NODE_OP,
 	NODE_TEXT,
 	NODE_NUMBER,
-	NODE_ID,
+	NODE_IDENTIFIER,
 	NODE_GROUP,
 	NODE_SIMPLE,
 	NODE_UNKNOWN
@@ -23,8 +24,7 @@ struct greg_data {
 };
 
 struct node *mk_bin(struct node *s0, struct node *s1, char *operator);
-struct node *mk_node(char *str);
-struct node *mk_dup(struct node *a);
+struct node *mk_node(enum node_t type, char *str);
 void inner(struct node *n);
 char *merror(char *input);
 void cancel(struct node *s0);
@@ -39,10 +39,10 @@ struct node *mk_number(char *s0);
 void msqrt(struct node *s0);
 void mtext(struct node *s0);
 void font(struct node *n, char *s0, struct node *t0);
-void accent_under(struct node *s0, char *a0);
+void ul(struct node *s0);
 void accent(struct node *s0, char *a0);
 struct node *mk_group(char *l, char *e, char *r);
-struct node *mk_concat(char *s0, char *e0);
+struct node *mk_concat(struct node *s0, struct node *s1);
 struct node *mk_fraction(struct node *s0, struct node *s1);
 struct node *mk_root(struct node *s0, struct node *s1);
 struct node *mk_color(struct node *s0, struct node *s1);
