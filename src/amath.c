@@ -9,7 +9,7 @@ struct greg_data *mk_greg_data(const char *input)
 	struct greg_data *D = malloc(sizeof(struct greg_data));
 
 	D->input = input;
-	D->result = NULL;
+	D->result = mk_node("");
 
 	return D;
 }
@@ -25,7 +25,7 @@ char *amath_to_mathml(const char *text)
 	yyinit(&g);
 	g.data = mk_greg_data(text);
 	while (yyparse(&g));
-	result = ((struct greg_data*) g.data)->result;
+	result = ((struct greg_data*) g.data)->result->text;
 	yydeinit(&g);
 
 	return result;

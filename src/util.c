@@ -1,14 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "util.h"
 
-char *inner(char *src)
+struct node *mk_node(char *str)
 {
-	char *a, *b, *c;
-	a = strstr(src, "</mo>") + 5;
-	b = strstr(src + strlen(src) - 22, "<mo>");
-	*b = '\0';
-	asprintf(&c, "<mrow>%s</mrow>", a);
-	return c;
+	struct node *n;
+	char *text;
+
+	n = malloc(sizeof(struct node));
+	text = malloc(sizeof(char) * strlen(str) + 1);
+	n->type = NODE_OP;
+	n->text = text;
+	strcpy(n->text, str);
+
+	return n;
+}
+
+/* use memcpy */
+struct node *mk_dup(struct node *a)
+{
+	return mk_node(a->text);
+}
+
+void inner(struct node *n)
+{
+	if (n->type == NODE_GROUP) {
+		n->text = n->inner;
+	}
 }
 
 char *merror(char *input)
@@ -18,132 +37,311 @@ char *merror(char *input)
 	return error;
 }
 
-void cancel(char **v, char *s0)
+void cancel(struct node *s0)
 {
-	asprintf(v, "<menclose notation=\"updiagonalstrike\">%s</menclose>", s0);
+	inner(s0);
+	asprintf(&s0->text, "<menclose notation=\"updiagonalstrike\">%s</menclose>", s0->text);
+	s0->type = NODE_SIMPLE;
 }
 
-void matrix(char **v, char *l, char *r0, char *r)
+void matrix(struct node *n, char *l, char *r0, char *r)
 {
-	asprintf(v, "<mrow><mo>%s</mo><mtable>%s</mtable><mo>%s</mo></mrow>", l, r0, r);
+	n->type = NODE_SIMPLE;
+	asprintf(&n->text, "<mrow><mo>%s</mo><mtable>%s</mtable><mo>%s</mo></mrow>", l, r0, r);
 }
 
-void row(char **v, char *r0)
+void row(struct node *n, char *r0)
 {
-	asprintf(v, "<mtr>%s</mtr>", r0);
+	n->type = NODE_SIMPLE;
+	asprintf(&n->text, "<mtr>%s</mtr>", r0);
 }
 
-void cell(char **v, char *s0)
+void cell(struct node *n, char *s0)
 {
-	asprintf(v, "<mtd>%s</mtd>", s0);
+	n->type = NODE_SIMPLE;
+	asprintf(&n->text, "<mtd>%s</mtd>", s0);
 }
 
-void operator(char **v, char *s0)
+void operator(struct node *n, char *s0)
 {
-	asprintf(v, "<mo>%s</mo>", s0);
+	n->type = NODE_OP;
+	asprintf(&n->text, "<mo>%s</mo>", s0);
 }
 
-void greek(char **v, char *s0)
+struct node *mk_identifier(char *s0)
 {
-	asprintf(v, "<mi>&%s;</mo>", s0);
+	struct node *n;
+	char *text;
+
+	n = malloc(sizeof(struct node));
+	text = malloc(sizeof(char) * strlen(s0) + 1);
+	n->type = NODE_ID;
+	asprintf(&n->text, "<mi>%s</mi>", s0);
+
+	return n;
 }
 
-void identifier(char **v, char *s0)
+struct node *mk_greek(char *s0)
 {
-	asprintf(v, "<mi>%s</mi>", s0);
+	struct node *n;
+	char *text;
+
+	n = malloc(sizeof(struct node));
+	text = malloc(sizeof(char) * strlen(s0) + 1);
+	n->type = NODE_ID;
+	asprintf(&n->text, "<mi>&%s;</mi>", s0);
+
+	return n;
 }
 
-void number(char **v, char *s0)
+struct node *mk_op(char *s0)
 {
-	asprintf(v, "<mn>%s</mn>", s0);
+	struct node *n;
+	char *text;
+
+	n = malloc(sizeof(struct node));
+	text = malloc(sizeof(char) * strlen(s0) + 1);
+	n->type = NODE_ID;
+	asprintf(&n->text, "<mo>%s</mo>", s0);
+
+	return n;
 }
 
-void msqrt(char **v, char *s0)
+struct node *mk_number(char *s0)
 {
-	asprintf(v, "<msqrt>%s</msqrt>", s0);
+	struct node *n;
+	char *text;
+
+	n = malloc(sizeof(struct node));
+	text = malloc(sizeof(char) * strlen(s0) + 1);
+	n->type = NODE_ID;
+	asprintf(&n->text, "<mn>%s</mn>", s0);
+
+	return n;
 }
 
-void text(char **v, char *s0)
+void msqrt(struct node *s0)
 {
-	asprintf(v, "<mtext>%s</mtext>", s0);
+	inner(s0);
+	asprintf(&s0->text, "<msqrt>%s</msqrt>", s0->text);
+	s0->type = NODE_SIMPLE;
 }
 
-void font(char **v, char *s0, char *t0)
+void mtext(struct node *s0)
 {
-	asprintf(v, "<mstyle mathvariant=\"%s\">%s</mstyle>", s0, t0);
+	asprintf(&s0->text, "<mtext>%s</mtext>", s0->text);
+	s0->type = NODE_SIMPLE;
 }
 
-void accent_under(char **v, char *s0, char *a0)
+
+void font(struct node *n, char *s0, struct node *t0)
 {
-	asprintf(v, "<munder>%s<mo>%s</mo></munder>", s0, a0);
+	inner(t0);
+	n->type = NODE_SIMPLE;
+	asprintf(&n->text, "<mstyle mathvariant=\"%s\">%s</mstyle>", s0, t0->text);
 }
 
-void accent(char **v, char *s0, char *a0)
+void accent_under(struct node *s0, char *a0)
 {
-	asprintf(v, "<mover>%s<mo>%s</mo></mover>", s0, a0);
+	inner(s0);
+	asprintf(&s0->text, "<munder>%s<mo>%s</mo></munder>", s0->text, a0);
+	s0->type = NODE_SIMPLE;
 }
 
-void group(char **v, char *l, char *e, char *r)
+void accent(struct node *s0, char *a0)
 {
-	asprintf(v, "<mrow><mo>%s</mo>%s<mo>%s</mo></mrow>", l, e, r);
+	inner(s0);
+	asprintf(&s0->text, "<mover>%s<mo>%s</mo></mover>", s0->text, a0);
+	s0->type = NODE_SIMPLE;
 }
 
-void concat(char **v, char *s0, char *e0)
+struct node *mk_group(char *l, char *e, char *r)
 {
-	asprintf(v, "%s%s", s0, e0);
+	struct node *n;
+	char *text;
+
+	n = malloc(sizeof(struct node));
+	text = malloc(sizeof(char) * (strlen(l) + strlen(e) + strlen(r)) + 1);
+	n->type = NODE_GROUP;
+	asprintf(&n->text, "<mrow><mo>%s</mo>%s<mo>%s</mo></mrow>", l, e, r);
+	asprintf(&n->inner, "<mrow>%s</mrow>", e);
+
+	return n;
 }
 
-void fraction(char **v, char *s0, char *s1)
+struct node *mk_concat(char *s0, char *e0)
 {
-	asprintf(v, "<mfrac>%s%s</mfrac>", s0, s1);
+	struct node *n;
+	char *text;
+
+	n = malloc(sizeof(struct node));
+	text = malloc(sizeof(char) * strlen(s0) + 1);
+	n->type = NODE_UNKNOWN;
+	asprintf(&n->text, "%s%s", s0, e0);
+
+	return n;
 }
 
-void root(char **v, char *s0, char *s1)
+struct node *mk_fraction(struct node *s0, struct node *s1)
 {
-	asprintf(v, "<mroot>%s%s</mroot>", s0, s1);
+	struct node *n;
+	char *text;
+
+	n = malloc(sizeof(struct node));
+	n->type = NODE_SIMPLE;
+	inner(s0);
+	inner(s1);
+	asprintf(&n->text, "<mfrac>%s%s</mfrac>", s0->text, s1->text);
+
+	return n;
 }
 
-void color(char **v, char *s0, char *s1)
+struct node *mk_bin(struct node *s0, struct node *s1, char *operator)
 {
-	asprintf(v, "<mstyle mathcolor=\"%s\">%s</mstyle>", s0, s1);
+	if (!strcmp("frac", operator)) {
+		return mk_fraction(s0, s1);
+	}
+	else if (!strcmp("root", operator)) {
+		return mk_root(s0, s1);
+	}
+	else if (!strcmp("stackrel", operator)) {
+		return mk_stackrel(s0, s1);
+	}
 }
 
-void stackrel(char **v, char *s0, char *s1)
+struct node *mk_root(struct node *s0, struct node *s1)
 {
-	asprintf(v, "<mover>%s%s</mover>", s0, s1);
+	struct node *n;
+	char *text;
+
+	n = malloc(sizeof(struct node));
+	n->type = NODE_SIMPLE;
+	inner(s0);
+	inner(s1);
+	asprintf(&n->text, "<mroot>%s%s</mroot>", s0->text, s1->text);
+
+	return n;
 }
 
-void sub(char **v, char *s0, char *s1)
+struct node *mk_color(struct node *s0, struct node *s1)
 {
-	asprintf(v, "<msub>%s%s</msub>", s0, s1);
+	struct node *n;
+	char *text;
+
+	n = malloc(sizeof(struct node));
+	n->type = NODE_SIMPLE;
+	inner(s1);
+	asprintf(&n->text, "<mstyle mathcolor=\"%s\">%s</mstyle>", s0->text, s1->text);
+
+	return n;
 }
 
-void under(char **v, char *s0, char *s1)
+struct node *mk_stackrel(struct node *s0, struct node *s1)
 {
-	asprintf(v, "<munder><mo>%s</mo>%s</munder>", s0, s1);
+	struct node *n;
+	char *text;
+
+	n = malloc(sizeof(struct node));
+	n->type = NODE_SIMPLE;
+	inner(s0);
+	inner(s1);
+	asprintf(&n->text, "<mover>%s%s</mover>", s0->text, s1->text);
+
+	return n;
 }
 
-void sup(char **v, char *s0, char *s1)
+struct node *mk_sub(struct node *s0, struct node *s1)
 {
-	asprintf(v, "<msup>%s%s</msup>", s0, s1);
+	struct node *n;
+	char *text;
+
+	n = malloc(sizeof(struct node));
+	n->type = NODE_SIMPLE;
+	inner(s1);
+	asprintf(&n->text, "<msub>%s%s</msub>", s0->text, s1->text);
+
+	return n;
 }
 
-void subsup(char **v, char *s0, char *s1, char *s2)
+struct node *mk_under(struct node *s0, struct node *s1)
 {
-	asprintf(v, "<msubsup>%s%s%s</msubsup>", s0, s1, s2);
+	struct node *n;
+	char *text;
+
+	n = malloc(sizeof(struct node));
+	n->type = NODE_SIMPLE;
+	inner(s1);
+	asprintf(&n->text, "<munder>%s%s</munder>", s0->text, s1->text);
+
+	return n;
 }
 
-void underover(char **v, char *s0, char *s1, char *s2)
-{
-	asprintf(v, "<munderover><mo>%s</mo>%s%s</munderover>", s0, s1, s2);
+struct node *mk_sup(struct node *s0, struct node *s1)
+{	struct node *n;
+	char *text;
+
+	n = malloc(sizeof(struct node));
+	n->type = NODE_SIMPLE;
+	inner(s1);
+	asprintf(&n->text, "<msup>%s%s</msup>", s0->text, s1->text);
+
+	return n;
 }
 
-void ubrace(char **v, char *s0, char *s1)
+struct node *mk_subsup(struct node *s0, struct node *s1, struct node *s2)
 {
-	asprintf(v, "<munder><munder>%s<mo>&#x23DF;</mo></munder>%s</munder>", s0, s1);
+	struct node *n;
+	char *text;
+
+	n = malloc(sizeof(struct node));
+	n->type = NODE_SIMPLE;
+	inner(s0);
+	inner(s1);
+	inner(s2);
+	asprintf(&n->text, "<msubsup>%s%s%s</msubsup>", s0->text, s1->text, s2->text);
+
+	return n;
 }
 
-void obrace(char **v, char *s0, char *s1)
+struct node *mk_underover(struct node *s0, struct node *s1, struct node *s2)
 {
-	asprintf(v, "<mover><mover>%s<mo>&#x23DE;</mo></mover>%s</mover>", s0, s1);
+	struct node *n;
+	char *text;
+
+	n = malloc(sizeof(struct node));
+	n->type = NODE_SIMPLE;
+	inner(s0);
+	inner(s1);
+	inner(s2);
+	asprintf(&n->text, "<munderover>%s%s%s</munderover>", s0->text, s1->text, s2->text);
+
+	return n;
+}
+
+struct node *mk_ubrace(struct node *s0, struct node *s1)
+{
+	struct node *n;
+	char *text;
+
+	n = malloc(sizeof(struct node));
+	n->type = NODE_SIMPLE;
+	inner(s0);
+	inner(s1);
+	asprintf(&n->text, "<munder><munder>%s<mo>&#x23DF;</mo></munder>%s</munder>", s0->text, s1->text);
+
+	return n;
+}
+
+struct node *mk_obrace(struct node *s0, struct node *s1)
+{
+	struct node *n;
+	char *text;
+
+	n = malloc(sizeof(struct node));
+	n->type = NODE_SIMPLE;
+	inner(s0);
+	inner(s1);
+	asprintf(&n->text, "<mover><mover>%s<mo>&#x23DE;</mo></mover>%s</mover>", s0->text, s1->text);
+
+	return n;
 }
