@@ -1,6 +1,7 @@
 %{
 
 #define YYSTYPE struct node*
+#define YYFREE free_node
 #define LCURLY "{"
 #define RCURLY "}"
 #define YY_INPUT(buf, result, max_size, D) yy_input_func(buf, &result, max_size, D)
@@ -19,7 +20,7 @@ void yy_input_func(char *buf, int *result, int max_size, struct greg_data *data)
 
 %}
 
-Start		= e0:Expr EOF	{ ((struct greg_data*) G->data)->result->text = e0->text; }
+Start		= e0:Expr EOF	{ ((struct greg_data*) G->data)->result->text = strdup(e0->text); free_node(e0); }
 		| < .+ > EOF	{ ((struct greg_data*) G->data)->result->text = merror(yytext); }
 
 Const		= < NUMBER >		{ $$ = mk_number(yytext); }
@@ -29,26 +30,25 @@ Const		= < NUMBER >		{ $$ = mk_number(yytext); }
 		| < SPECIAL >		{ $$ = mk_identifier(yytext); }
 		| < IDENTIFIER >	{ $$ = mk_identifier(yytext); }
 
-Operator	= Arrow
-		| Logic
-		| Misc
-		| Relation
-		| Unders
-		| Operation
-
 Unary		= "sqrt" - s:Simple	{ msqrt(s); }
 		| "text" - s:Simple	{ mtext(s); }
 		| "ul" - s:Simple	{ ul(s); }
 		| "cancel" - s:Simple	{ cancel(s); }
-		| a:Accent - s:Simple	{ accent(s, a->text); }
+		| a:Accent - s:Simple	{ accent(s, a); }
 		| Font
 
-Binary		= Fraction
-		| Root
-		| Color
-		| Stackrel
-		| Ubrace
-		| Obrace
+Binary		= "frac" - s0:Simple - s1:Simple		{ $$ = mk_fraction(s0, s1); }
+		| "root" - s0:Simple - s1:Simple		{ $$ = mk_root(s1, s0); }
+		| "color" - s0:ColorGroup - s1:Simple		{ $$ = mk_color(s0, s1); }
+		| "stackrel" - s0:Simple - s1:Simple		{ $$ = mk_stackrel(s1, s0); }
+		| "ubrace" - s0:Simple - '_' - s1:Simple	{ $$ = mk_ubrace(s0, s1); }
+		| "obrace" - s0:Simple - '^' - s1:Simple	{ $$ = mk_obrace(s0, s1); }
+
+Division	= s0:Simple - '/' - s1:Simple		{ $$ = mk_fraction(s0, s1); }
+Sub		= s0:Simple - '_' - s1:Simple		{ $$ = mk_sub(s0, s1); }
+Super		= s0:Simple - '^' - s1:Simple		{ $$ = mk_sup(s0, s1); }
+
+Subsup		= s0:Simple - '_' - s1:Simple - '^' - s2:Simple { $$ = mk_ter(s0, s1, s2); }
 
 Text		= ["] < (!["] .)* > ["]	{ $$ = mk_node(NODE_TEXT, yytext); mtext($$); }
 
@@ -60,8 +60,6 @@ Simple		= Matrix
 		| Const
 
 Intermediate	= Division
-		| Underover
-		| Under
 		| Subsup
 		| Sub
 		| Super
@@ -70,54 +68,49 @@ Intermediate	= Division
 IntermediateE	= Intermediate
 		| < !EOF . >					{ $$ = mk_op(yytext); }
 
-Expr		= - c0:IntermediateE - e0:Expr -	{ $$ = mk_concat(c0, e0); }
-		| - c0:IntermediateE - 			{ $$ = c0; }
+Expr		= - c0:IntermediateE
+			(- ci:IntermediateE -	{ c0 = mk_concat(c0, ci); }
+			)* -			{ $$ = c0; }
 
 IntermediateG	= !">>" Intermediate
 		| < !":}" !":)" !">>" !')' !']' !'}' . >	{ $$ = mk_op(yytext); }
 
-ExprG		= - c0:IntermediateG - e0:ExprG -	{ $$ = mk_concat(c0, e0); }
-		| - c0:IntermediateG - 			{ $$ = c0; }
+ExprG		= - c0:IntermediateG
+			(- ci:IntermediateG -	{ c0 = mk_concat(c0, ci); }
+			)* -			{ $$ = c0; }
 
-Group 		= l:Left - e:ExprG - r:Right	{ $$ = mk_group(l->text, e->text, r->text); }
+Group 		= l:Left - e:ExprG - r:Right	{ $$ = mk_group(l, e, r); }
 
 IntermediateM	= !">>" Intermediate
 		| < !":}" !":)" !">>" !')' !']' !'}' !',' . >	{ $$ = mk_op(yytext); }
 
-ExprM		= - c0:IntermediateM - e0:ExprM -	{ $$ = mk_concat(c0, e0); }
-		| - c0:IntermediateM - 			{ $$ = c0; }
+ExprM		= - c0:IntermediateM
+			(- ci:IntermediateM -	{ c0 = mk_concat(c0, ci); }
+			)* -			{ $$ = c0; }
 
-ColorGroup 	= l:Left - < (IDENTIFIER | NUMBER | '#')* > - r:Right	{ $$ = mk_node(NODE_GROUP, yytext); }
+ColorGroup 	= l:Left - < (IDENTIFIER | NUMBER | '#')* > - r:Right	{ free_node(l); free_node(r); $$ = mk_node(NODE_RAW, yytext); }
 
-Matrix		= l:Left - r0:Row -	{ row(r0, r0->text); }
-			("," - ri:Row -	{ row(ri, ri->text); r0 = mk_concat(r0, ri); }
-			)+ - r:Right	{ matrix(r0, l->text, r0->text, r->text); $$ = r0; }
+Matrix		= l:Left - r0:Row -	{ row(r0); }
+			("," - ri:Row -	{ row(ri); r0 = mk_concat(r0, ri); }
+			)+ - r:Right	{ matrix(l, r0, r); $$ = r0; }
 
-Row		= l:Left - s0:ExprM -		{ cell(s0, s0->text); }
-			("," - si:ExprM -	{ cell(si, si->text); s0 = mk_concat(s0, si); }
-			)* - r:Right		{ $$ = s0; }
+Row		= l:Left - s0:ExprM -		{ cell(s0); }
+			("," - si:ExprM -	{ cell(si); s0 = mk_concat(s0, si); }
+			)* - r:Right		{ free_node(l); free_node(r); $$ = s0; }
 
-Fraction	= "frac" - s0:Simple - s1:Simple		{ $$ = mk_fraction(s0, s1); }
-Root		= "root" - s0:Simple - s1:Simple		{ $$ = mk_root(s1, s0); }
-Stackrel	= "stackrel" - s0:Simple - s1:Simple		{ $$ = mk_stackrel(s1, s0); }
+Font		= "bbb" - t0:Simple			{ font("double-struck", t0); }
+		| "bb" - t0:Simple			{ font("bold", t0); }
+		| "cc" - t0:Simple			{ font("script", t0); }
+		| "tt" - t0:Simple			{ font("monospace", t0); }
+		| "fr" - t0:Simple			{ font("fraktur", t0); }
+		| "sf" - t0:Simple			{ font("sans-serif", t0); }
 
-Color		= "color" - s0:ColorGroup - s1:Simple		{ $$ = mk_color(s0, s1); }
-Division	= s0:Simple - '/' - s1:Simple			{ $$ = mk_fraction(s0, s1); }
-Underover	= s0:Unders - '_' - s1:Simple - '^' - s2:Simple { $$ = mk_underover(s0, s1, s2); }
-Subsup		= s0:Simple - '_' - s1:Simple - '^' - s2:Simple { $$ = mk_subsup(s0, s1, s2); }
-Ubrace		= "ubrace" - s0:Simple - '_' - s1:Simple	{ $$ = mk_ubrace(s0, s1); }
-Obrace		= "obrace" - s0:Simple - '^' - s1:Simple	{ $$ = mk_obrace(s0, s1); }
-
-Under		= s0:Unders - '_' - s1:Simple		{ $$ = mk_under(s0, s1); }
-Sub		= s0:Simple - '_' - s1:Simple		{ $$ = mk_sub(s0, s1); }
-Super		= s0:Simple - '^' - s1:Simple		{ $$ = mk_sup(s0, s1); }
-
-Font		= "bbb" - t0:Simple			{ font($$, "double-struck", t0); }
-		| "bb" - t0:Simple			{ font($$, "bold", t0); }
-		| "cc" - t0:Simple			{ font($$, "script", t0); }
-		| "tt" - t0:Simple			{ font($$, "monospace", t0); }
-		| "fr" - t0:Simple			{ font($$, "fraktur", t0); }
-		| "sf" - t0:Simple			{ font($$, "sans-serif", t0); }
+Operator	= Arrow
+		| Logic
+		| Misc
+		| Relation
+		| Unders
+		| Operation
 
 Left 		= "{:"		{ $$ = mk_node(NODE_RAW, ""); }
 		| "(:"		{ $$ = mk_node(NODE_RAW, "&lang;"); }
@@ -151,16 +144,16 @@ Operation	= "+"		{ $$ = mk_op("+"); }
 		| "nn"		{ $$ = mk_op("&cap;"); }
 		| "uu"		{ $$ = mk_op("&cup;"); }
 
-Unders		= "sum"		{ $$ = mk_op("&Sigma;"); }
-		| "prod"	{ $$ = mk_op("&Pi;"); }
-		| "^^^"		{ $$ = mk_op("&Wedge;"); }
-		| "vvv"		{ $$ = mk_op("&Vee;"); }
-		| "nnn"		{ $$ = mk_op("&Intersection;"); }
-		| "uuu"		{ $$ = mk_op("&Union;"); }
-		| "lim"		{ $$ = mk_op("lim"); }
-		| "Lim"		{ $$ = mk_op("Lim"); }
-		| "min"		{ $$ = mk_op("min"); }
-		| "max"		{ $$ = mk_op("max"); }
+Unders		= "sum"		{ $$ = mk_underover("&Sigma;"); }
+		| "prod"	{ $$ = mk_underover("&Pi;"); }
+		| "^^^"		{ $$ = mk_underover("&Wedge;"); }
+		| "vvv"		{ $$ = mk_underover("&Vee;"); }
+		| "nnn"		{ $$ = mk_underover("&Intersection;"); }
+		| "uuu"		{ $$ = mk_underover("&Union;"); }
+		| "lim"		{ $$ = mk_underover("lim"); }
+		| "Lim"		{ $$ = mk_underover("Lim"); }
+		| "min"		{ $$ = mk_underover("min"); }
+		| "max"		{ $$ = mk_underover("max"); }
 
 Relation	= "="		{ $$ = mk_op("="); }
 		| "!="		{ $$ = mk_op("&NotEqual;"); }

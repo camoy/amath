@@ -12,7 +12,7 @@ struct greg_data *mk_greg_data(const char *input)
 		return NULL;
 
 	D->input = input;
-	D->result = mk_node(NODE_RAW, "");
+	D->result = mk_empty(NODE_RAW);
 
 	return D;
 }
@@ -31,8 +31,10 @@ char *amath_to_mathml(const char *text)
 	yyinit(&g);
 	g.data = data;
 	while (yyparse(&g));
-	result = data->result->text;
+	result = strdup(data->result->text);
 	yydeinit(&g);
+	free_node(data->result);
+	free(data);
 
 	return result;
 }

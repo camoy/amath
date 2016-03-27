@@ -15,24 +15,36 @@ struct node *mk_empty(enum node_t type)
 struct node *mk_node(enum node_t type, char *str)
 {
 	struct node *n = mk_empty(type);
-	char *text = malloc(sizeof(char) * strlen(str) + 1);
-	n->text = text;
-	strcpy(n->text, str);
+	n->text = strdup(str);
 	return n;
+}
+
+void free_node(struct node *n)
+{
+	if (n->type == NODE_GROUP && n->inner != n->text) {
+		free(n->inner);
+	}
+	free(n->text);
+	free(n);
 }
 
 struct node *mk_concat(struct node *s0, struct node *s1)
 {
 	struct node *n = mk_empty(NODE_SIMPLE);
 	asprintf(&n->text, "%s%s", s0->text, s1->text);
+	free_node(s0);
+	free_node(s1);
 	return n;
 }
 
-struct node *mk_group(char *l, char *e, char *r)
+struct node *mk_group(struct node *l, struct node *e, struct node *r)
 {
 	struct node *n = mk_empty(NODE_GROUP);
-	asprintf(&n->text, "<mrow><mo>%s</mo>%s<mo>%s</mo></mrow>", l, e, r);
-	asprintf(&n->inner, "<mrow>%s</mrow>", e);
+	asprintf(&n->text, "<mrow><mo>%s</mo>%s<mo>%s</mo></mrow>", l->text, e->text, r->text);
+	asprintf(&n->inner, "<mrow>%s</mrow>", e->text);
+	free_node(l);
+	free_node(e);
+	free_node(r);
 	return n;
 }
 
@@ -49,6 +61,9 @@ char *merror(char *input)
 void inner(struct node *n)
 {
 	if (n->type == NODE_GROUP) {
+		if (n->text != n->inner) {
+			free(n->text);
+		}
 		n->text = n->inner;
 	}
 }
@@ -67,14 +82,18 @@ MK_FN(number, NODE_IDENTIFIER, "<mn>%s</mn>")
 MK_FN(op, NODE_IDENTIFIER, "<mo>%s</mo>")
 MK_FN(greek, NODE_IDENTIFIER, "<mi>&%s;</mi>")
 MK_FN(identifier, NODE_IDENTIFIER, "<mi>%s</mi>")
+MK_FN(underover, NODE_UNDEROVER, "<mo>%s</mo>")
 
 /* unary functions */
 
 #define UNARY_FN(name, n_type, str) \
 	void name(struct node *s0) \
 	{ \
+		char *str_o; \
 		inner(s0); \
+		str_o = s0->text; \
 		asprintf(&s0->text, str, s0->text); \
+		free(str_o); \
 		s0->type = n_type; \
 	} \
 
@@ -83,18 +102,25 @@ UNARY_FN(mtext, NODE_SIMPLE, "<mtext>%s</mtext>")
 UNARY_FN(ul, NODE_SIMPLE, "<munder>%s<mo>_</mo></munder>")
 UNARY_FN(cancel, NODE_SIMPLE, "<menclose notation=\"updiagonalstrike\">%s</menclose>")
 
-void accent(struct node *s0, char *a0)
+void accent(struct node *s0, struct node *a0)
 {
+	char *str_o;
 	inner(s0);
+	str_o = s0->text;
 	s0->type = NODE_SIMPLE;
-	asprintf(&s0->text, "<mover>%s<mo>%s</mo></mover>", s0->text, a0);
+	asprintf(&s0->text, "<mover>%s<mo>%s</mo></mover>", s0->text, a0->text);
+	free(str_o);
+	free_node(a0);
 }
 
-void font(struct node *n, char *s0, struct node *t0)
+void font(char *font, struct node *s0)
 {
-	inner(t0);
-	n->type = NODE_SIMPLE;
-	asprintf(&n->text, "<mstyle mathvariant=\"%s\">%s</mstyle>", s0, t0->text);
+	char *str_o;
+	inner(s0);
+	str_o = s0->text;
+	s0->type = NODE_SIMPLE;
+	asprintf(&s0->text, "<mstyle mathvariant=\"%s\">%s</mstyle>", font, s0->text);
+	free(str_o);
 }
 
 /* binary functions */
@@ -106,6 +132,8 @@ void font(struct node *n, char *s0, struct node *t0)
 		inner(s0); \
 		inner(s1); \
 		asprintf(&n->text, str, s0->text, s1->text); \
+		free_node(s0); \
+		free_node(s1); \
 		return n; \
 	} \
 
@@ -123,43 +151,70 @@ MK_BIN_FN(obrace, NODE_SIMPLE, "<mover><mover>%s<mo>&#x23DE;</mo></mover>%s</mov
 		struct node *n = mk_empty(n_type); \
 		inner(s1); \
 		asprintf(&n->text, str, s0->text, s1->text); \
+		free_node(s0); \
+		free_node(s1); \
 		return n; \
 	} \
 
 MK_BIN_SP_FN(color, NODE_SIMPLE, "<mstyle mathcolor=\"%s\">%s</mstyle>")
-MK_BIN_SP_FN(sub, NODE_SIMPLE, "<msub>%s%s</msub>")
-MK_BIN_SP_FN(under, NODE_SIMPLE, "<munder>%s%s</munder>")
 MK_BIN_SP_FN(sup, NODE_SIMPLE, "<msup>%s%s</msup>")
 
-/* ternary functions */
+struct node *mk_sub(struct node *s0, struct node *s1)
+{
+	struct node *n = mk_empty(NODE_SIMPLE);
+	inner(s1);
+	if (s0->type == NODE_UNDEROVER) {
+		asprintf(&n->text, "<munder>%s%s</munder>", s0->text, s1->text);
+	}
+	else {
+		asprintf(&n->text, "<msub>%s%s</msub>", s0->text, s1->text);
+	}
+	free_node(s0);
+	free_node(s1);
+	return n;
+}
 
-#define MK_TER_FN(name, n_type, str) \
-	struct node *mk_##name(struct node *s0, struct node *s1, struct node *s2) \
-	{ \
-		struct node *n = mk_empty(n_type); \
-		inner(s0); \
-		inner(s1); \
-		inner(s2); \
-		asprintf(&n->text, str, s0->text, s1->text, s2->text); \
-		return n; \
-	} \
+/* ternary function */
 
-MK_TER_FN(subsup, NODE_SIMPLE, "<msubsup>%s%s%s</msubsup>")
-MK_TER_FN(underover, NODE_SIMPLE, "<munderover>%s%s%s</munderover>")
+struct node *mk_ter(struct node *s0, struct node *s1, struct node *s2)
+{
+	struct node *n = mk_empty(NODE_SIMPLE);
+	inner(s0);
+	inner(s1);
+	inner(s2);
+	if (s0->type == NODE_UNDEROVER) {
+		asprintf(&n->text, "<munderover>%s%s%s</munderover>", s0->text, s1->text, s2->text);
+	}
+	else {
+		asprintf(&n->text, "<msubsup>%s%s%s</msubsup>", s0->text, s1->text, s2->text);
+	}
+	free_node(s0);
+	free_node(s1);
+	free_node(s2);
+	return n;
+}
 
 /* matrix functions */
-void matrix(struct node *n, char *l, char *r0, char *r)
+
+void matrix(struct node *l, struct node *n, struct node *r)
 {
-	n->type = NODE_SIMPLE;
-	asprintf(&n->text, "<mrow><mo>%s</mo><mtable>%s</mtable><mo>%s</mo></mrow>", l, r0, r);
+	char *str_o = n->text;
+	asprintf(&n->text, "<mrow><mo>%s</mo><mtable>%s</mtable><mo>%s</mo></mrow>", l->text, n->text, r->text);
+	free_node(l);
+	free_node(r);
+	free(str_o);
 }
 
-void row(struct node *n, char *r0)
+void row(struct node *n)
 {
-	asprintf(&n->text, "<mtr>%s</mtr>", r0);
+	char *str_o = n->text;
+	asprintf(&n->text, "<mtr>%s</mtr>", n->text);
+	free(str_o);
 }
 
-void cell(struct node *n, char *s0)
+void cell(struct node *n)
 {
-	asprintf(&n->text, "<mtd>%s</mtd>", s0);
+	char *str_o = n->text;
+	asprintf(&n->text, "<mtd>%s</mtd>", n->text);
+	free(str_o);
 }
