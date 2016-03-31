@@ -128,13 +128,14 @@ Right 		= ":}"		{ $$ = mk_node(NODE_RAW, ""); }
 
 Operation	= "+"		{ $$ = mk_op("+"); }
 		| "!"		{ $$ = mk_op("!"); }
+		| "-:"		{ $$ = mk_op("&divide;"); }
 		| "-"		{ $$ = mk_op("&minus;"); }
+		| "***"		{ $$ = mk_op("&Star;"); }		
+		| "**"		{ $$ = mk_op("&lowast;"); }
 		| "*"		{ $$ = mk_op("&sdot;"); }
-		| "**"		{ $$ = mk_op("&sstarf;"); }
 		| "//"		{ $$ = mk_op("/"); }
 		| "\\\\"	{ $$ = mk_op("\\"); }
 		| "xx"		{ $$ = mk_op("&times;"); }
-		| "-:"		{ $$ = mk_op("&divide;"); }
 		| "@"		{ $$ = mk_op("&compfn;"); }
 		| "o+"		{ $$ = mk_op("&oplus;"); }
 		| "ox"		{ $$ = mk_op("&otimes;"); }
