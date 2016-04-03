@@ -101,25 +101,22 @@ UNARY_FN(mtext, NODE_SIMPLE, "<mtext>%s</mtext>")
 UNARY_FN(ul, NODE_SIMPLE, "<munder>%s<mo>_</mo></munder>")
 UNARY_FN(cancel, NODE_SIMPLE, "<menclose notation=\"updiagonalstrike\">%s</menclose>")
 
-void accent(struct node *s0, struct node *a0)
+struct node *accent(struct node *s0, const char *accent)
 {
-	char *str_o;
+	struct node *n = mk_empty(NODE_SIMPLE);
 	inner(s0);
-	str_o = s0->text;
-	s0->type = NODE_SIMPLE;
-	asprintf(&s0->text, "<mover>%s<mo>%s</mo></mover>", s0->text, a0->text);
-	free(str_o);
-	free_node(a0);
+	asprintf(&n->text, "<mover>%s<mo>%s</mo></mover>", s0->text, accent);
+	free_node(s0);
+	return n;
 }
 
-void font(char *font, struct node *s0)
+struct node *font(struct node *s0, const char *font)
 {
-	char *str_o;
+	struct node *n = mk_empty(NODE_SIMPLE);
 	inner(s0);
-	str_o = s0->text;
-	s0->type = NODE_SIMPLE;
-	asprintf(&s0->text, "<mstyle mathvariant=\"%s\">%s</mstyle>", font, s0->text);
-	free(str_o);
+	asprintf(&n->text, "<mstyle mathvariant=\"%s\">%s</mstyle>", font, s0->text);
+	free_node(s0);
+	return n;
 }
 
 /* binary functions */

@@ -449,48 +449,6 @@ YY_ACTION(void) yy_1_Arrow(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY
   yyprintf((stderr, "\n  {yy = mk_op(\"&uarr;\"); }\n"));
   yy = mk_op("&uarr;"); ;
 }
-YY_ACTION(void) yy_6_Accent(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
-{
-  yyprintf((stderr, "do yy_6_Accent"));
-  yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_node(NODE_RAW, \"..\"); }\n"));
-  yy = mk_node(NODE_RAW, ".."); ;
-}
-YY_ACTION(void) yy_5_Accent(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
-{
-  yyprintf((stderr, "do yy_5_Accent"));
-  yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_node(NODE_RAW, \".\"); }\n"));
-  yy = mk_node(NODE_RAW, "."); ;
-}
-YY_ACTION(void) yy_4_Accent(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
-{
-  yyprintf((stderr, "do yy_4_Accent"));
-  yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_node(NODE_RAW, \"&rarr;\"); }\n"));
-  yy = mk_node(NODE_RAW, "&rarr;"); ;
-}
-YY_ACTION(void) yy_3_Accent(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
-{
-  yyprintf((stderr, "do yy_3_Accent"));
-  yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_node(NODE_RAW, \"_\"); }\n"));
-  yy = mk_node(NODE_RAW, "_"); ;
-}
-YY_ACTION(void) yy_2_Accent(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
-{
-  yyprintf((stderr, "do yy_2_Accent"));
-  yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_node(NODE_RAW, \"&macr;\"); }\n"));
-  yy = mk_node(NODE_RAW, "&macr;"); ;
-}
-YY_ACTION(void) yy_1_Accent(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
-{
-  yyprintf((stderr, "do yy_1_Accent"));
-  yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_node(NODE_RAW, \"^\"); }\n"));
-  yy = mk_node(NODE_RAW, "^"); ;
-}
 YY_ACTION(void) yy_30_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_30_Misc"));
@@ -1203,8 +1161,8 @@ YY_ACTION(void) yy_6_Font(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_
 #define t0 G->val[-1]
   yyprintf((stderr, "do yy_6_Font"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {font(\"sans-serif\", t0); }\n"));
-  font("sans-serif", t0); ;
+  yyprintf((stderr, "\n  {yy = font(t0, \"sans-serif\"); }\n"));
+  yy = font(t0, "sans-serif"); ;
 #undef t0
 }
 YY_ACTION(void) yy_5_Font(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
@@ -1212,8 +1170,8 @@ YY_ACTION(void) yy_5_Font(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_
 #define t0 G->val[-1]
   yyprintf((stderr, "do yy_5_Font"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {font(\"fraktur\", t0); }\n"));
-  font("fraktur", t0); ;
+  yyprintf((stderr, "\n  {yy = font(t0, \"fraktur\"); }\n"));
+  yy = font(t0, "fraktur"); ;
 #undef t0
 }
 YY_ACTION(void) yy_4_Font(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
@@ -1221,8 +1179,8 @@ YY_ACTION(void) yy_4_Font(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_
 #define t0 G->val[-1]
   yyprintf((stderr, "do yy_4_Font"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {font(\"monospace\", t0); }\n"));
-  font("monospace", t0); ;
+  yyprintf((stderr, "\n  {yy = font(t0, \"monospace\"); }\n"));
+  yy = font(t0, "monospace"); ;
 #undef t0
 }
 YY_ACTION(void) yy_3_Font(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
@@ -1230,8 +1188,8 @@ YY_ACTION(void) yy_3_Font(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_
 #define t0 G->val[-1]
   yyprintf((stderr, "do yy_3_Font"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {font(\"script\", t0); }\n"));
-  font("script", t0); ;
+  yyprintf((stderr, "\n  {yy = font(t0, \"script\"); }\n"));
+  yy = font(t0, "script"); ;
 #undef t0
 }
 YY_ACTION(void) yy_2_Font(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
@@ -1239,8 +1197,8 @@ YY_ACTION(void) yy_2_Font(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_
 #define t0 G->val[-1]
   yyprintf((stderr, "do yy_2_Font"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {font(\"bold\", t0); }\n"));
-  font("bold", t0); ;
+  yyprintf((stderr, "\n  {yy = font(t0, \"bold\"); }\n"));
+  yy = font(t0, "bold"); ;
 #undef t0
 }
 YY_ACTION(void) yy_1_Font(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
@@ -1248,8 +1206,62 @@ YY_ACTION(void) yy_1_Font(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_
 #define t0 G->val[-1]
   yyprintf((stderr, "do yy_1_Font"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {font(\"double-struck\", t0); }\n"));
-  font("double-struck", t0); ;
+  yyprintf((stderr, "\n  {yy = font(t0, \"double-struck\"); }\n"));
+  yy = font(t0, "double-struck"); ;
+#undef t0
+}
+YY_ACTION(void) yy_6_Accent(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+#define t0 G->val[-1]
+  yyprintf((stderr, "do yy_6_Accent"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = accent(t0, \"..\"); }\n"));
+  yy = accent(t0, ".."); ;
+#undef t0
+}
+YY_ACTION(void) yy_5_Accent(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+#define t0 G->val[-1]
+  yyprintf((stderr, "do yy_5_Accent"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = accent(t0, \".\"); }\n"));
+  yy = accent(t0, "."); ;
+#undef t0
+}
+YY_ACTION(void) yy_4_Accent(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+#define t0 G->val[-1]
+  yyprintf((stderr, "do yy_4_Accent"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = accent(t0, \"&rarr;\"); }\n"));
+  yy = accent(t0, "&rarr;"); ;
+#undef t0
+}
+YY_ACTION(void) yy_3_Accent(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+#define t0 G->val[-1]
+  yyprintf((stderr, "do yy_3_Accent"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = accent(t0, \"_\"); }\n"));
+  yy = accent(t0, "_"); ;
+#undef t0
+}
+YY_ACTION(void) yy_2_Accent(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+#define t0 G->val[-1]
+  yyprintf((stderr, "do yy_2_Accent"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = accent(t0, \"&macr;\"); }\n"));
+  yy = accent(t0, "&macr;"); ;
+#undef t0
+}
+YY_ACTION(void) yy_1_Accent(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+#define t0 G->val[-1]
+  yyprintf((stderr, "do yy_1_Accent"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = accent(t0, \"^\"); }\n"));
+  yy = accent(t0, "^"); ;
 #undef t0
 }
 YY_ACTION(void) yy_3_Row(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
@@ -1572,59 +1584,40 @@ YY_ACTION(void) yy_1_Binary(GREG *G, char *yytext, int yyleng, yythunk *thunk, Y
 #undef s1
 #undef s0
 }
-YY_ACTION(void) yy_5_Unary(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
-{
-#define a G->val[-1]
-#define s G->val[-2]
-  yyprintf((stderr, "do yy_5_Unary"));
-  yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {accent(s, a); }\n"));
-  accent(s, a); ;
-#undef a
-#undef s
-}
 YY_ACTION(void) yy_4_Unary(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
-#define a G->val[-1]
-#define s G->val[-2]
+#define s G->val[-1]
   yyprintf((stderr, "do yy_4_Unary"));
   yyprintfvTcontext(yytext);
   yyprintf((stderr, "\n  {yy = cancel(s); }\n"));
   yy = cancel(s); ;
-#undef a
 #undef s
 }
 YY_ACTION(void) yy_3_Unary(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
-#define a G->val[-1]
-#define s G->val[-2]
+#define s G->val[-1]
   yyprintf((stderr, "do yy_3_Unary"));
   yyprintfvTcontext(yytext);
   yyprintf((stderr, "\n  {yy = ul(s); }\n"));
   yy = ul(s); ;
-#undef a
 #undef s
 }
 YY_ACTION(void) yy_2_Unary(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
-#define a G->val[-1]
-#define s G->val[-2]
+#define s G->val[-1]
   yyprintf((stderr, "do yy_2_Unary"));
   yyprintfvTcontext(yytext);
   yyprintf((stderr, "\n  {yy = mtext(s); }\n"));
   yy = mtext(s); ;
-#undef a
 #undef s
 }
 YY_ACTION(void) yy_1_Unary(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
-#define a G->val[-1]
-#define s G->val[-2]
+#define s G->val[-1]
   yyprintf((stderr, "do yy_1_Unary"));
   yyprintfvTcontext(yytext);
   yyprintf((stderr, "\n  {yy = msqrt(s); }\n"));
   yy = msqrt(s); ;
-#undef a
 #undef s
 }
 YY_ACTION(void) yy_5_Const(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
@@ -2721,31 +2714,50 @@ YY_RULE(int) yy_Font(GREG *G)
   return 0;
 }
 YY_RULE(int) yy_Accent(GREG *G)
-{  int yypos0= G->pos, yythunkpos0= G->thunkpos;  yyprintfv((stderr, "%s\n", "Accent"));
+{  int yypos0= G->pos, yythunkpos0= G->thunkpos;  yyDo(G, yyPush, 1, 0, "yyPush");
+  yyprintfv((stderr, "%s\n", "Accent"));
 
   {  int yypos196= G->pos, yythunkpos196= G->thunkpos;  if (!yymatchString(G, "hat")) goto l197;
+  if (!yy__(G))  goto l197;
+  if (!yy_Simple(G))  goto l197;
+  yyDo(G, yySet, -1, 0, "yySet");
   yyDo(G, yy_1_Accent, G->begin, G->end, "yy_1_Accent");
   goto l196;
   l197:;	  G->pos= yypos196; G->thunkpos= yythunkpos196;  if (!yymatchString(G, "bar")) goto l198;
+  if (!yy__(G))  goto l198;
+  if (!yy_Simple(G))  goto l198;
+  yyDo(G, yySet, -1, 0, "yySet");
   yyDo(G, yy_2_Accent, G->begin, G->end, "yy_2_Accent");
   goto l196;
   l198:;	  G->pos= yypos196; G->thunkpos= yythunkpos196;  if (!yymatchString(G, "ul")) goto l199;
+  if (!yy__(G))  goto l199;
+  if (!yy_Simple(G))  goto l199;
+  yyDo(G, yySet, -1, 0, "yySet");
   yyDo(G, yy_3_Accent, G->begin, G->end, "yy_3_Accent");
   goto l196;
   l199:;	  G->pos= yypos196; G->thunkpos= yythunkpos196;  if (!yymatchString(G, "vec")) goto l200;
+  if (!yy__(G))  goto l200;
+  if (!yy_Simple(G))  goto l200;
+  yyDo(G, yySet, -1, 0, "yySet");
   yyDo(G, yy_4_Accent, G->begin, G->end, "yy_4_Accent");
   goto l196;
   l200:;	  G->pos= yypos196; G->thunkpos= yythunkpos196;  if (!yymatchString(G, "dot")) goto l201;
+  if (!yy__(G))  goto l201;
+  if (!yy_Simple(G))  goto l201;
+  yyDo(G, yySet, -1, 0, "yySet");
   yyDo(G, yy_5_Accent, G->begin, G->end, "yy_5_Accent");
   goto l196;
   l201:;	  G->pos= yypos196; G->thunkpos= yythunkpos196;  if (!yymatchString(G, "ddot")) goto l195;
+  if (!yy__(G))  goto l195;
+  if (!yy_Simple(G))  goto l195;
+  yyDo(G, yySet, -1, 0, "yySet");
   yyDo(G, yy_6_Accent, G->begin, G->end, "yy_6_Accent");
 
   }
   l196:;	  yyprintf((stderr, "  ok   Accent"));
   yyprintfGcontext;
   yyprintf((stderr, "\n"));
-
+  yyDo(G, yyPop, 1, 0, "yyPop");
   return 1;
   l195:;	  G->pos= yypos0; G->thunkpos= yythunkpos0;  yyprintfv((stderr, "  fail %s", "Accent"));
   yyprintfvGcontext;
@@ -2794,39 +2806,34 @@ YY_RULE(int) yy__(GREG *G)
   return 1;
 }
 YY_RULE(int) yy_Unary(GREG *G)
-{  int yypos0= G->pos, yythunkpos0= G->thunkpos;  yyDo(G, yyPush, 2, 0, "yyPush");
+{  int yypos0= G->pos, yythunkpos0= G->thunkpos;  yyDo(G, yyPush, 1, 0, "yyPush");
   yyprintfv((stderr, "%s\n", "Unary"));
 
   {  int yypos213= G->pos, yythunkpos213= G->thunkpos;  if (!yymatchString(G, "sqrt")) goto l214;
   if (!yy__(G))  goto l214;
   if (!yy_Simple(G))  goto l214;
-  yyDo(G, yySet, -2, 0, "yySet");
+  yyDo(G, yySet, -1, 0, "yySet");
   yyDo(G, yy_1_Unary, G->begin, G->end, "yy_1_Unary");
   goto l213;
   l214:;	  G->pos= yypos213; G->thunkpos= yythunkpos213;  if (!yymatchString(G, "text")) goto l215;
   if (!yy__(G))  goto l215;
   if (!yy_Simple(G))  goto l215;
-  yyDo(G, yySet, -2, 0, "yySet");
+  yyDo(G, yySet, -1, 0, "yySet");
   yyDo(G, yy_2_Unary, G->begin, G->end, "yy_2_Unary");
   goto l213;
   l215:;	  G->pos= yypos213; G->thunkpos= yythunkpos213;  if (!yymatchString(G, "ul")) goto l216;
   if (!yy__(G))  goto l216;
   if (!yy_Simple(G))  goto l216;
-  yyDo(G, yySet, -2, 0, "yySet");
+  yyDo(G, yySet, -1, 0, "yySet");
   yyDo(G, yy_3_Unary, G->begin, G->end, "yy_3_Unary");
   goto l213;
   l216:;	  G->pos= yypos213; G->thunkpos= yythunkpos213;  if (!yymatchString(G, "cancel")) goto l217;
   if (!yy__(G))  goto l217;
   if (!yy_Simple(G))  goto l217;
-  yyDo(G, yySet, -2, 0, "yySet");
+  yyDo(G, yySet, -1, 0, "yySet");
   yyDo(G, yy_4_Unary, G->begin, G->end, "yy_4_Unary");
   goto l213;
   l217:;	  G->pos= yypos213; G->thunkpos= yythunkpos213;  if (!yy_Accent(G))  goto l218;
-  yyDo(G, yySet, -1, 0, "yySet");
-  if (!yy__(G))  goto l218;
-  if (!yy_Simple(G))  goto l218;
-  yyDo(G, yySet, -2, 0, "yySet");
-  yyDo(G, yy_5_Unary, G->begin, G->end, "yy_5_Unary");
   goto l213;
   l218:;	  G->pos= yypos213; G->thunkpos= yythunkpos213;  if (!yy_Font(G))  goto l212;
 
@@ -2834,7 +2841,7 @@ YY_RULE(int) yy_Unary(GREG *G)
   l213:;	  yyprintf((stderr, "  ok   Unary"));
   yyprintfGcontext;
   yyprintf((stderr, "\n"));
-  yyDo(G, yyPop, 2, 0, "yyPop");
+  yyDo(G, yyPop, 1, 0, "yyPop");
   return 1;
   l212:;	  G->pos= yypos0; G->thunkpos= yythunkpos0;  yyprintfv((stderr, "  fail %s", "Unary"));
   yyprintfvGcontext;

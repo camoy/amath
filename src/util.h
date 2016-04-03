@@ -1,6 +1,8 @@
 #ifndef UTIL_H
 #define UTIL_H
 
+/* data types */
+
 enum node_t {
 	NODE_RAW,
 	NODE_UNDEROVER,
@@ -24,39 +26,57 @@ struct greg_data {
 	struct node *result;
 };
 
+/* basic functions */
+
 struct node *mk_empty(enum node_t type);
-void free_node(struct node *n);
-struct node *mk_bin(struct node *s0, struct node *s1, char *operator);
 struct node *mk_node(enum node_t type, char *str);
-void inner(struct node *n);
+void free_node(struct node *n);
+struct node *mk_concat(struct node *s0, struct node *s1);
+struct node *mk_group(struct node *l, struct node *e, struct node *r);
+
+/* helper functions */
+
 char *merror(char *input);
+void inner(struct node *n);
+
+/* const functions */
+
+struct node *mk_number(char *s0);
+struct node *mk_op(char *s0);
+struct node *mk_greek(char *s0);
+struct node *mk_identifier(char *s0);
+struct node *mk_underover(char *s0);
+
+/* unary functions */
+
+struct node *msqrt(struct node *s0);
+struct node *mtext(struct node *s0);
+struct node *ul(struct node *s0);
 struct node *cancel(struct node *s0);
+struct node *accent(struct node *s0, const char *accent);
+struct node *font(struct node *s0, const char *font);
+
+/* binary functions */
+
+struct node *mk_fraction(struct node *s0, struct node *s1);
+struct node *mk_root(struct node *s0, struct node *s1);
+struct node *mk_stackrel(struct node *s0, struct node *s1);
+struct node *mk_ubrace(struct node *s0, struct node *s1);
+struct node *mk_obrace(struct node *s0, struct node *s1);
+
+/* special binary functions */
+
+struct node *mk_color(struct node *s0, struct node *s1);
+struct node *mk_sub(struct node *s0, struct node *s1);
+
+/* ternary function */
+
+struct node *mk_ter(struct node *s0, struct node *s1, struct node *s2);
+
+/* matrix functions */
+
 void matrix(struct node *l, struct node *n, struct node *r);
 void row(struct node *n);
 void cell(struct node *n);
-void operator(struct node *n, char *s0);
-struct node *mk_identifier(char *s0);
-struct node *mk_greek(char *s0);
-struct node *mk_op(char *s0);
-struct node *mk_underover(char *s0);
-struct node *mk_number(char *s0);
-struct node *msqrt(struct node *s0);
-struct node *mtext(struct node *s0);
-void font(char *s0, struct node *t0);
-struct node *ul(struct node *s0);
-void accent(struct node *s0, struct node *a0);
-struct node *mk_group(struct node *l, struct node *e, struct node *r);
-struct node *mk_concat(struct node *s0, struct node *s1);
-struct node *mk_fraction(struct node *s0, struct node *s1);
-struct node *mk_root(struct node *s0, struct node *s1);
-struct node *mk_color(struct node *s0, struct node *s1);
-struct node *mk_stackrel(struct node *s0, struct node *s1);
-struct node *mk_sub(struct node *s0, struct node *s1);
-struct node *mk_under(struct node *s0, struct node *s1);
-struct node *mk_sup(struct node *s0, struct node *s1);
-struct node *mk_subsup(struct node *s0, struct node *s1, struct node *s2);
-struct node *mk_ter(struct node *s0, struct node *s1, struct node *s2);
-struct node *mk_ubrace(struct node *s0, struct node *s1);
-struct node *mk_obrace(struct node *s0, struct node *s1);
 
 #endif

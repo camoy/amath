@@ -34,7 +34,7 @@ Unary		= "sqrt" - s:Simple	{ $$ = msqrt(s); }
 		| "text" - s:Simple	{ $$ = mtext(s); }
 		| "ul" - s:Simple	{ $$ = ul(s); }
 		| "cancel" - s:Simple	{ $$ = cancel(s); }
-		| a:Accent - s:Simple	{ accent(s, a); }
+		| Accent
 		| Font
 
 Binary		= "frac" - s0:Simple - s1:Simple		{ $$ = mk_fraction(s0, s1); }
@@ -98,12 +98,19 @@ Row		= l:Left - s0:ExprM -		{ cell(s0); }
 			("," - si:ExprM -	{ cell(si); s0 = mk_concat(s0, si); }
 			)* - r:Right		{ free_node(l); free_node(r); $$ = s0; }
 
-Font		= "bbb" - t0:Simple			{ font("double-struck", t0); }
-		| "bb" - t0:Simple			{ font("bold", t0); }
-		| "cc" - t0:Simple			{ font("script", t0); }
-		| "tt" - t0:Simple			{ font("monospace", t0); }
-		| "fr" - t0:Simple			{ font("fraktur", t0); }
-		| "sf" - t0:Simple			{ font("sans-serif", t0); }
+Accent		= "hat" - t0:Simple	{ $$ = accent(t0, "^"); }
+		| "bar" - t0:Simple	{ $$ = accent(t0, "&macr;"); }
+		| "ul" - t0:Simple	{ $$ = accent(t0, "_"); }
+		| "vec" - t0:Simple	{ $$ = accent(t0, "&rarr;"); }
+		| "dot" - t0:Simple	{ $$ = accent(t0, "."); }
+		| "ddot" - t0:Simple	{ $$ = accent(t0, ".."); }
+
+Font		= "bbb" - t0:Simple	{ $$ = font(t0, "double-struck"); }
+		| "bb" - t0:Simple	{ $$ = font(t0, "bold"); }
+		| "cc" - t0:Simple	{ $$ = font(t0, "script"); }
+		| "tt" - t0:Simple	{ $$ = font(t0, "monospace"); }
+		| "fr" - t0:Simple	{ $$ = font(t0, "fraktur"); }
+		| "sf" - t0:Simple	{ $$ = font(t0, "sans-serif"); }
 
 Operator	= Arrow
 		| Logic
@@ -219,13 +226,6 @@ Misc		= "int"		{ $$ = mk_op("&int;"); }
 	        | "QQ"		{ $$ = mk_identifier("&Qopf;"); }
 	        | "RR"		{ $$ = mk_identifier("&Ropf;"); }
 	        | "ZZ"		{ $$ = mk_identifier("&Zopf;"); }
-
-Accent		= "hat"		{ $$ = mk_node(NODE_RAW, "^"); }
-		| "bar"		{ $$ = mk_node(NODE_RAW, "&macr;"); }
-		| "ul"		{ $$ = mk_node(NODE_RAW, "_"); }
-		| "vec"		{ $$ = mk_node(NODE_RAW, "&rarr;"); }
-		| "dot"		{ $$ = mk_node(NODE_RAW, "."); }
-		| "ddot"	{ $$ = mk_node(NODE_RAW, ".."); }
 
 Arrow		= "uarr"	{ $$ = mk_op("&uarr;"); }
 		| "darr"	{ $$ = mk_op("&darr;"); }
