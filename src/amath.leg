@@ -30,10 +30,10 @@ Const		= < NUMBER >		{ $$ = mk_number(yytext); }
 		| < SPECIAL >		{ $$ = mk_identifier(yytext); }
 		| < IDENTIFIER >	{ $$ = mk_identifier(yytext); }
 
-Unary		= "sqrt" - s:Simple	{ msqrt(s); }
-		| "text" - s:Simple	{ mtext(s); }
-		| "ul" - s:Simple	{ ul(s); }
-		| "cancel" - s:Simple	{ cancel(s); }
+Unary		= "sqrt" - s:Simple	{ $$ = msqrt(s); }
+		| "text" - s:Simple	{ $$ = mtext(s); }
+		| "ul" - s:Simple	{ $$ = ul(s); }
+		| "cancel" - s:Simple	{ $$ = cancel(s); }
 		| a:Accent - s:Simple	{ accent(s, a); }
 		| Font
 
@@ -50,7 +50,7 @@ Super		= s0:Simple - '^' - s1:Simple		{ $$ = mk_sup(s0, s1); }
 
 Subsup		= s0:Simple - '_' - s1:Simple - '^' - s2:Simple { $$ = mk_ter(s0, s1, s2); }
 
-Text		= ["] < (!["] .)* > ["]	{ $$ = mk_node(NODE_TEXT, yytext); mtext($$); }
+Text		= ["] < (!["] .)* > ["]	{ $$ = mk_node(NODE_TEXT, yytext); $$ = mtext($$); }
 
 Simple		= Matrix
 		| Group
@@ -197,8 +197,11 @@ Misc		= "int"		{ $$ = mk_op("&int;"); }
 	        | "O/"		{ $$ = mk_op("&empty;"); }
 	        | "oo"		{ $$ = mk_op("&infin;"); }
 	        | "aleph"	{ $$ = mk_op("&aleph;"); }
-	        | "/_"		{ $$ = mk_op("&angle;"); }
+	        | "..."		{ $$ = mk_op("&hellip;"); }
 	        | ":."		{ $$ = mk_op("&therefore;"); }
+	        | "/_"		{ $$ = mk_op("&angle;"); }
+	        | "/_\\"	{ $$ = mk_op("&xutri;"); }
+	        | "'"		{ $$ = mk_op("&prime;"); }
 	        | "|...|"	{ $$ = mk_op("|&hellip;|"); }
 	        | "|cdots|"	{ $$ = mk_op("|&ctdot;"); }
 	        | "vdots"	{ $$ = mk_op("&vellip;"); }
@@ -211,11 +214,11 @@ Misc		= "int"		{ $$ = mk_op("&int;"); }
 	        | "__|"		{ $$ = mk_op("&rfloor;"); }
 	        | "|~"		{ $$ = mk_op("&lceil;"); }
 	        | "~|"		{ $$ = mk_op("&rceil;"); }
-	        | "CC"		{ $$ = mk_op("&Copf;"); }
-	        | "NN"		{ $$ = mk_op("&Nopf;"); }
-	        | "QQ"		{ $$ = mk_op("&Qopf;"); }
-	        | "RR"		{ $$ = mk_op("&Ropf;"); }
-	        | "ZZ"		{ $$ = mk_op("&Zopf;"); }
+	        | "CC"		{ $$ = mk_identifier("&Copf;"); }
+	        | "NN"		{ $$ = mk_identifier("&Nopf;"); }
+	        | "QQ"		{ $$ = mk_identifier("&Qopf;"); }
+	        | "RR"		{ $$ = mk_identifier("&Ropf;"); }
+	        | "ZZ"		{ $$ = mk_identifier("&Zopf;"); }
 
 Accent		= "hat"		{ $$ = mk_node(NODE_RAW, "^"); }
 		| "bar"		{ $$ = mk_node(NODE_RAW, "&macr;"); }

@@ -10,12 +10,15 @@ OBJECTS = $(BUILD)/amath.o $(BUILD)/main.o $(BUILD)/util.o
 
 # phony targets
 
-.PHONY: all test install uninstall clean
+.PHONY: all test memory install uninstall clean
 
 all: $(LIBRARY) $(BINARY)
 
 test:
 	@bash test/test.sh
+
+memory:
+	@bash test/memory.sh
 
 install: all
 	install -m 0755 $(BINARY) $(PREFIX)/bin

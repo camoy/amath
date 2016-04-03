@@ -87,14 +87,13 @@ MK_FN(underover, NODE_UNDEROVER, "<mo>%s</mo>")
 /* unary functions */
 
 #define UNARY_FN(name, n_type, str) \
-	void name(struct node *s0) \
+	struct node *name(struct node *s0) \
 	{ \
-		char *str_o; \
+		struct node *n = mk_empty(n_type); \
 		inner(s0); \
-		str_o = s0->text; \
-		asprintf(&s0->text, str, s0->text); \
-		free(str_o); \
-		s0->type = n_type; \
+		asprintf(&n->text, str, s0->text); \
+		free_node(s0); \
+		return n; \
 	} \
 
 UNARY_FN(msqrt, NODE_SIMPLE, "<msqrt>%s</msqrt>")

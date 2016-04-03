@@ -14,6 +14,10 @@ The unit tests can also be run from `make`.
 
 	make test
 
+The tests can be checked for memory leaks.
+
+	make memory
+
 ## Usage
 
 The program reads AsciiMath from stdin and outputs MathML to stdout.

@@ -1,1 +1,1 @@
-<math><mrow><mo>(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>]</mo></mrow><mo>=</mo><mrow><mo>{</mo><mi>x</mi><mo>&in;</mo><mo>&Ropf;</mo><mo>|</mo><mi>a</mi><mo>&lt;</mo><mi>x</mi><mo>&leq;</mo><mi>b</mi><mo>}</mo></mrow></math>
+<math><mrow><mo>(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>]</mo></mrow><mo>=</mo><mrow><mo>{</mo><mi>x</mi><mo>&in;</mo><mi>&Ropf;</mi><mo>|</mo><mi>a</mi><mo>&lt;</mo><mi>x</mi><mo>&leq;</mo><mi>b</mi><mo>}</mo></mrow></math>
