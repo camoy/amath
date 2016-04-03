@@ -20,293 +20,294 @@ void yy_input_func(char *buf, int *result, int max_size, struct greg_data *data)
 
 %}
 
-Start		= e0:Expr EOF	{ ((struct greg_data*) G->data)->result->text = strdup(e0->text); free_node(e0); }
-		| < .+ > EOF	{ ((struct greg_data*) G->data)->result->text = merror(yytext); }
+Start	= e0:Expr EOF	{ ((struct greg_data*) G->data)->result->text = strdup(e0->text); free_node(e0); }
+	| < .+ > EOF	{ ((struct greg_data*) G->data)->result->text = merror(yytext); }
 
-Const		= < NUMBER >		{ $$ = mk_number(yytext); }
-		| Operator
-		| < STANDARD >		{ $$ = mk_op(yytext); }
-		| < GREEK >		{ $$ = mk_greek(yytext); }
-		| < SPECIAL >		{ $$ = mk_identifier(yytext); }
-		| < IDENTIFIER >	{ $$ = mk_identifier(yytext); }
+Const	= < NUMBER >	{ $$ = mk_number(yytext); }
+	| Op
+	| < STD >	{ $$ = mk_op(yytext); }
+	| < GREEK >	{ $$ = mk_greek(yytext); }
+	| < SPECIAL >	{ $$ = mk_id(yytext); }
+	| < ID >	{ $$ = mk_id(yytext); }
 
-Unary		= "sqrt" - s:Simple	{ $$ = msqrt(s); }
-		| "text" - s:Simple	{ $$ = mtext(s); }
-		| "ul" - s:Simple	{ $$ = ul(s); }
-		| "cancel" - s:Simple	{ $$ = cancel(s); }
-		| Accent
-		| Font
+Unary	= "sqrt" - s:Simp	{ $$ = msqrt(s); }
+	| "text" - s:Simp	{ $$ = mtext(s); }
+	| "ul" - s:Simp		{ $$ = ul(s); }
+	| "cancel" - s:Simp	{ $$ = cancel(s); }
+	| Accent
+	| Font
 
-Binary		= "frac" - s0:Simple - s1:Simple		{ $$ = mk_fraction(s0, s1); }
-		| "root" - s0:Simple - s1:Simple		{ $$ = mk_root(s1, s0); }
-		| "color" - s0:ColorGroup - s1:Simple		{ $$ = mk_color(s0, s1); }
-		| "stackrel" - s0:Simple - s1:Simple		{ $$ = mk_stackrel(s1, s0); }
-		| "ubrace" - s0:Simple - '_' - s1:Simple	{ $$ = mk_ubrace(s0, s1); }
-		| "obrace" - s0:Simple - '^' - s1:Simple	{ $$ = mk_obrace(s0, s1); }
+Binary	= "frac" - s0:Simp - s1:Simp		{ $$ = mk_frac(s0, s1); }
+	| "root" - s0:Simp - s1:Simp		{ $$ = mk_root(s1, s0); }
+	| "color" - s0:Color - s1:Simp		{ $$ = mk_color(s0, s1); }
+	| "stackrel" - s0:Simp - s1:Simp	{ $$ = mk_stackrel(s1, s0); }
+	| "ubrace" - s0:Simp - '_' - s1:Simp	{ $$ = mk_ubrace(s0, s1); }
+	| "obrace" - s0:Simp - '^' - s1:Simp	{ $$ = mk_obrace(s0, s1); }
 
-Division	= s0:Simple - '/' - s1:Simple		{ $$ = mk_fraction(s0, s1); }
-Sub		= s0:Simple - '_' - s1:Simple		{ $$ = mk_sub(s0, s1); }
-Super		= s0:Simple - '^' - s1:Simple		{ $$ = mk_sup(s0, s1); }
+Simp	= Matrix
+	| Group
+	| Binary
+	| Unary
+	| Text
+	| Const
 
-Subsup		= s0:Simple - '_' - s1:Simple - '^' - s2:Simple { $$ = mk_ter(s0, s1, s2); }
+Int	= s0:Simp - '/' - s1:Simp			{ $$ = mk_frac(s0, s1); }
+	| s0:Simp - '_' - s1:Simp - '^' - s2:Simp	{ $$ = mk_ter(s0, s1, s2); }
+	| s0:Simp - '_' - s1:Simp			{ $$ = mk_sub(s0, s1); }
+	| s0:Simp - '^' - s1:Simp			{ $$ = mk_sup(s0, s1); }
+	| Simp
+	| < !EOF . >					{ $$ = mk_op(yytext); }
 
-Text		= ["] < (!["] .)* > ["]	{ $$ = mk_node(NODE_TEXT, yytext); $$ = mtext($$); }
+IntG	= !Right Int
+IntM	= !',' IntG
 
-Simple		= Matrix
-		| Group
-		| Binary
-		| Unary
-		| Text
-		| Const
+Expr	= - c0:Int
+		(- ci:Int -	{ c0 = mk_concat(c0, ci); }
+		)* -		{ $$ = c0; }
 
-Intermediate	= Division
-		| Subsup
-		| Sub
-		| Super
-		| Simple
+ExprG	= - c0:IntG
+		(- ci:IntG -	{ c0 = mk_concat(c0, ci); }
+		)* -		{ $$ = c0; }
 
-IntermediateE	= Intermediate
-		| < !EOF . >					{ $$ = mk_op(yytext); }
+ExprM	= - c0:IntM
+		(- ci:IntM -	{ c0 = mk_concat(c0, ci); }
+		)* -		{ $$ = c0; }
 
-Expr		= - c0:IntermediateE
-			(- ci:IntermediateE -	{ c0 = mk_concat(c0, ci); }
-			)* -			{ $$ = c0; }
+Matrix	= l:Left - r0:Row -	{ r0 = row(r0); }
+		("," - ri:Row -	{ r0 = mk_concat(r0, row(ri)); }
+		)+ - r:Right	{ $$ = matrix(l, r0, r); }
 
-IntermediateG	= !">>" Intermediate
-		| < !":}" !":)" !">>" !')' !']' !'}' . >	{ $$ = mk_op(yytext); }
+Row	= l:Left - s0:ExprM -		{ s0 = cell(s0); }
+		("," - si:ExprM -	{ s0 = mk_concat(s0, cell(si)); }
+		)* - r:Right		{ free_node(l); free_node(r); $$ = s0; }
 
-ExprG		= - c0:IntermediateG
-			(- ci:IntermediateG -	{ c0 = mk_concat(c0, ci); }
-			)* -			{ $$ = c0; }
+Text	= ["] < (!["] .)* > ["]			{ $$ = mtext(mk_str(yytext)); }
+Color	= l:Left - < (!Right .)* > - r:Right	{ free_node(l); free_node(r); $$ = mk_str(yytext); }
+Group 	= l:Left - e:ExprG - r:Right		{ $$ = mk_group(l, e, r); }
 
-Group 		= l:Left - e:ExprG - r:Right	{ $$ = mk_group(l, e, r); }
+Accent	= "hat" - t0:Simp	{ $$ = accent(t0, "^"); }
+	| "bar" - t0:Simp	{ $$ = accent(t0, "&macr;"); }
+	| "ul" - t0:Simp	{ $$ = accent(t0, "_"); }
+	| "vec" - t0:Simp	{ $$ = accent(t0, "&rarr;"); }
+	| "dot" - t0:Simp	{ $$ = accent(t0, "."); }
+	| "ddot" - t0:Simp	{ $$ = accent(t0, ".."); }
 
-IntermediateM	= !">>" Intermediate
-		| < !":}" !":)" !">>" !')' !']' !'}' !',' . >	{ $$ = mk_op(yytext); }
+Font	= "bbb" - t0:Simp	{ $$ = font(t0, "double-struck"); }
+	| "bb" - t0:Simp	{ $$ = font(t0, "bold"); }
+	| "cc" - t0:Simp	{ $$ = font(t0, "script"); }
+	| "tt" - t0:Simp	{ $$ = font(t0, "monospace"); }
+	| "fr" - t0:Simp	{ $$ = font(t0, "fraktur"); }
+	| "sf" - t0:Simp	{ $$ = font(t0, "sans-serif"); }
 
-ExprM		= - c0:IntermediateM
-			(- ci:IntermediateM -	{ c0 = mk_concat(c0, ci); }
-			)* -			{ $$ = c0; }
+Op	= Arrow
+	| Logic
+	| Misc
+	| Rel
+	| Unders
+	| Symbol
 
-ColorGroup 	= l:Left - < (IDENTIFIER | NUMBER | '#')* > - r:Right	{ free_node(l); free_node(r); $$ = mk_node(NODE_RAW, yytext); }
+Left 	= "{:"		{ $$ = mk_str(""); }
+	| "(:"		{ $$ = mk_str("&lang;"); }
+	| "<<"		{ $$ = mk_str("&lang;"); }
+	| "("		{ $$ = mk_str("("); }
+	| "["		{ $$ = mk_str("["); }
+	| "{"		{ $$ = mk_str(LCURLY); }
 
-Matrix		= l:Left - r0:Row -	{ row(r0); }
-			("," - ri:Row -	{ row(ri); r0 = mk_concat(r0, ri); }
-			)+ - r:Right	{ matrix(l, r0, r); $$ = r0; }
+Right 	= ":}"		{ $$ = mk_str(""); }
+	| ":)"		{ $$ = mk_str("&rang;"); }
+	| ">>"		{ $$ = mk_str("&rang;"); }
+	| ")"		{ $$ = mk_str(")"); }
+	| "]"		{ $$ = mk_str("]"); }
+	| "}"		{ $$ = mk_str(RCURLY); }
 
-Row		= l:Left - s0:ExprM -		{ cell(s0); }
-			("," - si:ExprM -	{ cell(si); s0 = mk_concat(s0, si); }
-			)* - r:Right		{ free_node(l); free_node(r); $$ = s0; }
+Symbol	= "+"		{ $$ = mk_op("+"); }
+	| "!"		{ $$ = mk_op("!"); }
+	| "-:"		{ $$ = mk_op("&divide;"); }
+	| "-"		{ $$ = mk_op("&minus;"); }
+	| "***"		{ $$ = mk_op("&Star;"); }
+	| "**"		{ $$ = mk_op("&lowast;"); }
+	| "*"		{ $$ = mk_op("&sdot;"); }
+	| "//"		{ $$ = mk_op("/"); }
+	| "\\\\"	{ $$ = mk_op("\\"); }
+	| "|><"		{ $$ = mk_op("&ltimes;"); }
+	| "><|"		{ $$ = mk_op("&rtimes;"); }
+	| "|><|"	{ $$ = mk_op("&bowtie;"); }
+	| "xx"		{ $$ = mk_op("&times;"); }
+	| "@"		{ $$ = mk_op("&compfn;"); }
+	| "o+"		{ $$ = mk_op("&oplus;"); }
+	| "ox"		{ $$ = mk_op("&otimes;"); }
+	| "o."		{ $$ = mk_op("&odot;"); }
+	| "^^"		{ $$ = mk_op("&wedge;"); }
+	| "vv"		{ $$ = mk_op("&vee;"); }
+	| "nn"		{ $$ = mk_op("&cap;"); }
+	| "uu"		{ $$ = mk_op("&cup;"); }
 
-Accent		= "hat" - t0:Simple	{ $$ = accent(t0, "^"); }
-		| "bar" - t0:Simple	{ $$ = accent(t0, "&macr;"); }
-		| "ul" - t0:Simple	{ $$ = accent(t0, "_"); }
-		| "vec" - t0:Simple	{ $$ = accent(t0, "&rarr;"); }
-		| "dot" - t0:Simple	{ $$ = accent(t0, "."); }
-		| "ddot" - t0:Simple	{ $$ = accent(t0, ".."); }
+Unders	= "sum"		{ $$ = mk_underover("&Sigma;"); }
+	| "prod"	{ $$ = mk_underover("&Pi;"); }
+	| "^^^"		{ $$ = mk_underover("&Wedge;"); }
+	| "vvv"		{ $$ = mk_underover("&Vee;"); }
+	| "nnn"		{ $$ = mk_underover("&Intersection;"); }
+	| "uuu"		{ $$ = mk_underover("&Union;"); }
+	| "lim"		{ $$ = mk_underover("lim"); }
+	| "Lim"		{ $$ = mk_underover("Lim"); }
+	| "min"		{ $$ = mk_underover("min"); }
+	| "max"		{ $$ = mk_underover("max"); }
 
-Font		= "bbb" - t0:Simple	{ $$ = font(t0, "double-struck"); }
-		| "bb" - t0:Simple	{ $$ = font(t0, "bold"); }
-		| "cc" - t0:Simple	{ $$ = font(t0, "script"); }
-		| "tt" - t0:Simple	{ $$ = font(t0, "monospace"); }
-		| "fr" - t0:Simple	{ $$ = font(t0, "fraktur"); }
-		| "sf" - t0:Simple	{ $$ = font(t0, "sans-serif"); }
+Rel	= "="		{ $$ = mk_op("="); }
+	| "!="		{ $$ = mk_op("&NotEqual;"); }
+	| ":="		{ $$ = mk_op("&Assign;"); }
+	| "<="		{ $$ = mk_op("&leq;"); }
+	| "<"		{ $$ = mk_op("&lt;"); }
+	| ">="		{ $$ = mk_op("&geq;"); }
+	| ">"		{ $$ = mk_op("&gt;"); }
+	| "-<"		{ $$ = mk_op("&Precedes;"); }
+	| ">-"		{ $$ = mk_op("&Succeeds;"); }
+	| "-<="		{ $$ = mk_op("&PrecedesEqual;"); }
+	| ">-="		{ $$ = mk_op("&SucceedsEqual;"); }
+	| "in"		{ $$ = mk_op("&in;"); }
+	| "!in"		{ $$ = mk_op("&notin;"); }
+	| "sub"		{ $$ = mk_op("&sub;"); }
+	| "sup"		{ $$ = mk_op("&sup;"); }
+	| "sube"	{ $$ = mk_op("&sube;"); }
+	| "supe"	{ $$ = mk_op("&supe;"); }
+	| "-="		{ $$ = mk_op("&Congruent;"); }
+	| "~="		{ $$ = mk_op("&backcong;"); }
+	| "~~"		{ $$ = mk_op("&approx;"); }
+	| "prop"	{ $$ = mk_op("&prop;"); }
 
-Operator	= Arrow
-		| Logic
-		| Misc
-		| Relation
-		| Unders
-		| Operation
+Logic 	= "and"		{ $$ = mk_op("and"); }
+	| "or"		{ $$ = mk_op("or"); }
+	| "not"		{ $$ = mk_op("&not;"); }
+	| "=>"		{ $$ = mk_op("&Implies;"); }
+	| "if"		{ $$ = mk_op("if"); }
+	| "<=>"		{ $$ = mk_op("&iff;"); }
+	| "AA"		{ $$ = mk_op("&ForAll;"); }
+	| "EE"		{ $$ = mk_op("&Exists;"); }
+	| "_|_"		{ $$ = mk_op("&UpTee;"); }
+	| "TT"		{ $$ = mk_op("&DownTee;"); }
+	| "|--"		{ $$ = mk_op("&RightTee;"); }
+	| "|=="		{ $$ = mk_op("&DoubleRightTee;"); }
 
-Left 		= "{:"		{ $$ = mk_node(NODE_RAW, ""); }
-		| "(:"		{ $$ = mk_node(NODE_RAW, "&lang;"); }
-		| "<<"		{ $$ = mk_node(NODE_RAW, "&lang;"); }
-		| "("		{ $$ = mk_node(NODE_RAW, "("); }
-		| "["		{ $$ = mk_node(NODE_RAW, "["); }
-		| "{"		{ $$ = mk_node(NODE_RAW, LCURLY); }
+Misc	= "int"		{ $$ = mk_op("&int;"); }
+	| "oint"	{ $$ = mk_op("&oint;"); }
+	| "del"		{ $$ = mk_op("&part;"); }
+	| "grad"	{ $$ = mk_op("&nabla;"); }
+	| "+-"		{ $$ = mk_op("&pm;"); }
+	| "O/"		{ $$ = mk_op("&empty;"); }
+	| "oo"		{ $$ = mk_op("&infin;"); }
+	| "aleph"	{ $$ = mk_op("&aleph;"); }
+	| "..."		{ $$ = mk_op("&hellip;"); }
+	| ":."		{ $$ = mk_op("&therefore;"); }
+	| "/_"		{ $$ = mk_op("&angle;"); }
+	| "/_\\"	{ $$ = mk_op("&xutri;"); }
+	| "'"		{ $$ = mk_op("&prime;"); }
+	| "tilde"	{ $$ = mk_op("~"); }
+	| "\\ "		{ $$ = mk_op("&nbsp;"); }
+	| "frown"	{ $$ = mk_op("&frown;"); }
+	| "quad"	{ $$ = mk_op("&nbsp;&nbsp;"); }
+	| "qquad"	{ $$ = mk_op("&nbsp;&nbsp;&nbsp;&nbsp;"); }
+	| "cdots"	{ $$ = mk_op("&ctdot;"); }
+	| "vdots"	{ $$ = mk_op("&vellip;"); }
+	| "ddots"	{ $$ = mk_op("&dtdot;"); }
+	| "diamond"	{ $$ = mk_op("&diamond;"); }
+	| "square"	{ $$ = mk_op("&square;"); }
+	| "|__"		{ $$ = mk_op("&lfloor;"); }
+	| "__|"		{ $$ = mk_op("&rfloor;"); }
+	| "|~"		{ $$ = mk_op("&lceil;"); }
+	| "~|"		{ $$ = mk_op("&rceil;"); }
+	| "CC"		{ $$ = mk_id("&Copf;"); }
+	| "NN"		{ $$ = mk_id("&Nopf;"); }
+	| "QQ"		{ $$ = mk_id("&Qopf;"); }
+	| "RR"		{ $$ = mk_id("&Ropf;"); }
+	| "ZZ"		{ $$ = mk_id("&Zopf;"); }
 
-Right 		= ":}"		{ $$ = mk_node(NODE_RAW, ""); }
-		| ":)"		{ $$ = mk_node(NODE_RAW, "&rang;"); }
-		| ">>"		{ $$ = mk_node(NODE_RAW, "&rang;"); }
-		| ")"		{ $$ = mk_node(NODE_RAW, ")"); }
-		| "]"		{ $$ = mk_node(NODE_RAW, "]"); }
-		| "}"		{ $$ = mk_node(NODE_RAW, RCURLY); }
+Arrow	= "uarr"	{ $$ = mk_op("&uarr;"); }
+	| "darr"	{ $$ = mk_op("&darr;"); }
+	| "rarr"	{ $$ = mk_op("&rarr;"); }
+	| "->"		{ $$ = mk_op("&rarr;"); }
+	| "|->"		{ $$ = mk_op("&map;"); }
+	| "larr"	{ $$ = mk_op("&larr;"); }
+	| "harr"	{ $$ = mk_op("&harr;"); }
+	| "rArr"	{ $$ = mk_op("&rArr;"); }
+	| "lArr"	{ $$ = mk_op("&lArr;"); }
+	| "hArr"	{ $$ = mk_op("&hArr;"); }
+	| ">->"		{ $$ = mk_op("&rarrtl;"); }
+	| "->>"		{ $$ = mk_op("&Rarr;"); }
+	| ">->>"	{ $$ = mk_op("&Rarrtl;"); }
 
-Operation	= "+"		{ $$ = mk_op("+"); }
-		| "!"		{ $$ = mk_op("!"); }
-		| "-:"		{ $$ = mk_op("&divide;"); }
-		| "-"		{ $$ = mk_op("&minus;"); }
-		| "***"		{ $$ = mk_op("&Star;"); }		
-		| "**"		{ $$ = mk_op("&lowast;"); }
-		| "*"		{ $$ = mk_op("&sdot;"); }
-		| "//"		{ $$ = mk_op("/"); }
-		| "\\\\"	{ $$ = mk_op("\\"); }
-		| "xx"		{ $$ = mk_op("&times;"); }
-		| "@"		{ $$ = mk_op("&compfn;"); }
-		| "o+"		{ $$ = mk_op("&oplus;"); }
-		| "ox"		{ $$ = mk_op("&otimes;"); }
-		| "o."		{ $$ = mk_op("&odot;"); }
-		| "^^"		{ $$ = mk_op("&wedge;"); }
-		| "vv"		{ $$ = mk_op("&vee;"); }
-		| "nn"		{ $$ = mk_op("&cap;"); }
-		| "uu"		{ $$ = mk_op("&cup;"); }
+SPECIAL	= "dx"
+	| "dy"
+	| "dz"
+	| "dt"
+	| "f"
+	| "g"
 
-Unders		= "sum"		{ $$ = mk_underover("&Sigma;"); }
-		| "prod"	{ $$ = mk_underover("&Pi;"); }
-		| "^^^"		{ $$ = mk_underover("&Wedge;"); }
-		| "vvv"		{ $$ = mk_underover("&Vee;"); }
-		| "nnn"		{ $$ = mk_underover("&Intersection;"); }
-		| "uuu"		{ $$ = mk_underover("&Union;"); }
-		| "lim"		{ $$ = mk_underover("lim"); }
-		| "Lim"		{ $$ = mk_underover("Lim"); }
-		| "min"		{ $$ = mk_underover("min"); }
-		| "max"		{ $$ = mk_underover("max"); }
+GREEK	= "alpha"
+	| "beta"
+	| "chi"
+	| "delta"
+	| "Delta"
+	| "epsi"
+	| "varepsilon"
+	| "eta"
+	| "gamma"
+	| "Gamma"
+	| "iota"
+	| "kappa"
+	| "lambda"
+	| "Lambda"
+	| "lamda"
+	| "Lamda"
+	| "mu"
+	| "nu"
+	| "omega"
+	| "Omega"
+	| "phi"
+	| "varphi"
+	| "Phi"
+	| "pi"
+	| "Pi"
+	| "psi"
+	| "Psi"
+	| "rho"
+	| "sigma"
+	| "Sigma"
+	| "tau"
+	| "theta"
+	| "varthetaut"
+	| "Theta"
+	| "upsilon"
+	| "xi"
+	| "Xi"
+	| "zeta"
 
-Relation	= "="		{ $$ = mk_op("="); }
-		| "!="		{ $$ = mk_op("&NotEqual;"); }
-		| ":="		{ $$ = mk_op("&Assign;"); }
-		| "<="		{ $$ = mk_op("&leq;"); }
-		| "<"		{ $$ = mk_op("&lt;"); }
-		| ">="		{ $$ = mk_op("&geq;"); }
-		| ">"		{ $$ = mk_op("&gt;"); }
-		| "-<"		{ $$ = mk_op("&Precedes;"); }
-		| ">-"		{ $$ = mk_op("&Succeeds;"); }
-		| "in"		{ $$ = mk_op("&in;"); }
-		| "!in"		{ $$ = mk_op("&notin;"); }
-		| "sub"		{ $$ = mk_op("&sub;"); }
-		| "sup"		{ $$ = mk_op("&sup;"); }
-		| "sube"	{ $$ = mk_op("&sube;"); }
-		| "supe"	{ $$ = mk_op("&supe;"); }
-		| "-="		{ $$ = mk_op("&Congruent;"); }
-		| "~="		{ $$ = mk_op("&backcong;"); }
-		| "~~"		{ $$ = mk_op("&approx;"); }
-		| "prop"	{ $$ = mk_op("&prop;"); }
+STD	= "sin"
+	| "cos"
+	| "tan"
+	| "sinh"
+	| "cosh"
+	| "tanh"
+	| "cot"
+	| "sec"
+	| "csc"
+	| "arcsin"
+	| "arccos"
+	| "arctan"
+	| "coth"
+	| "sech"
+	| "csch"
+	| "exp"
+	| "log"
+	| "ln"
+	| "det"
+	| "dim"
+	| "mod"
+	| "gcd"
+	| "lcm"
+	| "lub"
+	| "glb"
 
-Logic 		= "and"		{ $$ = mk_op("and"); }
-		| "or"		{ $$ = mk_op("or"); }
-		| "not"		{ $$ = mk_op("&not;"); }
-		| "=>"		{ $$ = mk_op("&Implies;"); }
-		| "if"		{ $$ = mk_op("if"); }
-		| "<=>"		{ $$ = mk_op("&iff;"); }
-		| "AA"		{ $$ = mk_op("&ForAll;"); }
-		| "EE"		{ $$ = mk_op("&Exists;"); }
-		| "_|_"		{ $$ = mk_op("&UpTee;"); }
-		| "TT"		{ $$ = mk_op("&DownTee;"); }
-		| "|--"		{ $$ = mk_op("&RightTee;"); }
-		| "|=="		{ $$ = mk_op("&DoubleRightTee;"); }
-
-Misc		= "int"		{ $$ = mk_op("&int;"); }
-	        | "oint"	{ $$ = mk_op("&oint;"); }
-	        | "del"		{ $$ = mk_op("&part;"); }
-	        | "grad"	{ $$ = mk_op("&nabla;"); }
-	        | "+-"		{ $$ = mk_op("&pm;"); }
-	        | "O/"		{ $$ = mk_op("&empty;"); }
-	        | "oo"		{ $$ = mk_op("&infin;"); }
-	        | "aleph"	{ $$ = mk_op("&aleph;"); }
-	        | "..."		{ $$ = mk_op("&hellip;"); }
-	        | ":."		{ $$ = mk_op("&therefore;"); }
-	        | "/_"		{ $$ = mk_op("&angle;"); }
-	        | "/_\\"	{ $$ = mk_op("&xutri;"); }
-	        | "'"		{ $$ = mk_op("&prime;"); }
-	        | "|...|"	{ $$ = mk_op("|&hellip;|"); }
-	        | "|cdots|"	{ $$ = mk_op("|&ctdot;"); }
-	        | "vdots"	{ $$ = mk_op("&vellip;"); }
-	        | "ddots"	{ $$ = mk_op("&dtdot;"); }
-	        | "|\\ |"	{ $$ = mk_op("|&nbsp;|"); }
-	        | "|quad|"	{ $$ = mk_op("|&nbsp;&nbsp);|"); }
-	        | "diamond"	{ $$ = mk_op("&diamond;"); }
-	        | "square"	{ $$ = mk_op("&square;"); }
-	        | "|__"		{ $$ = mk_op("&lfloor;"); }
-	        | "__|"		{ $$ = mk_op("&rfloor;"); }
-	        | "|~"		{ $$ = mk_op("&lceil;"); }
-	        | "~|"		{ $$ = mk_op("&rceil;"); }
-	        | "CC"		{ $$ = mk_identifier("&Copf;"); }
-	        | "NN"		{ $$ = mk_identifier("&Nopf;"); }
-	        | "QQ"		{ $$ = mk_identifier("&Qopf;"); }
-	        | "RR"		{ $$ = mk_identifier("&Ropf;"); }
-	        | "ZZ"		{ $$ = mk_identifier("&Zopf;"); }
-
-Arrow		= "uarr"	{ $$ = mk_op("&uarr;"); }
-		| "darr"	{ $$ = mk_op("&darr;"); }
-		| "rarr"	{ $$ = mk_op("&rarr;"); }
-		| "->"		{ $$ = mk_op("&rarr;"); }
-		| "|->"		{ $$ = mk_op("&map;"); }
-		| "larr"	{ $$ = mk_op("&larr;"); }
-		| "harr"	{ $$ = mk_op("&harr;"); }
-		| "rArr"	{ $$ = mk_op("&rArr;"); }
-		| "lArr"	{ $$ = mk_op("&lArr;"); }
-		| "hArr"	{ $$ = mk_op("&hArr;"); }
-		| ">->"		{ $$ = mk_op("&rarrtl;"); }
-		| "->>"		{ $$ = mk_op("&Rarr;"); }
-		| ">->>"	{ $$ = mk_op("&Rarrtl;"); }
-
-SPECIAL		= "dx"
-		| "dy"
-		| "dz"
-		| "dt"
-		| "f"
-		| "g"
-
-GREEK		= "alpha"
-		| "beta"
-		| "chi"
-		| "delta"
-		| "Delta"
-		| "epsi"
-		| "varepsilon"
-		| "eta"
-		| "gamma"
-		| "Gamma"
-		| "iota"
-		| "kappa"
-		| "lambda"
-		| "Lambda"
-		| "lamda"
-		| "Lamda"
-		| "mu"
-		| "nu"
-		| "omega"
-		| "Omega"
-		| "phi"
-		| "varphi"
-		| "Phi"
-		| "pi"
-		| "Pi"
-		| "psi"
-		| "Psi"
-		| "rho"
-		| "sigma"
-		| "Sigma"
-		| "tau"
-		| "theta"
-		| "varthetaut"
-		| "Theta"
-		| "upsilon"
-		| "xi"
-		| "Xi"
-		| "zeta"
-
-STANDARD	= "sin"
-		| "cos"
-		| "tan"
-		| "sinh"
-		| "cosh"
-		| "tanh"
-		| "cot"
-		| "sec"
-		| "csc"
-		| "log"
-		| "ln"
-		| "det"
-		| "dim"
-		| "mod"
-		| "gcd"
-		| "lcm"
-		| "lub"
-		| "glb"
-
-IDENTIFIER	= [a-zA-Z]
-NUMBER		= '-'? [0-9]+ ('.' [0-9]+)?
--		= [ \t]*
-EOF		= "\n" | !.
+ID	= [a-zA-Z]
+NUMBER	= '-'? [0-9]+ ('.' [0-9]+)?
+-	= [ \t]*
+EOF	= "\n" | !.

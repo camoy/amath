@@ -3,6 +3,12 @@
 `amath` is a parser which converts [AsciiMath] to [MathML]. It uses the
 [greg parser generator][greg].
 
+## Usage
+
+The program reads AsciiMath from stdin and outputs MathML to stdout.
+
+	echo "x^2 + y^2 = z^2" | amath
+
 ## Installing
 
 Use `make` to build and install `amath` and the shared library `libamath`.
@@ -17,12 +23,6 @@ The unit tests can also be run from `make`.
 The tests can be checked for memory leaks.
 
 	make memory
-
-## Usage
-
-The program reads AsciiMath from stdin and outputs MathML to stdout.
-
-	echo "x^2 + y^2 = z^2" | amath
 
 ## Terms
 

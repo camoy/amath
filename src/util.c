@@ -19,6 +19,13 @@ struct node *mk_node(enum node_t type, char *str)
 	return n;
 }
 
+struct node *mk_str(char *str)
+{
+	struct node *n = mk_empty(NODE_RAW);
+	n->text = strdup(str);
+	return n;
+}
+
 void free_node(struct node *n)
 {
 	if (n->type == NODE_GROUP && n->inner != n->text) {
@@ -81,7 +88,7 @@ void inner(struct node *n)
 MK_FN(number, NODE_IDENTIFIER, "<mn>%s</mn>")
 MK_FN(op, NODE_IDENTIFIER, "<mo>%s</mo>")
 MK_FN(greek, NODE_IDENTIFIER, "<mi>&%s;</mi>")
-MK_FN(identifier, NODE_IDENTIFIER, "<mi>%s</mi>")
+MK_FN(id, NODE_IDENTIFIER, "<mi>%s</mi>")
 MK_FN(underover, NODE_UNDEROVER, "<mo>%s</mo>")
 
 /* unary functions */
@@ -133,7 +140,7 @@ struct node *font(struct node *s0, const char *font)
 		return n; \
 	} \
 
-MK_BIN_FN(fraction, NODE_SIMPLE, "<mfrac>%s%s</mfrac>")
+MK_BIN_FN(frac, NODE_SIMPLE, "<mfrac>%s%s</mfrac>")
 MK_BIN_FN(root, NODE_SIMPLE, "<mroot>%s%s</mroot>")
 MK_BIN_FN(stackrel, NODE_SIMPLE, "<mover>%s%s</mover>")
 MK_BIN_FN(ubrace, NODE_SIMPLE, "<munder><munder>%s<mo>&#x23DF;</mo></munder>%s</munder>")
@@ -192,25 +199,28 @@ struct node *mk_ter(struct node *s0, struct node *s1, struct node *s2)
 
 /* matrix functions */
 
-void matrix(struct node *l, struct node *n, struct node *r)
+struct node *matrix(struct node *l, struct node *s0, struct node *r)
 {
-	char *str_o = n->text;
-	asprintf(&n->text, "<mrow><mo>%s</mo><mtable>%s</mtable><mo>%s</mo></mrow>", l->text, n->text, r->text);
+	struct node *n = mk_empty(NODE_SIMPLE);
+	asprintf(&n->text, "<mrow><mo>%s</mo><mtable>%s</mtable><mo>%s</mo></mrow>", l->text, s0->text, r->text);
 	free_node(l);
+	free_node(s0);
 	free_node(r);
-	free(str_o);
+	return n;
 }
 
-void row(struct node *n)
+struct node *row(struct node *s0)
 {
-	char *str_o = n->text;
-	asprintf(&n->text, "<mtr>%s</mtr>", n->text);
-	free(str_o);
+	struct node *n = mk_empty(NODE_SIMPLE);
+	asprintf(&n->text, "<mtr>%s</mtr>", s0->text);
+	free_node(s0);
+	return n;
 }
 
-void cell(struct node *n)
+struct node *cell(struct node *s0)
 {
-	char *str_o = n->text;
-	asprintf(&n->text, "<mtd>%s</mtd>", n->text);
-	free(str_o);
+	struct node *n = mk_empty(NODE_SIMPLE);
+	asprintf(&n->text, "<mtd>%s</mtd>", s0->text);
+	free_node(s0);
+	return n;
 }
