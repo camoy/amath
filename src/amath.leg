@@ -24,10 +24,10 @@ Start	= e0:Expr EOF	{ ((struct greg_data*) G->data)->result->text = strdup(e0->t
 	| < .+ > EOF	{ ((struct greg_data*) G->data)->result->text = merror(yytext); }
 
 Const	= < NUMBER >	{ $$ = mk_number(yytext); }
-	| Op
-	| < STD >	{ $$ = mk_op(yytext); }
 	| < GREEK >	{ $$ = mk_greek(yytext); }
+	| < STD >	{ $$ = mk_op(yytext); }
 	| < SPECIAL >	{ $$ = mk_id(yytext); }
+	| Op
 	| < ID >	{ $$ = mk_id(yytext); }
 
 Unary	= "sqrt" - s:Simp	{ $$ = msqrt(s); }
@@ -129,9 +129,8 @@ Symbol	= "+"		{ $$ = mk_op("+"); }
 	| "*"		{ $$ = mk_op("&sdot;"); }
 	| "//"		{ $$ = mk_op("/"); }
 	| "\\\\"	{ $$ = mk_op("\\"); }
-	| "|><"		{ $$ = mk_op("&ltimes;"); }
-	| "><|"		{ $$ = mk_op("&rtimes;"); }
 	| "|><|"	{ $$ = mk_op("&bowtie;"); }
+	| "|><"		{ $$ = mk_op("&ltimes;"); }
 	| "xx"		{ $$ = mk_op("&times;"); }
 	| "@"		{ $$ = mk_op("&compfn;"); }
 	| "o+"		{ $$ = mk_op("&oplus;"); }
@@ -156,20 +155,21 @@ Unders	= "sum"		{ $$ = mk_underover("&Sigma;"); }
 Rel	= "="		{ $$ = mk_op("="); }
 	| "!="		{ $$ = mk_op("&NotEqual;"); }
 	| ":="		{ $$ = mk_op("&Assign;"); }
+	| "-<="		{ $$ = mk_op("&PrecedesEqual;"); }
+	| "-<"		{ $$ = mk_op("&Precedes;"); }
 	| "<="		{ $$ = mk_op("&leq;"); }
 	| "<"		{ $$ = mk_op("&lt;"); }
+	| "><|"		{ $$ = mk_op("&rtimes;"); }
 	| ">="		{ $$ = mk_op("&geq;"); }
-	| ">"		{ $$ = mk_op("&gt;"); }
-	| "-<"		{ $$ = mk_op("&Precedes;"); }
-	| ">-"		{ $$ = mk_op("&Succeeds;"); }
-	| "-<="		{ $$ = mk_op("&PrecedesEqual;"); }
 	| ">-="		{ $$ = mk_op("&SucceedsEqual;"); }
+	| ">-"		{ $$ = mk_op("&Succeeds;"); }
+	| ">"		{ $$ = mk_op("&gt;"); }
 	| "in"		{ $$ = mk_op("&in;"); }
 	| "!in"		{ $$ = mk_op("&notin;"); }
-	| "sub"		{ $$ = mk_op("&sub;"); }
-	| "sup"		{ $$ = mk_op("&sup;"); }
 	| "sube"	{ $$ = mk_op("&sube;"); }
+	| "sub"		{ $$ = mk_op("&sub;"); }
 	| "supe"	{ $$ = mk_op("&supe;"); }
+	| "sup"		{ $$ = mk_op("&sup;"); }
 	| "-="		{ $$ = mk_op("&Congruent;"); }
 	| "~="		{ $$ = mk_op("&backcong;"); }
 	| "~~"		{ $$ = mk_op("&approx;"); }
@@ -224,16 +224,16 @@ Misc	= "int"		{ $$ = mk_op("&int;"); }
 Arrow	= "uarr"	{ $$ = mk_op("&uarr;"); }
 	| "darr"	{ $$ = mk_op("&darr;"); }
 	| "rarr"	{ $$ = mk_op("&rarr;"); }
-	| "->"		{ $$ = mk_op("&rarr;"); }
 	| "|->"		{ $$ = mk_op("&map;"); }
 	| "larr"	{ $$ = mk_op("&larr;"); }
 	| "harr"	{ $$ = mk_op("&harr;"); }
 	| "rArr"	{ $$ = mk_op("&rArr;"); }
 	| "lArr"	{ $$ = mk_op("&lArr;"); }
 	| "hArr"	{ $$ = mk_op("&hArr;"); }
+	| ">->>"	{ $$ = mk_op("&Rarrtl;"); }
 	| ">->"		{ $$ = mk_op("&rarrtl;"); }
 	| "->>"		{ $$ = mk_op("&Rarr;"); }
-	| ">->>"	{ $$ = mk_op("&Rarrtl;"); }
+	| "->"		{ $$ = mk_op("&rarr;"); }
 
 SPECIAL	= "dx"
 	| "dy"
