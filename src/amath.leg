@@ -34,6 +34,7 @@ Unary	= "sqrt" - s:Simp	{ $$ = msqrt(s); }
 	| "text" - s:Simp	{ $$ = mtext(s); }
 	| "ul" - s:Simp		{ $$ = ul(s); }
 	| "cancel" - s:Simp	{ $$ = cancel(s); }
+	| "," - s:Simp		{ $$ = mk_concat(mk_op(","), s); }
 	| Accent
 	| Font
 
@@ -44,32 +45,44 @@ Binary	= "frac" - s0:Simp - s1:Simp		{ $$ = mk_frac(s0, s1); }
 	| "ubrace" - s0:Simp - '_' - s1:Simp	{ $$ = mk_ubrace(s0, s1); }
 	| "obrace" - s0:Simp - '^' - s1:Simp	{ $$ = mk_obrace(s0, s1); }
 
-Simp	= Matrix
+SimpB	= Matrix
 	| Group
 	| Binary
 	| Unary
 	| Text
 	| Const
 
-Int	= s0:Simp - '/' - s1:Simp			{ $$ = mk_frac(s0, s1); }
+Simp	= '-' s0:Simp				{ $$ = mk_group(mk_str(""), mk_concat(mk_op("-"), s0), mk_str("")); }
+	| SimpB
+
+IntB	= s0:Simp - '/' - s1:Simp			{ $$ = mk_frac(s0, s1); }
 	| s0:Simp - '_' - s1:Simp - '^' - s2:Simp	{ $$ = mk_ter(s0, s1, s2); }
 	| s0:Simp - '_' - s1:Simp			{ $$ = mk_sub(s0, s1); }
 	| s0:Simp - '^' - s1:Simp			{ $$ = mk_sup(s0, s1); }
+
+Int	= IntB
+	| SimpB
+	| < !EOF . >					{ $$ = mk_op(yytext); }
+
+Int0	= IntB
 	| Simp
 	| < !EOF . >					{ $$ = mk_op(yytext); }
 
 IntG	= !Right Int
-IntM	= !',' IntG
+IntG0	= !Right Int0
 
-Expr	= - c0:Int
+IntM	= !',' IntG
+IntM0	= !',' IntG0
+
+Expr	= - c0:Int0
 		(- ci:Int -	{ c0 = mk_concat(c0, ci); }
 		)* -		{ $$ = c0; }
 
-ExprG	= - c0:IntG
+ExprG	= - c0:IntG0
 		(- ci:IntG -	{ c0 = mk_concat(c0, ci); }
 		)* -		{ $$ = c0; }
 
-ExprM	= - c0:IntM
+ExprM	= - c0:IntM0
 		(- ci:IntM -	{ c0 = mk_concat(c0, ci); }
 		)* -		{ $$ = c0; }
 
@@ -309,6 +322,6 @@ STD	= "sin"
 	| "glb"
 
 ID	= [a-zA-Z]
-NUMBER	= '-'? [0-9]+ ('.' [0-9]+)?
+NUMBER	= [0-9]+ ('.' [0-9]+)?
 -	= [ \t]*
 EOF	= "\n" | !.

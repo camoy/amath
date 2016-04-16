@@ -47,8 +47,11 @@ struct node *mk_concat(struct node *s0, struct node *s1)
 struct node *mk_group(struct node *l, struct node *e, struct node *r)
 {
 	struct node *n = mk_empty(NODE_GROUP);
-	asprintf(&n->text, "<mrow><mo>%s</mo>%s<mo>%s</mo></mrow>", l->text, e->text, r->text);
 	asprintf(&n->inner, "<mrow>%s</mrow>", e->text);
+	if (strcmp(l->text, ""))
+		asprintf(&n->text, "<mrow><mo>%s</mo>%s<mo>%s</mo></mrow>", l->text, e->text, r->text);
+	else
+		n->text = strdup(n->inner);
 	free_node(l);
 	free_node(e);
 	free_node(r);
