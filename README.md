@@ -5,9 +5,13 @@
 
 ## Usage
 
-The program reads AsciiMath from stdin and outputs MathML to stdout.
+AsciiMath is read and the equivalent MathML is printed.
 
 	echo "x^2 + y^2 = z^2" | amath
+
+The default behavior does not output any XML namespace.
+
+* `--xml-ns` print with MathML XML namespace
 
 ## Installing
 
@@ -26,9 +30,8 @@ The tests can be checked for memory leaks.
 
 ## Terms
 
-This software is in the public domain. Where that dedication is not
-recognized, redistribution and use in source and binary forms, with or
-without modification, are permitted.
+This software is in the public domain. Anyone is free to use and
+distribute this software for any purpose.
 
 `amath` is maintained by Cameron Moy.
 
