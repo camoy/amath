@@ -87,7 +87,6 @@ void inner(struct node *n)
 
 MK_FN(number, NODE_IDENTIFIER, "<mn>%s</mn>")
 MK_FN(op, NODE_IDENTIFIER, "<mo>%s</mo>")
-MK_FN(greek, NODE_IDENTIFIER, "<mi>&%s;</mi>")
 MK_FN(id, NODE_IDENTIFIER, "<mi>%s</mi>")
 MK_FN(underover, NODE_UNDEROVER, "<mo>%s</mo>")
 
@@ -143,8 +142,8 @@ struct node *font(struct node *s0, const char *font)
 MK_BIN_FN(frac, NODE_SIMPLE, "<mfrac>%s%s</mfrac>")
 MK_BIN_FN(root, NODE_SIMPLE, "<mroot>%s%s</mroot>")
 MK_BIN_FN(stackrel, NODE_SIMPLE, "<mover>%s%s</mover>")
-MK_BIN_FN(ubrace, NODE_SIMPLE, "<munder><munder>%s<mo>&#x23DF;</mo></munder>%s</munder>")
-MK_BIN_FN(obrace, NODE_SIMPLE, "<mover><mover>%s<mo>&#x23DE;</mo></mover>%s</mover>")
+MK_BIN_FN(ubrace, NODE_SIMPLE, "<munder><munder>%s<mo>⏟</mo></munder>%s</munder>")
+MK_BIN_FN(obrace, NODE_SIMPLE, "<mover><mover>%s<mo>⏞</mo></mover>%s</mover>")
 
 /* special binary functions */
 

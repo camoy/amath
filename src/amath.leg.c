@@ -346,201 +346,474 @@ YY_RULE(int) yy_ID(GREG *G); /* 10 */
 YY_RULE(int) yy_Op(GREG *G); /* 9 */
 YY_RULE(int) yy_SPECIAL(GREG *G); /* 8 */
 YY_RULE(int) yy_STD(GREG *G); /* 7 */
-YY_RULE(int) yy_GREEK(GREG *G); /* 6 */
+YY_RULE(int) yy_Greek(GREG *G); /* 6 */
 YY_RULE(int) yy_NUMBER(GREG *G); /* 5 */
 YY_RULE(int) yy_Const(GREG *G); /* 4 */
 YY_RULE(int) yy_EOF(GREG *G); /* 3 */
 YY_RULE(int) yy_Expr(GREG *G); /* 2 */
 YY_RULE(int) yy_Start(GREG *G); /* 1 */
 
+YY_ACTION(void) yy_39_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_39_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("ζ"); ;
+}
+YY_ACTION(void) yy_38_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_38_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("Ξ"); ;
+}
+YY_ACTION(void) yy_37_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_37_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("ξ"); ;
+}
+YY_ACTION(void) yy_36_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_36_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("υ"); ;
+}
+YY_ACTION(void) yy_35_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_35_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("Θ"); ;
+}
+YY_ACTION(void) yy_34_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_34_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("ϑ"); ;
+}
+YY_ACTION(void) yy_33_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_33_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("θ"); ;
+}
+YY_ACTION(void) yy_32_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_32_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("τ"); ;
+}
+YY_ACTION(void) yy_31_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_31_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("Σ"); ;
+}
+YY_ACTION(void) yy_30_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_30_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("σ"); ;
+}
+YY_ACTION(void) yy_29_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_29_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("ρ"); ;
+}
+YY_ACTION(void) yy_28_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_28_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("Ψ"); ;
+}
+YY_ACTION(void) yy_27_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_27_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("ψ"); ;
+}
+YY_ACTION(void) yy_26_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_26_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("Π"); ;
+}
+YY_ACTION(void) yy_25_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_25_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("π"); ;
+}
+YY_ACTION(void) yy_24_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_24_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("Φ"); ;
+}
+YY_ACTION(void) yy_23_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_23_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("φ"); ;
+}
+YY_ACTION(void) yy_22_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_22_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("φ"); ;
+}
+YY_ACTION(void) yy_21_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_21_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("Ω"); ;
+}
+YY_ACTION(void) yy_20_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_20_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("ω"); ;
+}
+YY_ACTION(void) yy_19_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_19_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("ν"); ;
+}
+YY_ACTION(void) yy_18_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_18_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("μ"); ;
+}
+YY_ACTION(void) yy_17_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_17_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("Λ"); ;
+}
+YY_ACTION(void) yy_16_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_16_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("λ"); ;
+}
+YY_ACTION(void) yy_15_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_15_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("Λ"); ;
+}
+YY_ACTION(void) yy_14_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_14_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("λ"); ;
+}
+YY_ACTION(void) yy_13_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_13_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("κ"); ;
+}
+YY_ACTION(void) yy_12_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_12_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("ι"); ;
+}
+YY_ACTION(void) yy_11_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_11_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("Γ"); ;
+}
+YY_ACTION(void) yy_10_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_10_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("γ"); ;
+}
+YY_ACTION(void) yy_9_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_9_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("η"); ;
+}
+YY_ACTION(void) yy_8_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_8_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("ε"); ;
+}
+YY_ACTION(void) yy_7_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_7_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("ε"); ;
+}
+YY_ACTION(void) yy_6_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_6_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("ε"); ;
+}
+YY_ACTION(void) yy_5_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_5_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("Δ"); ;
+}
+YY_ACTION(void) yy_4_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_4_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("δ"); ;
+}
+YY_ACTION(void) yy_3_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_3_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("χ"); ;
+}
+YY_ACTION(void) yy_2_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_2_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("β"); ;
+}
+YY_ACTION(void) yy_1_Greek(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_1_Greek"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\"); }\n"));
+  yy = mk_id("α"); ;
+}
 YY_ACTION(void) yy_13_Arrow(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_13_Arrow"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&rarr;\"); }\n"));
-  yy = mk_op("&rarr;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("→"); ;
 }
 YY_ACTION(void) yy_12_Arrow(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_12_Arrow"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&Rarr;\"); }\n"));
-  yy = mk_op("&Rarr;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("↠"); ;
 }
 YY_ACTION(void) yy_11_Arrow(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_11_Arrow"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&rarrtl;\"); }\n"));
-  yy = mk_op("&rarrtl;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("↣"); ;
 }
 YY_ACTION(void) yy_10_Arrow(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_10_Arrow"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&Rarrtl;\"); }\n"));
-  yy = mk_op("&Rarrtl;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⤖"); ;
 }
 YY_ACTION(void) yy_9_Arrow(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_9_Arrow"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&hArr;\"); }\n"));
-  yy = mk_op("&hArr;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⇔"); ;
 }
 YY_ACTION(void) yy_8_Arrow(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_8_Arrow"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&lArr;\"); }\n"));
-  yy = mk_op("&lArr;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⇐"); ;
 }
 YY_ACTION(void) yy_7_Arrow(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_7_Arrow"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&rArr;\"); }\n"));
-  yy = mk_op("&rArr;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⇒"); ;
 }
 YY_ACTION(void) yy_6_Arrow(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_6_Arrow"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&harr;\"); }\n"));
-  yy = mk_op("&harr;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("↔"); ;
 }
 YY_ACTION(void) yy_5_Arrow(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_5_Arrow"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&larr;\"); }\n"));
-  yy = mk_op("&larr;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("←"); ;
 }
 YY_ACTION(void) yy_4_Arrow(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_4_Arrow"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&map;\"); }\n"));
-  yy = mk_op("&map;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("↦"); ;
 }
 YY_ACTION(void) yy_3_Arrow(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_3_Arrow"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&rarr;\"); }\n"));
-  yy = mk_op("&rarr;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("→"); ;
 }
 YY_ACTION(void) yy_2_Arrow(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_2_Arrow"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&darr;\"); }\n"));
-  yy = mk_op("&darr;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("↓"); ;
 }
 YY_ACTION(void) yy_1_Arrow(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_1_Arrow"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&uarr;\"); }\n"));
-  yy = mk_op("&uarr;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("↑"); ;
 }
 YY_ACTION(void) yy_32_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_32_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_id(\"&Zopf;\"); }\n"));
-  yy = mk_id("&Zopf;"); ;
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\377\"); }\n"));
+  yy = mk_id("ℤ"); ;
 }
 YY_ACTION(void) yy_31_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_31_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_id(\"&Ropf;\"); }\n"));
-  yy = mk_id("&Ropf;"); ;
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\377\"); }\n"));
+  yy = mk_id("ℝ"); ;
 }
 YY_ACTION(void) yy_30_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_30_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_id(\"&Qopf;\"); }\n"));
-  yy = mk_id("&Qopf;"); ;
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\377\"); }\n"));
+  yy = mk_id("ℚ"); ;
 }
 YY_ACTION(void) yy_29_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_29_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_id(\"&Nopf;\"); }\n"));
-  yy = mk_id("&Nopf;"); ;
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\377\"); }\n"));
+  yy = mk_id("ℕ"); ;
 }
 YY_ACTION(void) yy_28_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_28_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_id(\"&Copf;\"); }\n"));
-  yy = mk_id("&Copf;"); ;
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\377\"); }\n"));
+  yy = mk_id("ℂ"); ;
 }
 YY_ACTION(void) yy_27_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_27_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&rceil;\"); }\n"));
-  yy = mk_op("&rceil;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⌉"); ;
 }
 YY_ACTION(void) yy_26_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_26_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&lceil;\"); }\n"));
-  yy = mk_op("&lceil;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⌈"); ;
 }
 YY_ACTION(void) yy_25_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_25_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&rfloor;\"); }\n"));
-  yy = mk_op("&rfloor;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⌋"); ;
 }
 YY_ACTION(void) yy_24_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_24_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&lfloor;\"); }\n"));
-  yy = mk_op("&lfloor;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⌊"); ;
 }
 YY_ACTION(void) yy_23_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_23_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&square;\"); }\n"));
-  yy = mk_op("&square;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("□"); ;
 }
 YY_ACTION(void) yy_22_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_22_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&diamond;\"); }\n"));
-  yy = mk_op("&diamond;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⋄"); ;
 }
 YY_ACTION(void) yy_21_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_21_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&dtdot;\"); }\n"));
-  yy = mk_op("&dtdot;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⋱"); ;
 }
 YY_ACTION(void) yy_20_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_20_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&vellip;\"); }\n"));
-  yy = mk_op("&vellip;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⋮"); ;
 }
 YY_ACTION(void) yy_19_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_19_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&ctdot;\"); }\n"));
-  yy = mk_op("&ctdot;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⋯"); ;
 }
 YY_ACTION(void) yy_18_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
@@ -560,8 +833,8 @@ YY_ACTION(void) yy_16_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY
 {
   yyprintf((stderr, "do yy_16_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&frown;\"); }\n"));
-  yy = mk_op("&frown;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⌢"); ;
 }
 YY_ACTION(void) yy_15_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
@@ -581,141 +854,141 @@ YY_ACTION(void) yy_13_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY
 {
   yyprintf((stderr, "do yy_13_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&prime;\"); }\n"));
-  yy = mk_op("&prime;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("′"); ;
 }
 YY_ACTION(void) yy_12_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_12_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&xutri;\"); }\n"));
-  yy = mk_op("&xutri;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("△"); ;
 }
 YY_ACTION(void) yy_11_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_11_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&angle;\"); }\n"));
-  yy = mk_op("&angle;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("∠"); ;
 }
 YY_ACTION(void) yy_10_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_10_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&therefore;\"); }\n"));
-  yy = mk_op("&therefore;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("∴"); ;
 }
 YY_ACTION(void) yy_9_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_9_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&hellip;\"); }\n"));
-  yy = mk_op("&hellip;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("…"); ;
 }
 YY_ACTION(void) yy_8_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_8_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&aleph;\"); }\n"));
-  yy = mk_op("&aleph;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("ℵ"); ;
 }
 YY_ACTION(void) yy_7_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_7_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&infin;\"); }\n"));
-  yy = mk_op("&infin;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("∞"); ;
 }
 YY_ACTION(void) yy_6_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_6_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&empty;\"); }\n"));
-  yy = mk_op("&empty;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("∅"); ;
 }
 YY_ACTION(void) yy_5_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_5_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&pm;\"); }\n"));
-  yy = mk_op("&pm;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\"); }\n"));
+  yy = mk_op("±"); ;
 }
 YY_ACTION(void) yy_4_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_4_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&nabla;\"); }\n"));
-  yy = mk_op("&nabla;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("∇"); ;
 }
 YY_ACTION(void) yy_3_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_3_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&part;\"); }\n"));
-  yy = mk_op("&part;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("∂"); ;
 }
 YY_ACTION(void) yy_2_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_2_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&oint;\"); }\n"));
-  yy = mk_op("&oint;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("∮"); ;
 }
 YY_ACTION(void) yy_1_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_1_Misc"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&int;\"); }\n"));
-  yy = mk_op("&int;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("∫"); ;
 }
 YY_ACTION(void) yy_12_Logic(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_12_Logic"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&DoubleRightTee;\"); }\n"));
-  yy = mk_op("&DoubleRightTee;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⊨"); ;
 }
 YY_ACTION(void) yy_11_Logic(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_11_Logic"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&RightTee;\"); }\n"));
-  yy = mk_op("&RightTee;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⊢"); ;
 }
 YY_ACTION(void) yy_10_Logic(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_10_Logic"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&DownTee;\"); }\n"));
-  yy = mk_op("&DownTee;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⊤"); ;
 }
 YY_ACTION(void) yy_9_Logic(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_9_Logic"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&UpTee;\"); }\n"));
-  yy = mk_op("&UpTee;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⊥"); ;
 }
 YY_ACTION(void) yy_8_Logic(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_8_Logic"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&Exists;\"); }\n"));
-  yy = mk_op("&Exists;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("∃"); ;
 }
 YY_ACTION(void) yy_7_Logic(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_7_Logic"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&ForAll;\"); }\n"));
-  yy = mk_op("&ForAll;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("∀"); ;
 }
 YY_ACTION(void) yy_6_Logic(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_6_Logic"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&iff;\"); }\n"));
-  yy = mk_op("&iff;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⇔"); ;
 }
 YY_ACTION(void) yy_5_Logic(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
@@ -728,15 +1001,15 @@ YY_ACTION(void) yy_4_Logic(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY
 {
   yyprintf((stderr, "do yy_4_Logic"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&Implies;\"); }\n"));
-  yy = mk_op("&Implies;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⇒"); ;
 }
 YY_ACTION(void) yy_3_Logic(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_3_Logic"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&not;\"); }\n"));
-  yy = mk_op("&not;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\"); }\n"));
+  yy = mk_op("¬"); ;
 }
 YY_ACTION(void) yy_2_Logic(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
@@ -756,71 +1029,71 @@ YY_ACTION(void) yy_22_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_
 {
   yyprintf((stderr, "do yy_22_Rel"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&prop;\"); }\n"));
-  yy = mk_op("&prop;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("∝"); ;
 }
 YY_ACTION(void) yy_21_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_21_Rel"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&approx;\"); }\n"));
-  yy = mk_op("&approx;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("≈"); ;
 }
 YY_ACTION(void) yy_20_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_20_Rel"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&backcong;\"); }\n"));
-  yy = mk_op("&backcong;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("≌"); ;
 }
 YY_ACTION(void) yy_19_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_19_Rel"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&Congruent;\"); }\n"));
-  yy = mk_op("&Congruent;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("≡"); ;
 }
 YY_ACTION(void) yy_18_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_18_Rel"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&sup;\"); }\n"));
-  yy = mk_op("&sup;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⊃"); ;
 }
 YY_ACTION(void) yy_17_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_17_Rel"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&supe;\"); }\n"));
-  yy = mk_op("&supe;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⊇"); ;
 }
 YY_ACTION(void) yy_16_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_16_Rel"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&sub;\"); }\n"));
-  yy = mk_op("&sub;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⊂"); ;
 }
 YY_ACTION(void) yy_15_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_15_Rel"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&sube;\"); }\n"));
-  yy = mk_op("&sube;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⊆"); ;
 }
 YY_ACTION(void) yy_14_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_14_Rel"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&notin;\"); }\n"));
-  yy = mk_op("&notin;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("∉"); ;
 }
 YY_ACTION(void) yy_13_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_13_Rel"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&in;\"); }\n"));
-  yy = mk_op("&in;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("∈"); ;
 }
 YY_ACTION(void) yy_12_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
@@ -833,29 +1106,29 @@ YY_ACTION(void) yy_11_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_
 {
   yyprintf((stderr, "do yy_11_Rel"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&Succeeds;\"); }\n"));
-  yy = mk_op("&Succeeds;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("≥"); ;
 }
 YY_ACTION(void) yy_10_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_10_Rel"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&SucceedsEqual;\"); }\n"));
-  yy = mk_op("&SucceedsEqual;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⪰"); ;
 }
 YY_ACTION(void) yy_9_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_9_Rel"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&geq;\"); }\n"));
-  yy = mk_op("&geq;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("≥"); ;
 }
 YY_ACTION(void) yy_8_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_8_Rel"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&rtimes;\"); }\n"));
-  yy = mk_op("&rtimes;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⋊"); ;
 }
 YY_ACTION(void) yy_7_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
@@ -868,36 +1141,36 @@ YY_ACTION(void) yy_6_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_X
 {
   yyprintf((stderr, "do yy_6_Rel"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&leq;\"); }\n"));
-  yy = mk_op("&leq;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("≤"); ;
 }
 YY_ACTION(void) yy_5_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_5_Rel"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&Precedes;\"); }\n"));
-  yy = mk_op("&Precedes;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("≺"); ;
 }
 YY_ACTION(void) yy_4_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_4_Rel"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&PrecedesEqual;\"); }\n"));
-  yy = mk_op("&PrecedesEqual;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⪯"); ;
 }
 YY_ACTION(void) yy_3_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_3_Rel"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&Assign;\"); }\n"));
-  yy = mk_op("&Assign;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("≔"); ;
 }
 YY_ACTION(void) yy_2_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_2_Rel"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&NotEqual;\"); }\n"));
-  yy = mk_op("&NotEqual;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("≠"); ;
 }
 YY_ACTION(void) yy_1_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
@@ -938,120 +1211,120 @@ YY_ACTION(void) yy_6_Unders(GREG *G, char *yytext, int yyleng, yythunk *thunk, Y
 {
   yyprintf((stderr, "do yy_6_Unders"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_underover(\"&Union;\"); }\n"));
-  yy = mk_underover("&Union;"); ;
+  yyprintf((stderr, "\n  {yy = mk_underover(\"\377\377\377\"); }\n"));
+  yy = mk_underover("⋃"); ;
 }
 YY_ACTION(void) yy_5_Unders(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_5_Unders"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_underover(\"&Intersection;\"); }\n"));
-  yy = mk_underover("&Intersection;"); ;
+  yyprintf((stderr, "\n  {yy = mk_underover(\"\377\377\377\"); }\n"));
+  yy = mk_underover("⋂"); ;
 }
 YY_ACTION(void) yy_4_Unders(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_4_Unders"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_underover(\"&Vee;\"); }\n"));
-  yy = mk_underover("&Vee;"); ;
+  yyprintf((stderr, "\n  {yy = mk_underover(\"\377\377\377\"); }\n"));
+  yy = mk_underover("⋁"); ;
 }
 YY_ACTION(void) yy_3_Unders(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_3_Unders"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_underover(\"&Wedge;\"); }\n"));
-  yy = mk_underover("&Wedge;"); ;
+  yyprintf((stderr, "\n  {yy = mk_underover(\"\377\377\377\"); }\n"));
+  yy = mk_underover("⋀"); ;
 }
 YY_ACTION(void) yy_2_Unders(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_2_Unders"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_underover(\"&Pi;\"); }\n"));
-  yy = mk_underover("&Pi;"); ;
+  yyprintf((stderr, "\n  {yy = mk_underover(\"\377\377\"); }\n"));
+  yy = mk_underover("Π"); ;
 }
 YY_ACTION(void) yy_1_Unders(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_1_Unders"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_underover(\"&Sigma;\"); }\n"));
-  yy = mk_underover("&Sigma;"); ;
+  yyprintf((stderr, "\n  {yy = mk_underover(\"\377\377\"); }\n"));
+  yy = mk_underover("Σ"); ;
 }
 YY_ACTION(void) yy_20_Symbol(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_20_Symbol"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&cup;\"); }\n"));
-  yy = mk_op("&cup;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("∪"); ;
 }
 YY_ACTION(void) yy_19_Symbol(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_19_Symbol"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&cap;\"); }\n"));
-  yy = mk_op("&cap;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("∩"); ;
 }
 YY_ACTION(void) yy_18_Symbol(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_18_Symbol"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&vee;\"); }\n"));
-  yy = mk_op("&vee;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("∨"); ;
 }
 YY_ACTION(void) yy_17_Symbol(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_17_Symbol"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&wedge;\"); }\n"));
-  yy = mk_op("&wedge;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("∧"); ;
 }
 YY_ACTION(void) yy_16_Symbol(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_16_Symbol"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&odot;\"); }\n"));
-  yy = mk_op("&odot;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⊙"); ;
 }
 YY_ACTION(void) yy_15_Symbol(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_15_Symbol"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&otimes;\"); }\n"));
-  yy = mk_op("&otimes;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⊗"); ;
 }
 YY_ACTION(void) yy_14_Symbol(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_14_Symbol"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&oplus;\"); }\n"));
-  yy = mk_op("&oplus;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⊕"); ;
 }
 YY_ACTION(void) yy_13_Symbol(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_13_Symbol"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&compfn;\"); }\n"));
-  yy = mk_op("&compfn;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("∘"); ;
 }
 YY_ACTION(void) yy_12_Symbol(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_12_Symbol"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&times;\"); }\n"));
-  yy = mk_op("&times;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\"); }\n"));
+  yy = mk_op("×"); ;
 }
 YY_ACTION(void) yy_11_Symbol(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_11_Symbol"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&ltimes;\"); }\n"));
-  yy = mk_op("&ltimes;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⋉"); ;
 }
 YY_ACTION(void) yy_10_Symbol(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_10_Symbol"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&bowtie;\"); }\n"));
-  yy = mk_op("&bowtie;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⋈"); ;
 }
 YY_ACTION(void) yy_9_Symbol(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
@@ -1071,36 +1344,36 @@ YY_ACTION(void) yy_7_Symbol(GREG *G, char *yytext, int yyleng, yythunk *thunk, Y
 {
   yyprintf((stderr, "do yy_7_Symbol"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&sdot;\"); }\n"));
-  yy = mk_op("&sdot;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⋅"); ;
 }
 YY_ACTION(void) yy_6_Symbol(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_6_Symbol"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&lowast;\"); }\n"));
-  yy = mk_op("&lowast;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("∗"); ;
 }
 YY_ACTION(void) yy_5_Symbol(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_5_Symbol"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&Star;\"); }\n"));
-  yy = mk_op("&Star;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⋆"); ;
 }
 YY_ACTION(void) yy_4_Symbol(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_4_Symbol"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&minus;\"); }\n"));
-  yy = mk_op("&minus;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("−"); ;
 }
 YY_ACTION(void) yy_3_Symbol(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_3_Symbol"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(\"&divide;\"); }\n"));
-  yy = mk_op("&divide;"); ;
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\"); }\n"));
+  yy = mk_op("÷"); ;
 }
 YY_ACTION(void) yy_2_Symbol(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
@@ -1141,15 +1414,15 @@ YY_ACTION(void) yy_3_Right(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY
 {
   yyprintf((stderr, "do yy_3_Right"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_str(\"&rang;\"); }\n"));
-  yy = mk_str("&rang;"); ;
+  yyprintf((stderr, "\n  {yy = mk_str(\"\377\377\377\"); }\n"));
+  yy = mk_str("⟩"); ;
 }
 YY_ACTION(void) yy_2_Right(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_2_Right"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_str(\"&rang;\"); }\n"));
-  yy = mk_str("&rang;"); ;
+  yyprintf((stderr, "\n  {yy = mk_str(\"\377\377\377\"); }\n"));
+  yy = mk_str("⟩"); ;
 }
 YY_ACTION(void) yy_1_Right(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
@@ -1183,15 +1456,15 @@ YY_ACTION(void) yy_3_Left(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_
 {
   yyprintf((stderr, "do yy_3_Left"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_str(\"&lang;\"); }\n"));
-  yy = mk_str("&lang;"); ;
+  yyprintf((stderr, "\n  {yy = mk_str(\"\377\377\377\"); }\n"));
+  yy = mk_str("⟨"); ;
 }
 YY_ACTION(void) yy_2_Left(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_2_Left"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_str(\"&lang;\"); }\n"));
-  yy = mk_str("&lang;"); ;
+  yyprintf((stderr, "\n  {yy = mk_str(\"\377\377\377\"); }\n"));
+  yy = mk_str("⟨"); ;
 }
 YY_ACTION(void) yy_1_Left(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
@@ -1277,8 +1550,8 @@ YY_ACTION(void) yy_4_Accent(GREG *G, char *yytext, int yyleng, yythunk *thunk, Y
 #define t0 G->val[-1]
   yyprintf((stderr, "do yy_4_Accent"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = accent(t0, \"&rarr;\"); }\n"));
-  yy = accent(t0, "&rarr;"); ;
+  yyprintf((stderr, "\n  {yy = accent(t0, \"\377\377\377\"); }\n"));
+  yy = accent(t0, "→"); ;
 #undef t0
 }
 YY_ACTION(void) yy_3_Accent(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
@@ -1295,8 +1568,8 @@ YY_ACTION(void) yy_2_Accent(GREG *G, char *yytext, int yyleng, yythunk *thunk, Y
 #define t0 G->val[-1]
   yyprintf((stderr, "do yy_2_Accent"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = accent(t0, \"&macr;\"); }\n"));
-  yy = accent(t0, "&macr;"); ;
+  yyprintf((stderr, "\n  {yy = accent(t0, \"\377\377\"); }\n"));
+  yy = accent(t0, "¯"); ;
 #undef t0
 }
 YY_ACTION(void) yy_1_Accent(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
@@ -1662,13 +1935,6 @@ YY_ACTION(void) yy_1_Unary(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY
   yy = msqrt(s); ;
 #undef s
 }
-YY_ACTION(void) yy_5_Const(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
-{
-  yyprintf((stderr, "do yy_5_Const"));
-  yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_id(yytext); }\n"));
-  yy = mk_id(yytext); ;
-}
 YY_ACTION(void) yy_4_Const(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_4_Const"));
@@ -1680,15 +1946,15 @@ YY_ACTION(void) yy_3_Const(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY
 {
   yyprintf((stderr, "do yy_3_Const"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op(yytext); }\n"));
-  yy = mk_op(yytext); ;
+  yyprintf((stderr, "\n  {yy = mk_id(yytext); }\n"));
+  yy = mk_id(yytext); ;
 }
 YY_ACTION(void) yy_2_Const(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_2_Const"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_greek(yytext); }\n"));
-  yy = mk_greek(yytext); ;
+  yyprintf((stderr, "\n  {yy = mk_op(yytext); }\n"));
+  yy = mk_op(yytext); ;
 }
 YY_ACTION(void) yy_1_Const(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
@@ -2903,94 +3169,133 @@ YY_RULE(int) yy_STD(GREG *G)
 
   return 0;
 }
-YY_RULE(int) yy_GREEK(GREG *G)
-{  int yypos0= G->pos, yythunkpos0= G->thunkpos;  yyprintfv((stderr, "%s\n", "GREEK"));
+YY_RULE(int) yy_Greek(GREG *G)
+{  int yypos0= G->pos, yythunkpos0= G->thunkpos;  yyprintfv((stderr, "%s\n", "Greek"));
 
   {  int yypos243= G->pos, yythunkpos243= G->thunkpos;  if (!yymatchString(G, "alpha")) goto l244;
+  yyDo(G, yy_1_Greek, G->begin, G->end, "yy_1_Greek");
   goto l243;
   l244:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "beta")) goto l245;
+  yyDo(G, yy_2_Greek, G->begin, G->end, "yy_2_Greek");
   goto l243;
   l245:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "chi")) goto l246;
+  yyDo(G, yy_3_Greek, G->begin, G->end, "yy_3_Greek");
   goto l243;
   l246:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "delta")) goto l247;
+  yyDo(G, yy_4_Greek, G->begin, G->end, "yy_4_Greek");
   goto l243;
   l247:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "Delta")) goto l248;
+  yyDo(G, yy_5_Greek, G->begin, G->end, "yy_5_Greek");
   goto l243;
   l248:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "epsilon")) goto l249;
+  yyDo(G, yy_6_Greek, G->begin, G->end, "yy_6_Greek");
   goto l243;
   l249:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "epsi")) goto l250;
+  yyDo(G, yy_7_Greek, G->begin, G->end, "yy_7_Greek");
   goto l243;
   l250:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "varepsilon")) goto l251;
+  yyDo(G, yy_8_Greek, G->begin, G->end, "yy_8_Greek");
   goto l243;
   l251:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "eta")) goto l252;
+  yyDo(G, yy_9_Greek, G->begin, G->end, "yy_9_Greek");
   goto l243;
   l252:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "gamma")) goto l253;
+  yyDo(G, yy_10_Greek, G->begin, G->end, "yy_10_Greek");
   goto l243;
   l253:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "Gamma")) goto l254;
+  yyDo(G, yy_11_Greek, G->begin, G->end, "yy_11_Greek");
   goto l243;
   l254:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "iota")) goto l255;
+  yyDo(G, yy_12_Greek, G->begin, G->end, "yy_12_Greek");
   goto l243;
   l255:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "kappa")) goto l256;
+  yyDo(G, yy_13_Greek, G->begin, G->end, "yy_13_Greek");
   goto l243;
   l256:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "lambda")) goto l257;
+  yyDo(G, yy_14_Greek, G->begin, G->end, "yy_14_Greek");
   goto l243;
   l257:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "Lambda")) goto l258;
+  yyDo(G, yy_15_Greek, G->begin, G->end, "yy_15_Greek");
   goto l243;
   l258:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "lamda")) goto l259;
+  yyDo(G, yy_16_Greek, G->begin, G->end, "yy_16_Greek");
   goto l243;
   l259:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "Lamda")) goto l260;
+  yyDo(G, yy_17_Greek, G->begin, G->end, "yy_17_Greek");
   goto l243;
   l260:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "mu")) goto l261;
+  yyDo(G, yy_18_Greek, G->begin, G->end, "yy_18_Greek");
   goto l243;
   l261:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "nu")) goto l262;
+  yyDo(G, yy_19_Greek, G->begin, G->end, "yy_19_Greek");
   goto l243;
   l262:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "omega")) goto l263;
+  yyDo(G, yy_20_Greek, G->begin, G->end, "yy_20_Greek");
   goto l243;
   l263:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "Omega")) goto l264;
+  yyDo(G, yy_21_Greek, G->begin, G->end, "yy_21_Greek");
   goto l243;
   l264:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "phi")) goto l265;
+  yyDo(G, yy_22_Greek, G->begin, G->end, "yy_22_Greek");
   goto l243;
   l265:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "varphi")) goto l266;
+  yyDo(G, yy_23_Greek, G->begin, G->end, "yy_23_Greek");
   goto l243;
   l266:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "Phi")) goto l267;
+  yyDo(G, yy_24_Greek, G->begin, G->end, "yy_24_Greek");
   goto l243;
   l267:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "pi")) goto l268;
+  yyDo(G, yy_25_Greek, G->begin, G->end, "yy_25_Greek");
   goto l243;
   l268:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "Pi")) goto l269;
+  yyDo(G, yy_26_Greek, G->begin, G->end, "yy_26_Greek");
   goto l243;
   l269:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "psi")) goto l270;
+  yyDo(G, yy_27_Greek, G->begin, G->end, "yy_27_Greek");
   goto l243;
   l270:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "Psi")) goto l271;
+  yyDo(G, yy_28_Greek, G->begin, G->end, "yy_28_Greek");
   goto l243;
   l271:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "rho")) goto l272;
+  yyDo(G, yy_29_Greek, G->begin, G->end, "yy_29_Greek");
   goto l243;
   l272:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "sigma")) goto l273;
+  yyDo(G, yy_30_Greek, G->begin, G->end, "yy_30_Greek");
   goto l243;
   l273:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "Sigma")) goto l274;
+  yyDo(G, yy_31_Greek, G->begin, G->end, "yy_31_Greek");
   goto l243;
   l274:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "tau")) goto l275;
+  yyDo(G, yy_32_Greek, G->begin, G->end, "yy_32_Greek");
   goto l243;
   l275:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "theta")) goto l276;
+  yyDo(G, yy_33_Greek, G->begin, G->end, "yy_33_Greek");
   goto l243;
   l276:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "varthetaut")) goto l277;
+  yyDo(G, yy_34_Greek, G->begin, G->end, "yy_34_Greek");
   goto l243;
   l277:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "Theta")) goto l278;
+  yyDo(G, yy_35_Greek, G->begin, G->end, "yy_35_Greek");
   goto l243;
   l278:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "upsilon")) goto l279;
+  yyDo(G, yy_36_Greek, G->begin, G->end, "yy_36_Greek");
   goto l243;
   l279:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "xi")) goto l280;
+  yyDo(G, yy_37_Greek, G->begin, G->end, "yy_37_Greek");
   goto l243;
   l280:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "Xi")) goto l281;
+  yyDo(G, yy_38_Greek, G->begin, G->end, "yy_38_Greek");
   goto l243;
   l281:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "zeta")) goto l242;
+  yyDo(G, yy_39_Greek, G->begin, G->end, "yy_39_Greek");
 
   }
-  l243:;	  yyprintf((stderr, "  ok   GREEK"));
+  l243:;	  yyprintf((stderr, "  ok   Greek"));
   yyprintfGcontext;
   yyprintf((stderr, "\n"));
 
   return 1;
-  l242:;	  G->pos= yypos0; G->thunkpos= yythunkpos0;  yyprintfv((stderr, "  fail %s", "GREEK"));
+  l242:;	  G->pos= yypos0; G->thunkpos= yythunkpos0;  yyprintfv((stderr, "  fail %s", "Greek"));
   yyprintfvGcontext;
   yyprintfv((stderr, "\n"));
 
@@ -3037,19 +3342,18 @@ YY_RULE(int) yy_Const(GREG *G)
   {  int yypos292= G->pos, yythunkpos292= G->thunkpos;  yyText(G, G->begin, G->end);  if (!(YY_BEGIN)) goto l293;  if (!yy_NUMBER(G))  goto l293;
   yyText(G, G->begin, G->end);  if (!(YY_END)) goto l293;  yyDo(G, yy_1_Const, G->begin, G->end, "yy_1_Const");
   goto l292;
-  l293:;	  G->pos= yypos292; G->thunkpos= yythunkpos292;  yyText(G, G->begin, G->end);  if (!(YY_BEGIN)) goto l294;  if (!yy_GREEK(G))  goto l294;
-  yyText(G, G->begin, G->end);  if (!(YY_END)) goto l294;  yyDo(G, yy_2_Const, G->begin, G->end, "yy_2_Const");
+  l293:;	  G->pos= yypos292; G->thunkpos= yythunkpos292;  if (!yy_Greek(G))  goto l294;
   goto l292;
   l294:;	  G->pos= yypos292; G->thunkpos= yythunkpos292;  yyText(G, G->begin, G->end);  if (!(YY_BEGIN)) goto l295;  if (!yy_STD(G))  goto l295;
-  yyText(G, G->begin, G->end);  if (!(YY_END)) goto l295;  yyDo(G, yy_3_Const, G->begin, G->end, "yy_3_Const");
+  yyText(G, G->begin, G->end);  if (!(YY_END)) goto l295;  yyDo(G, yy_2_Const, G->begin, G->end, "yy_2_Const");
   goto l292;
   l295:;	  G->pos= yypos292; G->thunkpos= yythunkpos292;  yyText(G, G->begin, G->end);  if (!(YY_BEGIN)) goto l296;  if (!yy_SPECIAL(G))  goto l296;
-  yyText(G, G->begin, G->end);  if (!(YY_END)) goto l296;  yyDo(G, yy_4_Const, G->begin, G->end, "yy_4_Const");
+  yyText(G, G->begin, G->end);  if (!(YY_END)) goto l296;  yyDo(G, yy_3_Const, G->begin, G->end, "yy_3_Const");
   goto l292;
   l296:;	  G->pos= yypos292; G->thunkpos= yythunkpos292;  if (!yy_Op(G))  goto l297;
   goto l292;
   l297:;	  G->pos= yypos292; G->thunkpos= yythunkpos292;  yyText(G, G->begin, G->end);  if (!(YY_BEGIN)) goto l291;  if (!yy_ID(G))  goto l291;
-  yyText(G, G->begin, G->end);  if (!(YY_END)) goto l291;  yyDo(G, yy_5_Const, G->begin, G->end, "yy_5_Const");
+  yyText(G, G->begin, G->end);  if (!(YY_END)) goto l291;  yyDo(G, yy_4_Const, G->begin, G->end, "yy_4_Const");
 
   }
   l292:;	  yyprintf((stderr, "  ok   Const"));

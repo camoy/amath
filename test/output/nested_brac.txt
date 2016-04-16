@@ -1,1 +1,1 @@
-<math><mfrac><mrow><mrow><mo>(</mo><mi>a</mi><mo>&sdot;</mo><mi>b</mi><mo>)</mo></mrow></mrow><mi>c</mi></mfrac></math>
+<math><mfrac><mrow><mrow><mo>(</mo><mi>a</mi><mo>⋅</mo><mi>b</mi><mo>)</mo></mrow></mrow><mi>c</mi></mfrac></math>

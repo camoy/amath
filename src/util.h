@@ -44,7 +44,6 @@ void inner(struct node *n);
 
 struct node *mk_number(char *s0);
 struct node *mk_op(char *s0);
-struct node *mk_greek(char *s0);
 struct node *mk_id(char *s0);
 struct node *mk_underover(char *s0);
 
