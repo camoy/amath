@@ -1107,7 +1107,7 @@ YY_ACTION(void) yy_11_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_
   yyprintf((stderr, "do yy_11_Rel"));
   yyprintfvTcontext(yytext);
   yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
-  yy = mk_op("≥"); ;
+  yy = mk_op("≻"); ;
 }
 YY_ACTION(void) yy_10_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
@@ -3271,7 +3271,7 @@ YY_RULE(int) yy_Greek(GREG *G)
   l275:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "theta")) goto l276;
   yyDo(G, yy_33_Greek, G->begin, G->end, "yy_33_Greek");
   goto l243;
-  l276:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "varthetaut")) goto l277;
+  l276:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "vartheta")) goto l277;
   yyDo(G, yy_34_Greek, G->begin, G->end, "yy_34_Greek");
   goto l243;
   l277:;	  G->pos= yypos243; G->thunkpos= yythunkpos243;  if (!yymatchString(G, "Theta")) goto l278;
