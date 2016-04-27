@@ -1,7 +1,8 @@
 # amath
 
 `amath` is a parser which converts [AsciiMath] to [MathML]. It uses the
-[greg parser generator][greg].
+[greg parser generator][greg]. It is written so it may be ported to
+other languages easily, but can certainly be used as a library itself.
 
 ## Usage
 
@@ -31,7 +32,7 @@ The tests can be checked for memory leaks.
 ## Terms
 
 This software is in the public domain. Anyone is free to use and
-distribute this software for any purpose.
+distribute it for any purpose.
 
 `amath` is maintained by Cameron Moy.
 
