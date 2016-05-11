@@ -104,6 +104,7 @@ Accent	= "hat" - t0:Simp	{ $$ = accent(t0, "^"); }
 	| "vec" - t0:Simp	{ $$ = accent(t0, "→"); }
 	| "dot" - t0:Simp	{ $$ = accent(t0, "."); }
 	| "ddot" - t0:Simp	{ $$ = accent(t0, ".."); }
+	| "tilde" - t0:Simp	{ $$ = accent(t0, "~"); }
 
 Font	= "bbb" - t0:Simp	{ $$ = font(t0, "double-struck"); }
 	| "bb" - t0:Simp	{ $$ = font(t0, "bold"); }
@@ -214,7 +215,6 @@ Misc	= "int"		{ $$ = mk_op("∫"); }
 	| "/_"		{ $$ = mk_op("∠"); }
 	| "/_\\"	{ $$ = mk_op("△"); }
 	| "'"		{ $$ = mk_op("′"); }
-	| "tilde"	{ $$ = mk_op("~"); }
 	| "\\ "		{ $$ = mk_op("&nbsp;"); }
 	| "frown"	{ $$ = mk_op("⌢"); }
 	| "quad"	{ $$ = mk_op("&nbsp;&nbsp;"); }

@@ -29,7 +29,7 @@ The tests can be checked for memory leaks.
 
 	make memory
 
-## Terms
+## Legal
 
 This software is in the public domain. Anyone is free to use and
 distribute it for any purpose.
