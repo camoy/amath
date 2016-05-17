@@ -1,1 +1,1 @@
-<math><mi>a</mi><mi>b</mi><mi>c</mi><mo>−</mo><msup><mn>123.45</mn><mrow><mo>−</mo><mn>1.1</mn></mrow></msup></math>
+<math><mi>a</mi><mi>b</mi><mi>c</mi><msup><mn>-123.45</mn><mn>-1.1</mn></msup></math>
