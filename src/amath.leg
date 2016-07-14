@@ -53,18 +53,20 @@ Simp	= Matrix
 	| Text
 	| Const
 
-Int	= s0:Simp - '/' - s1:Simp			{ $$ = mk_frac(s0, s1); }
-	| s0:Simp - '_' - s1:Simp - '^' - s2:Simp	{ $$ = mk_ter(s0, s1, s2); }
+Int	= s0:Simp - '_' - s1:Simp - '^' - s2:Simp	{ $$ = mk_ter(s0, s1, s2); }
 	| s0:Simp - '_' - s1:Simp			{ $$ = mk_sub(s0, s1); }
 	| s0:Simp - '^' - s1:Simp			{ $$ = mk_sup(s0, s1); }
 	| Simp
 	| < !EOF . >					{ $$ = mk_op(yytext); }
 
-IntG	= !Right Int
+E	= s0:Int - '/' !'/' - s1:Int		{ $$ = mk_frac(s0, s1); }
+	| Int
+
+IntG	= !Right E
 IntM	= !',' IntG
 
-Expr	= - c0:Int
-		(- ci:Int -	{ c0 = mk_concat(c0, ci); }
+Expr	= - c0:E
+		(- ci:E -	{ c0 = mk_concat(c0, ci); }
 		)* -		{ $$ = c0; }
 
 ExprG	= - c0:IntG
