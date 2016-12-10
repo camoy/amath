@@ -31,4 +31,6 @@ int main(int argc, char *argv[])
 	/* free memory */
 	if (strlen(result) > 0) free(result);
 	if (strlen(content) > 0) free(content);
+
+	return 0;
 }

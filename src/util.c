@@ -144,6 +144,7 @@ struct node *font(struct node *s0, const char *font)
 
 MK_BIN_FN(frac, NODE_SIMPLE, "<mfrac>%s%s</mfrac>")
 MK_BIN_FN(root, NODE_SIMPLE, "<mroot>%s%s</mroot>")
+MK_BIN_FN(binom, NODE_SIMPLE, "<mfenced><mfrac linethickness=\"0\">%s%s</mfrac></mfenced>")
 MK_BIN_FN(stackrel, NODE_SIMPLE, "<mover>%s%s</mover>")
 MK_BIN_FN(ubrace, NODE_SIMPLE, "<munder><munder>%s<mo>⏟</mo></munder>%s</munder>")
 MK_BIN_FN(obrace, NODE_SIMPLE, "<mover><mover>%s<mo>⏞</mo></mover>%s</mover>")

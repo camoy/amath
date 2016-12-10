@@ -61,6 +61,7 @@ struct node *color(struct node *s0, const char *color);
 
 struct node *mk_frac(struct node *s0, struct node *s1);
 struct node *mk_root(struct node *s0, struct node *s1);
+struct node *mk_binom(struct node *s0, struct node *s1);
 struct node *mk_stackrel(struct node *s0, struct node *s1);
 struct node *mk_ubrace(struct node *s0, struct node *s1);
 struct node *mk_obrace(struct node *s0, struct node *s1);
