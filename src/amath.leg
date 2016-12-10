@@ -39,7 +39,6 @@ Unary	= "sqrt" - s:Simp	{ $$ = msqrt(s); }
 
 Binary	= "frac" - s0:Simp - s1:Simp		{ $$ = mk_frac(s0, s1); }
 	| "root" - s0:Simp - s1:Simp		{ $$ = mk_root(s1, s0); }
-	| "binom" - s0:Simp - s1:Simp		{ $$ = mk_binom(s0, s1); }
 	| "color" - s0:Color - s1:Simp		{ $$ = mk_color(s0, s1); }
 	| "stackrel" - s0:Simp - s1:Simp	{ $$ = mk_stackrel(s1, s0); }
 	| "ubrace" - s0:Simp - '_' - s1:Simp	{ $$ = mk_ubrace(s0, s1); }
