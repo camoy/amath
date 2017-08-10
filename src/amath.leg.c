@@ -809,6 +809,13 @@ YY_ACTION(void) yy_1_Arrow(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY
   yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
   yy = mk_op("↑"); ;
 }
+YY_ACTION(void) yy_46_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_46_Misc"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_id(\"\377\377\377\"); }\n"));
+  yy = mk_id("∎"); ;
+}
 YY_ACTION(void) yy_45_Misc(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
   yyprintf((stderr, "do yy_45_Misc"));
@@ -1270,6 +1277,55 @@ YY_ACTION(void) yy_1_Logic(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY
   yyprintfvTcontext(yytext);
   yyprintf((stderr, "\n  {yy = mk_op(\"and\"); }\n"));
   yy = mk_op("and"); ;
+}
+YY_ACTION(void) yy_50_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_50_Rel"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("∥"); ;
+}
+YY_ACTION(void) yy_49_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_49_Rel"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("∌"); ;
+}
+YY_ACTION(void) yy_48_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_48_Rel"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("∋"); ;
+}
+YY_ACTION(void) yy_47_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_47_Rel"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⊅"); ;
+}
+YY_ACTION(void) yy_46_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_46_Rel"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⊄"); ;
+}
+YY_ACTION(void) yy_45_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_45_Rel"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⊉"); ;
+}
+YY_ACTION(void) yy_44_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
+{
+  yyprintf((stderr, "do yy_44_Rel"));
+  yyprintfvTcontext(yytext);
+  yyprintf((stderr, "\n  {yy = mk_op(\"\377\377\377\"); }\n"));
+  yy = mk_op("⊈"); ;
 }
 YY_ACTION(void) yy_43_Rel(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
@@ -2885,8 +2941,29 @@ YY_RULE(int) yy_Rel(GREG *G)
   l95:;	  G->pos= yypos54; G->thunkpos= yythunkpos54;  if (!yymatchString(G, "prop")) goto l96;
   yyDo(G, yy_42_Rel, G->begin, G->end, "yy_42_Rel");
   goto l54;
-  l96:;	  G->pos= yypos54; G->thunkpos= yythunkpos54;  if (!yymatchString(G, "propto")) goto l53;
+  l96:;   G->pos= yypos54; G->thunkpos= yythunkpos54;  if (!yymatchString(G, "propto")) goto ll97;
   yyDo(G, yy_43_Rel, G->begin, G->end, "yy_43_Rel");
+  goto l54;
+  ll97:;   G->pos= yypos54; G->thunkpos= yythunkpos54;  if (!yymatchString(G, "nsube")) goto ll98;
+  yyDo(G, yy_44_Rel, G->begin, G->end, "yy_44_Rel");
+  goto l54;
+  ll98:;   G->pos= yypos54; G->thunkpos= yythunkpos54;  if (!yymatchString(G, "nsupe")) goto ll99;
+  yyDo(G, yy_45_Rel, G->begin, G->end, "yy_45_Rel");
+  goto l54;
+  ll99:;   G->pos= yypos54; G->thunkpos= yythunkpos54;  if (!yymatchString(G, "nsub")) goto ll100;
+  yyDo(G, yy_46_Rel, G->begin, G->end, "yy_46_Rel");
+  goto l54;
+  ll100:;   G->pos= yypos54; G->thunkpos= yythunkpos54;  if (!yymatchString(G, "nsup")) goto ll101;
+  yyDo(G, yy_47_Rel, G->begin, G->end, "yy_47_Rel");
+  goto l54;
+  ll101:;   G->pos= yypos54; G->thunkpos= yythunkpos54;  if (!yymatchString(G, "ni")) goto ll102;
+  yyDo(G, yy_48_Rel, G->begin, G->end, "yy_48_Rel");
+  goto l54;
+  ll102:;   G->pos= yypos54; G->thunkpos= yythunkpos54;  if (!yymatchString(G, "nni")) goto ll103;
+  yyDo(G, yy_49_Rel, G->begin, G->end, "yy_49_Rel");
+  goto l54;
+  ll103:;	  G->pos= yypos54; G->thunkpos= yythunkpos54;  if (!yymatchString(G, "||")) goto l53;
+  yyDo(G, yy_50_Rel, G->begin, G->end, "yy_50_Rel");
 
   }
   l54:;	  yyprintf((stderr, "  ok   Rel"));
@@ -3035,8 +3112,11 @@ YY_RULE(int) yy_Misc(GREG *G)
   l141:;	  G->pos= yypos98; G->thunkpos= yythunkpos98;  if (!yymatchString(G, "RR")) goto l142;
   yyDo(G, yy_44_Misc, G->begin, G->end, "yy_44_Misc");
   goto l98;
-  l142:;	  G->pos= yypos98; G->thunkpos= yythunkpos98;  if (!yymatchString(G, "ZZ")) goto l97;
+  l142:;	  G->pos= yypos98; G->thunkpos= yythunkpos98;  if (!yymatchString(G, "ZZ")) goto ll143;
   yyDo(G, yy_45_Misc, G->begin, G->end, "yy_45_Misc");
+  goto l98;
+  ll143:;   G->pos= yypos98; G->thunkpos= yythunkpos98;  if (!yymatchString(G, "qed")) goto l97;
+  yyDo(G, yy_46_Misc, G->begin, G->end, "yy_46_Misc");
 
   }
   l98:;	  yyprintf((stderr, "  ok   Misc"));

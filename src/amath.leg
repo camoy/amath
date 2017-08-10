@@ -224,6 +224,14 @@ Rel	= "="		{ $$ = mk_op("="); }
 	| "approx"	{ $$ = mk_op("≈"); }
 	| "prop"	{ $$ = mk_op("∝"); }
 	| "propto"	{ $$ = mk_op("∝"); }
+	| "nsube"  { $$ = mk_op{"⊈"}; } 
+	| "nsupe"	{ $$ = mk_op{"⊉"}; } 
+    | "nsub" { $$ = mk_op{"⊄"}; } 
+	| "nsup"	{ $$ = mk_op{"⊅"}; } 
+	| "ni"	    { $$ = mk_op{"∋"}; } 
+	| "nni"   { $$ = mk_op{"∌"}; } 
+	| "||"      { $$ = mk_op{"∥"}; } 
+
 
 Logic 	= "and"		{ $$ = mk_op("and"); }
 	| "or"		{ $$ = mk_op("or"); }
@@ -292,6 +300,7 @@ Misc	= "int"		{ $$ = mk_op("∫"); }
 	| "QQ"		{ $$ = mk_id("ℚ"); }
 	| "RR"		{ $$ = mk_id("ℝ"); }
 	| "ZZ"		{ $$ = mk_id("ℤ"); }
+	| "qed"		{ $$ = mk_op("∎"); }
 
 Arrow	= "uarr"	{ $$ = mk_op("↑"); }
 	| "uparrow"	{ $$ = mk_op("↑"); }
