@@ -90,7 +90,6 @@ void inner(struct node *n)
 
 MK_FN(number, NODE_IDENTIFIER, "<mn>%s</mn>")
 MK_FN(op, NODE_IDENTIFIER, "<mo>%s</mo>")
-MK_FN(op_nosp, NODE_IDENTIFIER, "<mo lspace=\"0\" rspace=\"0\">%s</mo>")
 MK_FN(id, NODE_IDENTIFIER, "<mi>%s</mi>")
 MK_FN(underover, NODE_UNDEROVER, "<mo>%s</mo>")
 
