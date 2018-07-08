@@ -2610,8 +2610,8 @@ YY_ACTION(void) yy_2_Const(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY
 {
   yyprintf((stderr, "do yy_2_Const"));
   yyprintfvTcontext(yytext);
-  yyprintf((stderr, "\n  {yy = mk_op_nosp(yytext); }\n"));
-  yy = mk_op_nosp(yytext); ;
+  yyprintf((stderr, "\n  {yy = mk_op(yytext); }\n"));
+  yy = mk_op(yytext); ;
 }
 YY_ACTION(void) yy_1_Const(GREG *G, char *yytext, int yyleng, yythunk *thunk, YY_XTYPE YY_XVAR)
 {
