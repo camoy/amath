@@ -25,7 +25,7 @@ Start	= e0:Expr EOF	{ ((struct greg_data*) G->data)->result->text = strdup(e0->t
 
 Const	= < NUMBER >	{ $$ = mk_number(yytext); }
 	| Greek
-	| < STD >	{ $$ = mk_id(yytext); }
+	| < STD >	{ $$ = mk_op(yytext); }
 	| < SPECIAL >	{ $$ = mk_id(yytext); }
 	| Op
 	| < ID >	{ $$ = mk_id(yytext); }
