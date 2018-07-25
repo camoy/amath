@@ -59,7 +59,7 @@ Int	= s0:Simp - '_' - s1:Simp - '^' - s2:Simp	{ $$ = mk_ter(s0, s1, s2); }
 	| Simp
 	| < !EOF . >					{ $$ = mk_op(yytext); }
 
-E	= s0:Int - '/' !'/' - s1:Int		{ $$ = mk_frac(s0, s1); }
+E	= s0:Int - '/' !'/' !'_' - s1:Int		{ $$ = mk_frac(s0, s1); }
 	| Int
 
 IntG	= !Right E
