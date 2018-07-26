@@ -4,24 +4,24 @@
 #define YYFREE free_node
 #define LCURLY "{"
 #define RCURLY "}"
-#define YY_INPUT(buf, result, max_size, D) yy_input_func(buf, &result, max_size, D)
-
-void yy_input_func(char *buf, int *result, int max_size, struct greg_data *data)
-{
-	if (data->input && *data->input != '\0') {
-		*buf = *data->input;
-		data->input++;
-		*result = 1;
-	}
-	else {
-		*result = 0;
-	}
+#define YY_CTX_LOCAL
+#define YY_CTX_MEMBERS struct peg_data* data;
+#define YY_INPUT(yy, buf, result, max_size)			\
+{								\
+	if (yy->data->input && *(yy->data->input) != '\0') {	\
+		*buf = *(yy->data->input);			\
+		yy->data->input++;				\
+		result = 1;					\
+	}							\
+	else {							\
+		result = 0;					\
+	}							\
 }
 
 %}
 
-Start	= e0:Expr EOF	{ ((struct greg_data*) G->data)->result->text = strdup(e0->text); free_node(e0); }
-	| < .+ > EOF	{ ((struct greg_data*) G->data)->result->text = merror(yytext); }
+Start	= e0:Expr EOF	{ ((struct peg_data*) yy->data)->result->text = strdup(e0->text); free_node(e0); }
+	| < .+ > EOF	{ ((struct peg_data*) yy->data)->result->text = merror(yytext); }
 
 Const	= < NUMBER >	{ $$ = mk_number(yytext); }
 	| Greek

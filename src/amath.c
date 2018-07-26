@@ -4,9 +4,9 @@
 
 #include "amath.leg.c"
 
-struct greg_data *mk_greg_data(const char *input)
+struct peg_data *mk_peg_data(const char *input)
 {
-	struct greg_data *D = malloc(sizeof(struct greg_data));
+	struct peg_data *D = malloc(sizeof(struct peg_data));
 
 	if (D == NULL)
 		return NULL;
@@ -19,20 +19,20 @@ struct greg_data *mk_greg_data(const char *input)
 
 char *amath_to_mathml(const char *text)
 {
-	GREG g;
+	yycontext g;
 	char *result;
-	struct greg_data *data;
+	struct peg_data *data;
 
-	data = mk_greg_data(text);
+	data = mk_peg_data(text);
 
 	if (strlen(text) <= 0 || data == NULL)
 		return NULL;
 
-	yyinit(&g);
+	memset(&g, 0, sizeof(yycontext));
 	g.data = data;
 	while (yyparse(&g));
 	result = strdup(data->result->text);
-	yydeinit(&g);
+	yyrelease(&g);
 	free_node(data->result);
 	free(data);
 

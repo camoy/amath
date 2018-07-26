@@ -55,6 +55,6 @@ $(SRC)/amath.c: $(SRC)/amath.leg.c
 	touch $@
 
 $(SRC)/amath.leg.c: $(SRC)/amath.leg
-	greg -o $@ $<
+	leg -o $@ $<
 
 .SUFFIXES:

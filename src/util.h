@@ -21,7 +21,7 @@ struct node {
 	char *inner;
 };
 
-struct greg_data {
+struct peg_data {
 	const char *input;
 	struct node *result;
 };
