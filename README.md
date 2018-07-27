@@ -1,8 +1,8 @@
 # amath
 
 `amath` is a parser which converts [AsciiMath] to [MathML]. It uses the
-[greg parser generator][greg]. It is written so it may be ported to
-other languages easily, but can certainly be used as a library itself.
+[leg parser generator][peg]. It is written so it may be ported to other
+languages easily, but can certainly be used as a library itself.
 
 ## Usage
 
@@ -38,4 +38,4 @@ distribute it for any purpose.
 
 [AsciiMath]: http://asciimath.org
 [MathML]: https://www.w3.org/TR/MathML
-[greg]: https://github.com/ooc-lang/greg
+[peg]: http://piumarta.com/software/peg/
