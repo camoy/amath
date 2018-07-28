@@ -1,1 +1,1 @@
-<math><munder><munder><mrow><mn>1</mn><mo>+</mo><mn>2</mn><mo>+</mo><mn>3</mn><mo>+</mo><mn>4</mn></mrow><mo>⏟</mo></munder><mrow><mtext>4 terms</mtext></mrow></munder><mo>−</mo><mover><mover><mrow><mn>2</mn><mo>+</mo><mn>3</mn></mrow><mo>⏞</mo></mover><mrow><mi>n</mi></mrow></mover></math>
+<munder><munder><mrow><mn>1</mn><mo>+</mo><mn>2</mn><mo>+</mo><mn>3</mn><mo>+</mo><mn>4</mn></mrow><mo>⏟</mo></munder><mrow><mtext>4 terms</mtext></mrow></munder><mo>−</mo><mover><mover><mrow><mn>2</mn><mo>+</mo><mn>3</mn></mrow><mo>⏞</mo></mover><mrow><mi>n</mi></mrow></mover>
