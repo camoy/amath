@@ -10,9 +10,7 @@ AsciiMath is read and the equivalent MathML is printed.
 
 	echo "x^2 + y^2 = z^2" | amath
 
-The default behavior does not output any XML namespace.
-
-* `--xml-ns` print with MathML XML namespace
+The default behavior does not output a surrounding math tag.
 
 ## Installing
 
