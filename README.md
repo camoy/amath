@@ -23,6 +23,10 @@ The unit tests can also be run from `make`.
 
 	make test
 
+The official unit tests can also be run from `make`.
+
+	make otest
+
 The tests can be checked for memory leaks.
 
 	make memory
