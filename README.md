@@ -29,6 +29,10 @@ The tests can be checked for memory leaks.
 
 	make memory
 
+The official AsciiMath unit tests can be run with:
+
+	make otest
+
 ## Legal
 
 This software is in the public domain. Anyone is free to use and
