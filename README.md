@@ -10,8 +10,6 @@ AsciiMath is read and the equivalent MathML is printed.
 
 	echo "x^2 + y^2 = z^2" | amath
 
-The default behavior does not output a surrounding math tag.
-
 ## Installing
 
 Use `make` to build and install `amath` and the shared library `libamath`.
@@ -19,15 +17,16 @@ Use `make` to build and install `amath` and the shared library `libamath`.
 	make
 	make install
 
-The unit tests can also be run from `make`.
+The `amath` unit tests can be run with the `test` target.
 
 	make test
 
-The official unit tests can also be run from `make`.
+The official AsciiMath unit tests can be run with the `otest` target.
 
 	make otest
 
-The tests can be checked for memory leaks.
+The `memory` target uses `valgrind` to check for memory leaks in the
+`amath` unit tests.
 
 	make memory
 
