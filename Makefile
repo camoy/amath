@@ -17,6 +17,19 @@ all: $(LIBRARY) $(BINARY)
 test:
 	@bash test/test.sh
 
+test/converter: test/converter.leg
+	leg test/converter.leg -o test/converter.c
+	$(CC) test/converter.c -o test/converter
+
+test/unittests.js:
+	wget 'https://raw.githubusercontent.com/asciimath/asciimathml/master/test/unittests.js' -O test/unittests.js
+
+test/official_tests.txt: test/unittests.js test/converter
+	test/converter < test/unittests.js > test/official_tests.txt
+
+otest: test/official_tests.txt
+	@bash test/official_tests.sh
+
 memory:
 	@bash test/memory.sh
 

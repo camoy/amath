@@ -1,0 +1,22 @@
+%{
+#include <stdio.h>
+%}
+
+# Parser to extract official unit tests from JavaScript into a line-based format.
+
+grammar = "{input:" - string - ',' { putchar('\n') } - "output:" - string { printf("\n\n") }
+	| .
+
+string = '"' strchr+  '"'
+
+strchr = !'"' '\\'? <.> { putchar(*yytext); }
+
+- = ' '*
+
+%%
+int main()
+{
+	while (yyparse())
+	;
+	return 0;
+}
