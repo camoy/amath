@@ -1,1 +1,1 @@
-<math><msub><mi>S</mi><mrow><mi>i</mi><mi>n</mi><mi>n</mi><mi>e</mi></mrow></msub></math>
+<msub><mi>S</mi><mrow><mi>i</mi><mi>n</mi><mi>n</mi><mi>e</mi></mrow></msub>
